@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="gamesdk" />
+	<meta name="description" content="gamesdk" />
+	<!-- 网页标签标题 -->
+	<title>gamesdk</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot="" data-reactid="1" data-react-checksum="266282353"><header class="header-container header-container-normal" data-reactid="2"><div class="header-body" data-reactid="3"><a href="/zh-cn/index.html" data-reactid="4"><img class="logo" src="http://nosdn-yx.127.net/yxgame/6dfac650089849dc8281ffef5e164127.png" data-reactid="5"/></a><div class="header-menu" data-reactid="6"><img class="header-menu-toggle" src="/img/system/menu_gray.png" data-reactid="7"/><ul data-reactid="8"><li class="menu-item menu-item-normal" data-reactid="9"><a href="/zh-cn/index.html" target="_self" data-reactid="10">首页</a></li><li class="menu-item menu-item-normal" data-reactid="11"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="12">接入指引</a></li><li class="menu-item menu-item-normal" data-reactid="13"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="14">客户端</a></li><li class="menu-item menu-item-normal" data-reactid="15"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="16">服务器</a></li></ul></div></div></header><div class="bar" data-reactid="17"><div class="bar-body" data-reactid="18"><img src="/img/system/docs.png" class="front-img" data-reactid="19"/><span data-reactid="20">接入文档</span><img src="/img/system/docs.png" class="back-img" data-reactid="21"/></div></div><section class="content-section" data-reactid="22"><div class="sidemenu" data-reactid="23"><div class="sidemenu-toggle" data-reactid="24"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png" data-reactid="25"/></div><ul data-reactid="26"><li class="menu-item menu-item-level-1" data-reactid="27"><span data-reactid="28">接入文档</span><ul data-reactid="29"><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="30"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="31">接入指引</a></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="32"><span data-reactid="33"><!-- react-text: 34 -->客户端<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="35"/></span><ul data-reactid="36"><li class="menu-item menu-item-level-3" data-reactid="37"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="38">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="39"><a href="/zh-cn/docs/client/faq.html" target="_self" data-reactid="40">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="41"><span data-reactid="42"><!-- react-text: 43 -->服务器<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="44"/></span><ul data-reactid="45"><li class="menu-item menu-item-level-3" data-reactid="46"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="47">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="48"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self" data-reactid="49">php下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="50"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self" data-reactid="51">python下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="52"><a href="/zh-cn/docs/server/faq.html" target="_self" data-reactid="53">Q&amp;A</a></li></ul></li></ul></li></ul></div><div class="doc-content markdown-body" data-reactid="54"><h1>网易云游戏SDK接入文档</h1>
+<h3>快速使用</h3>
+<h4>资源引入</h4>
+<ol>
+<li>将gamesdk-x.x.x.jar引入项目</li>
+<li><code>若游戏打包方式无法将gamesdk-x.x.x.jar中的assets文件夹下内容打包到apk，请手动将assets复制到项目的assets文件夹下</code></li>
+</ol>
+<h4>参数配置</h4>
+<h5>AndroidManifest配置</h5>
+<ol>
+<li><code>versionName</code> 需要保证为三段式 <code>x.x.x</code> (例1.2.3)</li>
+<li>GameID, GameSecret 配置再application标签下，例如</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">application</span>
+    <span class="hljs-attr">android:label</span>=<span class="hljs-string">"@string/app_name"</span>
+    <span class="hljs-attr">android:icon</span>=<span class="hljs-string">"@mipmap/ic_launcher"</span>
+    <span class="hljs-attr">android:theme</span>=<span class="hljs-string">"@style/AppTheme"</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">".DemoApp"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
+        <span class="hljs-attr">android:name</span>=<span class="hljs-string">"YX_GAME_ID"</span>
+        <span class="hljs-attr">android:value</span>=<span class="hljs-string">"${YX_GAME_ID}"</span>/&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
+        <span class="hljs-attr">android:name</span>=<span class="hljs-string">"YX_GAME_SECRET"</span>
+        <span class="hljs-attr">android:value</span>=<span class="hljs-string">"${YX_GAME_SECRET}"</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span>
+</code></pre>
+<ol start="2">
+<li>权限配置</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.READ_PHONE_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_NETWORK_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CHANGE_NETWORK_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.READ_PHONE_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.GET_TASKS"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CALL_PHONE"</span>/&gt;</span>
+</code></pre>
+<ol start="3">
+<li>其他配置</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.gamesdk.activity.YXComponentActivity"</span>
+    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
+    <span class="hljs-attr">android:theme</span>=<span class="hljs-string">"@android:style/Theme.Translucent.NoTitleBar"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.YXEntryActivity"</span>
+    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
+    <span class="hljs-attr">android:excludeFromRecents</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">receiver</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx..yxapi.AppRegister"</span>
+    <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"im.yixin.sdk.permission.YIXIN_SDK_MESSAGE"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
+
+</code></pre>
+<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的xx.xx.xx.xx.替换为游戏中的<code>真实路径</code></p>
+<h4>初始化SDK</h4>
+<p>在<code>Application</code>中初始化</p>
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xxxApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>{
+
+    <span class="hljs-keyword">private</span> YXGameApi gameApi;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onCreate();
+        gameApi = YXGameApiFactory.init(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Void aVoid)</span> </span>{
+                <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_SUCCESS) {
+                    <span class="hljs-comment">//SDK初始化成功</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_ERROR) {
+                    <span class="hljs-comment">//SDK初始化失败</span>
+
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGIN_SUCCESS) {
+                    <span class="hljs-comment">//调用login后，用户登陆成功</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.ACCOUNT_CHANGE) {
+                    <span class="hljs-comment">//切换用户</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGOUT) {
+                    <span class="hljs-comment">//悬浮窗内退出账户</span>
+                }
+            }
+        });
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> YXGameApi <span class="hljs-title">yxGameApi</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> gameApi;
+    }
+}
+</code></pre>
+<p>init接口回调参数说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INIT_SUCCESS</td>
+<td>SDK初始化成功</td>
+</tr>
+<tr>
+<td>LOGIN_SUCCESS</td>
+<td>授权成功</td>
+</tr>
+<tr>
+<td>LOGOUT</td>
+<td>悬浮窗内退出账户</td>
+</tr>
+<tr>
+<td>LOGIN_SUCCESS</td>
+<td>用户登陆成功</td>
+</tr>
+<tr>
+<td>ACCOUNT_CHANGE</td>
+<td>该次登陆的用户与之前缓存的用户信息不是同一个用户</td>
+</tr>
+</tbody>
+</table>
+<h4>注册全局监听器（可选）</h4>
+<p>可在需要的地方注册全局状态监听器，来监听账户改变，回调参数通init接口中的一致</p>
+<pre><code class="language-java">yxGameApi().registerGameMonitor(<span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Void aVoid)</span> </span>{
+                <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGIN_SUCCESS) {
+                    <span class="hljs-comment">//调用login后，用户登陆成功</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.ACCOUNT_CHANGE) {
+                    <span class="hljs-comment">//切换用户</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGOUT) {
+                    <span class="hljs-comment">//悬浮窗内退出账户</span>
+                }
+            }
+        });
+</code></pre>
+<h4>登录</h4>
+<p>在需要登录的时刻调用login接口</p>
+<pre><code class="language-java">yxGameApi().login(activity)
+</code></pre>
+<p>登录结果会回调到初始化和全局监听器注册的回调</p>
+<h4>YXEntryActivity，AppRegister</h4>
+<p>该两个文件，请直接复制Demo中的代码</p>
+<h4>接口调用</h4>
+<ol>
+<li>获取token</li>
+</ol>
+<pre><code class="language-java">String token = yxGameApi().getToken()
+</code></pre>
+<p>在<code>登录成功</code>后可调用，获取到的token一定是有效的token，可以直接给服务器使用，服务器校验token有效性，请参考服务器文档</p>
+<ol start="2">
+<li>获取用户信息</li>
+</ol>
+<pre><code class="language-java"><span class="hljs-keyword">try</span> {
+    yxGameApi().getAccountInfo(<span class="hljs-keyword">new</span> YXGameCallbackListener&lt;GameAccount&gt;() {
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, GameAccount account)</span> </span>{
+            <span class="hljs-keyword">if</span> (status != YXGameStatusCode.SUCCESS || account == <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">return</span>;
+            }
+            System.out.println(account.getAccountId());
+        }
+    });
+} <span class="hljs-keyword">catch</span> (Exception e) {
+    e.printStackTrace();
+}
+</code></pre>
+<ol start="3">
+<li>通知SDK登出账户</li>
+</ol>
+<pre><code class="language-java">yxGameApi().logout();
+</code></pre>
+<p>登出结果会回调到初始化和全局监听器注册的回调</p>
+<ol start="4">
+<li>退出游戏</li>
+</ol>
+<pre><code class="language-java">yxGameApi().exit(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Boolean&gt;() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Boolean exit)</span> </span>{
+                <span class="hljs-keyword">if</span> (exit) {
+                    <span class="hljs-comment">//退出游戏</span>
+                    finish();
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-comment">//不退出</span>
+                }
+            }
+        });
+</code></pre>
+<h4>支付</h4>
+<pre><code class="language-java">YXTrade trade = <span class="hljs-keyword">new</span> YXTrade();
+trade.setId(tradeId);
+trade.setGateUrl(payGateUrl);
+trade.setResult(YXTrade.RESULT_OK);
+<span class="hljs-keyword">new</span> YXPayApi(PayActivity.<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXPayDelegate() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onTradeComplete</span><span class="hljs-params">(<span class="hljs-keyword">int</span> resultCode)</span> </span>{
+                    <span class="hljs-comment">// 注意回调在UI主线程中，对http请求需要异步调用</span>
+                    <span class="hljs-keyword">if</span> (resultCode == YXPayResultCode.SUCCESS) {
+                        <span class="hljs-comment">//支付成功</span>
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (resultCode == YXPayResultCode.USER_CANCEL) {
+                        <span class="hljs-comment">//用户取消支付</span>
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-comment">//支付异常</span>
+                    }
+                }
+            }).pay(trade);
+</code></pre>
+<p><code>tradeId</code>和<code>payGateUrl</code>从游戏自己服务器下单后获取，具体请参考服务器支付文档</p>
+<h4>混淆</h4>
+<pre><code class="language-java">proguard 不要混淆sdk，相关代码 如下
+-keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">squareup</span>.** </span>{*;}
+-dontwarn com.squareup.**
+-keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">im</span>.<span class="hljs-title">yixin</span>.** </span>{*;}
+-dontwarn im.yixin.**
+
+</code></pre>
+</div></section></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>

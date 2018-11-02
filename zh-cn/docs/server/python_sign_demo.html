@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="python_sign_demo" />
+	<meta name="description" content="python_sign_demo" />
+	<!-- 网页标签标题 -->
+	<title>python_sign_demo</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot="" data-reactid="1" data-react-checksum="-1667922565"><header class="header-container header-container-normal" data-reactid="2"><div class="header-body" data-reactid="3"><a href="/zh-cn/index.html" data-reactid="4"><img class="logo" src="http://nosdn-yx.127.net/yxgame/6dfac650089849dc8281ffef5e164127.png" data-reactid="5"/></a><div class="header-menu" data-reactid="6"><img class="header-menu-toggle" src="/img/system/menu_gray.png" data-reactid="7"/><ul data-reactid="8"><li class="menu-item menu-item-normal" data-reactid="9"><a href="/zh-cn/index.html" target="_self" data-reactid="10">首页</a></li><li class="menu-item menu-item-normal" data-reactid="11"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="12">接入指引</a></li><li class="menu-item menu-item-normal" data-reactid="13"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="14">客户端</a></li><li class="menu-item menu-item-normal" data-reactid="15"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="16">服务器</a></li></ul></div></div></header><div class="bar" data-reactid="17"><div class="bar-body" data-reactid="18"><img src="/img/system/docs.png" class="front-img" data-reactid="19"/><span data-reactid="20">接入文档</span><img src="/img/system/docs.png" class="back-img" data-reactid="21"/></div></div><section class="content-section" data-reactid="22"><div class="sidemenu" data-reactid="23"><div class="sidemenu-toggle" data-reactid="24"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png" data-reactid="25"/></div><ul data-reactid="26"><li class="menu-item menu-item-level-1" data-reactid="27"><span data-reactid="28">接入文档</span><ul data-reactid="29"><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="30"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="31">接入指引</a></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="32"><span data-reactid="33"><!-- react-text: 34 -->客户端<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="35"/></span><ul data-reactid="36"><li class="menu-item menu-item-level-3" data-reactid="37"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="38">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="39"><a href="/zh-cn/docs/client/faq.html" target="_self" data-reactid="40">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="41"><span data-reactid="42"><!-- react-text: 43 -->服务器<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="44"/></span><ul data-reactid="45"><li class="menu-item menu-item-level-3" data-reactid="46"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="47">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="48"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self" data-reactid="49">php下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="50"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self" data-reactid="51">python下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="52"><a href="/zh-cn/docs/server/faq.html" target="_self" data-reactid="53">Q&amp;A</a></li></ul></li></ul></li></ul></div><div class="doc-content markdown-body" data-reactid="54"><h1>python 签名示例</h1>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> Crypto.PublicKey <span class="hljs-keyword">import</span> RSA
+<span class="hljs-keyword">from</span> Crypto.Signature <span class="hljs-keyword">import</span> PKCS1_v1_5
+<span class="hljs-keyword">from</span> Crypto.Hash <span class="hljs-keyword">import</span> SHA
+<span class="hljs-keyword">from</span> binascii <span class="hljs-keyword">import</span> hexlify
+<span class="hljs-keyword">from</span> urllib <span class="hljs-keyword">import</span> quote_plus
+
+<span class="hljs-string">"""
+Original parameter string
+"""</span>
+strToSign = <span class="hljs-string">'03146776612-14579579182016-03-14 20:18:38yb60becc49c9-8ce6-4b5d-b214-6614fbfd03f21'</span>
+
+<span class="hljs-string">"""
+CAUTION: The str before sign needs to be urlencoded first.
+         using urllib.quote_plus instead of urllib.quote
+"""</span>
+encodedStr = quote_plus(strToSign)
+
+<span class="hljs-string">"""
+Place the PRIVATE key(openssl generated pem format key pair) in the right place.
+"""</span>
+priv_key = RSA.importKey(open(<span class="hljs-string">'pkcs8_rsa_private_key.pem'</span>, <span class="hljs-string">'r'</span>).read())
+
+<span class="hljs-string">"""
+SHA1 hash the str first then sign it using the private key.
+"""</span>
+signedStr = PKCS1_v1_5.new(priv_key).sign(SHA.new(encodedStr))
+
+<span class="hljs-string">"""
+Finally, convert the bytes to hex.
+"""</span>
+hexStr = hexlify(signedStr)
+
+<span class="hljs-string">"""
+You can load this python file and manage to produce the correct hexStr using these functions as a base. You can test againest with each function seperatedly to find out what goes wrong. Good luck!
+
+"""</span>
+
+</code></pre>
+</div></section></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="php_sign_demo" />
+	<meta name="description" content="php_sign_demo" />
+	<!-- 网页标签标题 -->
+	<title>php_sign_demo</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot="" data-reactid="1" data-react-checksum="997988675"><header class="header-container header-container-normal" data-reactid="2"><div class="header-body" data-reactid="3"><a href="/zh-cn/index.html" data-reactid="4"><img class="logo" src="http://nosdn-yx.127.net/yxgame/6dfac650089849dc8281ffef5e164127.png" data-reactid="5"/></a><div class="header-menu" data-reactid="6"><img class="header-menu-toggle" src="/img/system/menu_gray.png" data-reactid="7"/><ul data-reactid="8"><li class="menu-item menu-item-normal" data-reactid="9"><a href="/zh-cn/index.html" target="_self" data-reactid="10">首页</a></li><li class="menu-item menu-item-normal" data-reactid="11"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="12">接入指引</a></li><li class="menu-item menu-item-normal" data-reactid="13"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="14">客户端</a></li><li class="menu-item menu-item-normal" data-reactid="15"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="16">服务器</a></li></ul></div></div></header><div class="bar" data-reactid="17"><div class="bar-body" data-reactid="18"><img src="/img/system/docs.png" class="front-img" data-reactid="19"/><span data-reactid="20">接入文档</span><img src="/img/system/docs.png" class="back-img" data-reactid="21"/></div></div><section class="content-section" data-reactid="22"><div class="sidemenu" data-reactid="23"><div class="sidemenu-toggle" data-reactid="24"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png" data-reactid="25"/></div><ul data-reactid="26"><li class="menu-item menu-item-level-1" data-reactid="27"><span data-reactid="28">接入文档</span><ul data-reactid="29"><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="30"><a href="/zh-cn/docs/resources/resources.html" target="_self" data-reactid="31">接入指引</a></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="32"><span data-reactid="33"><!-- react-text: 34 -->客户端<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="35"/></span><ul data-reactid="36"><li class="menu-item menu-item-level-3" data-reactid="37"><a href="/zh-cn/docs/client/gamesdk.html" target="_self" data-reactid="38">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="39"><a href="/zh-cn/docs/client/faq.html" target="_self" data-reactid="40">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden;" class="menu-item menu-item-level-2" data-reactid="41"><span data-reactid="42"><!-- react-text: 43 -->服务器<!-- /react-text --><img style="transform:rotate(-90deg);" class="menu-toggle" src="/img/system/arrow_down.png" data-reactid="44"/></span><ul data-reactid="45"><li class="menu-item menu-item-level-3" data-reactid="46"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self" data-reactid="47">接入指南</a></li><li class="menu-item menu-item-level-3" data-reactid="48"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self" data-reactid="49">php下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="50"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self" data-reactid="51">python下单签名示例</a></li><li class="menu-item menu-item-level-3" data-reactid="52"><a href="/zh-cn/docs/server/faq.html" target="_self" data-reactid="53">Q&amp;A</a></li></ul></li></ul></li></ul></div><div class="doc-content markdown-body" data-reactid="54"><h1>php 签名示例</h1>
+<pre><code class="language-php"><span class="hljs-meta">&lt;?php</span>
+
+	$gameid = <span class="hljs-string">""</span>;
+	<span class="hljs-comment">//网易云后台私钥</span>
+	$privateKey = <span class="hljs-string">""</span>;
+
+	<span class="hljs-comment">//服务器接入文档上的支付平台公钥</span>
+	$publicKey = <span class="hljs-string">""</span>;
+
+	<span class="hljs-comment">//订单数据</span>
+	$order = <span class="hljs-keyword">Array</span>(
+	    <span class="hljs-string">'v'</span> =&gt; <span class="hljs-number">13</span>,
+	    <span class="hljs-string">'thirdpart_orderid'</span> =&gt; <span class="hljs-number">123456</span>,
+	    <span class="hljs-string">'thirdpart_ordertime'</span> =&gt; <span class="hljs-string">'2018-05-16 14:31:53'</span>,
+	    <span class="hljs-string">'tradeName'</span> =&gt; <span class="hljs-string">'ProductName1'</span>,
+	    <span class="hljs-string">'price'</span> =&gt; <span class="hljs-number">998.00</span>,
+	    <span class="hljs-string">'access_token'</span> =&gt; <span class="hljs-string">'f178d-fe93-4f9a-9383-19648dd'</span>,
+	);
+	$order[<span class="hljs-string">'sign'</span>] = getOrderSign($order, $privatekey);
+
+	$url = <span class="hljs-string">"https://open.game.163.com/pay/games/{$gameid}/add/trades"</span>;
+	$result = httpCurl($url ,$order);   <span class="hljs-comment">// 生成订单接口</span>
+	$_rst = getVerifySign($result, $publicKey); <span class="hljs-comment">//验证返回签名数据</span>
+	<span class="hljs-keyword">if</span>($_rst) {
+		<span class="hljs-comment">//success 返回 trade_serialid 和 pay_url</span>
+		<span class="hljs-keyword">die</span>(<span class="hljs-string">'success'</span>);
+	}
+
+
+
+	<span class="hljs-comment">//2.3.	PayServer异步通知   网易服务器通知支付结果</span>
+	$_signCheck = getVerifySign($data, $publicKey,<span class="hljs-keyword">true</span>);
+	<span class="hljs-keyword">if</span>($_signCheck) {
+		<span class="hljs-comment">//success cp完成支付成功之后逻辑</span>
+		<span class="hljs-keyword">die</span>(<span class="hljs-string">'success'</span>);
+	}
+
+	<span class="hljs-comment">// 生产签名</span>
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getOrderSign</span><span class="hljs-params">($data,$Key)</span>
+    </span>{
+        $sourcestr = <span class="hljs-string">''</span>;
+        <span class="hljs-keyword">foreach</span> ($data <span class="hljs-keyword">as</span> $key =&gt; $value) {
+            <span class="hljs-keyword">if</span>($key == <span class="hljs-string">'price'</span>) <span class="hljs-keyword">continue</span>;
+            $sourcestr .= urlencode($value);
+        }
+
+        $devKey = base64_encode(hex2bin($Key));
+        $begin_private_key = <span class="hljs-string">"-----BEGIN RSA PRIVATE KEY-----\n"</span>;
+        $end_private_key = <span class="hljs-string">"-----END RSA PRIVATE KEY-----\n"</span>;
+
+        $str = chunk_split($devKey, <span class="hljs-number">64</span>, <span class="hljs-string">"\n"</span>);
+
+        $privateKey = $begin_private_key.$str.$end_private_key;
+
+        $pkeyid = openssl_get_privatekey($privateKey);
+        openssl_sign($sourcestr, $signature, $pkeyid,OPENSSL_ALGO_SHA1);
+        openssl_free_key($pkeyid);
+        <span class="hljs-keyword">return</span> bin2hex($signature);
+    }
+
+    <span class="hljs-comment">// 校验网易云签名</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getVerifySign</span><span class="hljs-params">($data, $pubKey,$isEncode=false)</span>
+    </span>{
+        $content = <span class="hljs-string">''</span>;
+        <span class="hljs-keyword">foreach</span> ($data <span class="hljs-keyword">as</span> $key =&gt; $value) {
+
+            <span class="hljs-keyword">if</span>(($key == <span class="hljs-string">'goodscount'</span> &amp;&amp; $value ==<span class="hljs-number">1</span>) || $key == <span class="hljs-string">'sign'</span>) <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">if</span>($isEncode)
+            	$content .= urlencode($value);
+            <span class="hljs-keyword">else</span>
+            	$content .= $value;
+        }
+
+        $devKey = base64_encode(hex2bin($pubKey));
+        $begin_public_key = <span class="hljs-string">"-----BEGIN PUBLIC KEY-----\n"</span>;
+        $end_public_key = <span class="hljs-string">"-----END PUBLIC KEY-----\n"</span>;
+
+        $str = chunk_split($devKey, <span class="hljs-number">64</span>, <span class="hljs-string">"\n"</span>);
+
+        $publickey = $begin_public_key.$str.$end_public_key;
+
+        $openssl_public_key = openssl_get_publickey($publickey);
+        $ok = openssl_verify($content,hex2bin($data[<span class="hljs-string">'sign'</span>]), $openssl_public_key, OPENSSL_ALGO_SHA1);
+        openssl_free_key($openssl_public_key);
+        <span class="hljs-keyword">return</span> $ok;
+    }
+
+    <span class="hljs-comment">//发送https请求</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">httpCurl</span><span class="hljs-params">($url, $postData = array<span class="hljs-params">()</span>, $isSsl = <span class="hljs-number">0</span>,$timeout=<span class="hljs-number">5</span>)</span>
+    </span>{
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">empty</span>($postData)) {
+            <span class="hljs-keyword">if</span> (is_array($postData)) {
+                $data = urldecode(http_build_query($postData));
+            } <span class="hljs-keyword">else</span> {
+                $data = $postData;
+            }
+            curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            <span class="hljs-keyword">if</span> (strpos($url, <span class="hljs-string">"?"</span>)) {
+                $url .= <span class="hljs-string">"&amp;"</span> . $data;
+            } <span class="hljs-keyword">else</span> {
+                $url .= <span class="hljs-string">"?"</span> . $data;
+            }
+        }
+        <span class="hljs-keyword">if</span> ($isSsl &gt; <span class="hljs-number">0</span>) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-keyword">false</span>);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-keyword">false</span>);
+        }
+        $time = microtime(<span class="hljs-number">1</span>);
+        $result = curl_exec($ch);
+        $time = microtime(<span class="hljs-number">1</span>)-$time;
+        <span class="hljs-keyword">if</span> (curl_errno($ch)) {
+            <span class="hljs-comment">//错误日志</span>
+        } <span class="hljs-keyword">else</span> {
+            $res = is_array($result) ? var_export($result, <span class="hljs-keyword">true</span>) : $result;
+        }
+        curl_close($ch);
+        <span class="hljs-keyword">return</span> $result;
+    }
+<span class="hljs-meta">?&gt;</span>
+</code></pre>
+</div></section></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>
