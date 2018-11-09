@@ -1,3 +1,5 @@
+[important]: http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png
+
 # 云游戏服务端接入文档
 ## 0.版本变更记录
 修订内容描述|修订日期|版本号
@@ -56,10 +58,10 @@
 
 **<code>流程注意点</code>**
 
-1. 调用支付接口时都:star:`必须`:star:传递用户的access_token，用于提取用户名、验证。
-1. :star:`任一步`:star:都可能中断，要保证最终数据的一致性、正确。比如悬挂订单最终要超时。
-1. :star:`任一步`:star:都要签名，防篡改、欺骗、重放。
-1. :star:`任一步`:star:都有可能多次重复调用，被调用者负责去重。
+1. 调用支付接口时都![][important]`必须`![][important]传递用户的access_token，用于提取用户名、验证。
+1. ![][important]`任一步`![][important]都可能中断，要保证最终数据的一致性、正确。比如悬挂订单最终要超时。
+1. ![][important]`任一步`![][important]都要签名，防篡改、欺骗、重放。
+1. ![][important]`任一步`![][important]都有可能多次重复调用，被调用者负责去重。
 
 ## 2.服务端接口
 服务器端接口包括`第三方Server`、`PayServer`提供给对方和Android客户端的接口。主要包括订单生成、支付通知两类接口。考虑到安全性，除了用户输入、UI交互接口需要在Android端完成，其他跟支付有关的接口必须在服务器端进行调用。签名由服务器端进行，公钥不要暴露在Android端。
@@ -73,34 +75,34 @@
 update Trade set PayState=Payed where PayState=UnPay and Id=?;
 ```
 
-#### 2.1.3 两个公钥，一个私钥:star:`很重要`:star:
+#### 2.1.3 两个公钥，一个私钥![][important]`很重要`![][important]
 网易云游戏需要两个公钥一个私钥。请`谨记`括号里面的名字。
 
-1. 游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称:star:`游戏方公钥`:star:或:star:`游戏方私钥`:star:)
+1. 游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称![][important]`游戏方公钥`![][important]或![][important]`游戏方私钥`![][important])
 ![游戏方接入方公私钥获取](http://nosdn-yx.127.net/yxgame/0be8e326369a4f64a44b03c193faf243.jpg)
-1. 平台公钥(以下称:star:`平台公钥`:star:)
+1. 平台公钥(以下称![][important]`平台公钥`![][important])
 
 ```
 30819f300d06092a864886f70d010101050003818d0030818902818100ac1b8d63bcaf49cdd0d1e79c916aba0250421b3ee8eaf134f80843c5033e30a150b9e26e78025fde8e52538d4beb572940966b0c80460d90a26c9119a0d28c4277024dbeb20e31403360aeca70da506a19d89e95512e5347be0eae9b2c49da3150a93e3bc80817fa9a1d8170555e6117c86f84f13afc39944fb6bdfc85e3723b0203010001
 ```
 
-#### 2.1.4 签名校验及参数值编码
-:star:`非常重要`:star:绝大部分平台接入失败都卡在签名这一步，请仔细阅读下面各点。
+#### <h4 id='sign'>2.1.4 签名校验及参数值编码</h4>
+![][important]`非常重要`![][important]绝大部分平台接入失败都卡在签名这一步，请仔细阅读下面各点。
 
 ##### 2.1.4.1 注意点
 1. 拼接在请求URL上的参数，需要进行URLEncode, 如`String param = URLEncoder.encode("2014-01-01 12:12:12", "UTF-8");`, 输出为`2014-01-01+12%3A12%3A12`
 1. `第三方Server`请求`PayServer`的接口，传递的参数中的`sign签名`字段的操作
 	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
-	+ :star:`需要、需要、需要`:star:进行`URLEncode`
-	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.sign()`接口和:star:`游戏方私钥`:star:以及上述拼接字符串生成签名串
+	+ ![][important]`需要、需要、需要`![][important]进行`URLEncode`
+	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.sign()`接口和![][important]`游戏方私钥`![][important]以及上述拼接字符串生成签名串
 1. `第三方Server`请求`PayServer`的接口后校验返回的参数中的`sign签名`字段的操作
 	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
-	+ :star:`不需要、不需要、不需要`:star:进行`URLEncode`
-	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和:star:`平台公钥`:star:以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
+	+ ![][important]`不需要、不需要、不需要`![][important]进行`URLEncode`
+	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和![][important]`平台公钥`![][important]以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
 1. `第三方Server`接收`PayServer`的支付通知回调接口的`sign签名`字段操作
 	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
-	+ :star:`需要、需要、需要`:star:进行`URLEncode`
-	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和:star:`平台公钥`:star:以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
+	+ ![][important]`需要、需要、需要`![][important]进行`URLEncode`
+	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和![][important]`平台公钥`![][important]以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
 ##### 2.1.4.2 生成和验证签名Java Demo
 `php`、`python`Demo请参考Android SDK文档包中的`doc/服务端`
 
@@ -176,7 +178,7 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 + 订单唯一性保证: 相同的`thirdpart_orderid`、`thirdpart_ordertime`为`第三方Server`唯一订单号，不能重复调用此接口生成订单
 
 #### 2.3.2 请求参数
-:star:`拼接在URL中`:star:
+![][important]`拼接在URL中`![][important]
 
 参数|参数名称(FulfillWithEngCharacter)|参数说明|类型(字符长度)|必传
 -----|-----|-----|-----|-----
@@ -187,7 +189,7 @@ tradeName|商品名称|小写英文字母或数字或中文|String(240)|是
 price|商品单价|金额，单位元，精确到分，如0.01元|String|是
 access_token|oauth token|登陆时返回，用于账号验证。|String|是
 goodscount|购买数量|为兼容老版，不传默认为1|Int|否
-sign|签名|请先阅读[2.1.4 签名校验及参数值编码](https://github.com/dingbupt/cloudgame-doc/wiki/cloudgame-server-doc#214-%E7%AD%BE%E5%90%8D%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%8F%82%E6%95%B0%E5%80%BC%E7%BC%96%E7%A0%81),参与签名的参数:star:严格:star:依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后:star:`需要URLEncode`:star:, `v+thirdpart_orderid+thirdpart_ordertime+tradeName+access_token+goodscount`,`goodscount`不传或者为1时:star:`不参与`:star:签名字符串拼接,使用:star:`游戏方私钥`:star:进行签名生成计算|String|是
+sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`需要URLEncode`![][important], `v+thirdpart_orderid+thirdpart_ordertime+tradeName+access_token+goodscount`,`goodscount`不传或者为1时![][important]`不参与`![][important]签名字符串拼接,使用![][important]`游戏方私钥`![][important]进行签名生成计算|String|是
 
 #### 2.3.3 返回值
 + 返回值格式: `JSON`
@@ -211,7 +213,7 @@ trade_serialid|支付平台订单序列号||String
 goodsprice|商品单价|单位元，精确到分，如0.01元|String
 goodsamount|支付总金额|单位元，精确到分，如0.01元|String
 pay_url|支付工具页面跳转url|包含支付页面需要的参数。第三方Server需要原样返回给客户端。|String
-sign|签名|请先阅读[2.1.4 签名校验及参数值编码](https://github.com/dingbupt/cloudgame-doc/wiki/cloudgame-server-doc#214-%E7%AD%BE%E5%90%8D%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%8F%82%E6%95%B0%E5%80%BC%E7%BC%96%E7%A0%81),参与签名的参数:star:严格:star:依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后:star:`不需要URLEncode`:star:，`v+thirdpart_orderid+thirdpart_ordertime+result+trade_serialid+goodsprice+goodsamount+pay_url+goodscount`, `goodscount`为请求时的参数，不传或者为1时:star:`不参与`:star:签名字符串拼接，使用:star:`平台公钥`:star:进行签名验证计算|String
+sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`不需要URLEncode`![][important]，`v+thirdpart_orderid+thirdpart_ordertime+result+trade_serialid+goodsprice+goodsamount+pay_url+goodscount`, `goodscount`为请求时的参数，不传或者为1时![][important]`不参与`![][important]签名字符串拼接，使用![][important]`平台公钥`![][important]进行签名验证计算|String
 ### 2.4 PayServer异步支付通知
 本接口为流程图中的`异步发送支付通知 4.1`接口。Android页面通知可能因为网络故障导致通知失败，需要`PayServer`多次异步通知来保证通知到`第三方Server`。
 
@@ -226,7 +228,7 @@ sign|签名|请先阅读[2.1.4 签名校验及参数值编码](https://github.co
 + 请求方式: `POST`
 
 #### 2.4.2 请求参数
-:star:`拼接在URL中`:star:
+![][important]`拼接在URL中`![][important]
 
 参数|参数名称(FulfillWithEngCharacter)|参数说明|类型(字符长度)
 -----|-----|-----|-----
@@ -244,7 +246,7 @@ paytooltype|支付工具类型||int
 notifyid|通知内部id|用于校验|long
 notifytime|通知时间戳||long
 from|来源参数|值固定为`backend`|String
-sign|签名|请先阅读[2.1.4 签名校验及参数值编码](https://github.com/dingbupt/cloudgame-doc/wiki/cloudgame-server-doc#214-%E7%AD%BE%E5%90%8D%E6%A0%A1%E9%AA%8C%E5%8F%8A%E5%8F%82%E6%95%B0%E5%80%BC%E7%BC%96%E7%A0%81),参与签名的参数:star:严格:star:依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后:star:`需要URLEncode`:star:, `v+thirdpart_orderid+thirdpart_ordertime+tradeName+result+trade_serialid+goodsprice+goodsamount+paystatus+paytime+paytooltype+notifyid+notifytime+from`,使用:star:`平台公钥`:star:进行签名验证计算|String
+sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`需要URLEncode`![][important], `v+thirdpart_orderid+thirdpart_ordertime+tradeName+result+trade_serialid+goodsprice+goodsamount+paystatus+paytime+paytooltype+notifyid+notifytime+from`,使用![][important]`平台公钥`![][important]进行签名验证计算|String
 #### 2.4.3 返回值
 成功处理则返回`success`这7个字符，失败返回`fail`。
 ### 2.5 获取用户信息
