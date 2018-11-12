@@ -8,7 +8,7 @@ export default {
         author: 'Netease',
         dateStr: '2018-10-19',
         desc: '',
-        link: '/feature/index.html',
+        link: '/zh-cn/blog/feature/index.html',
       },
       {
         title: '服务器接入文档',

@@ -18,29 +18,38 @@ class BlogDetail extends Language {
     super(props);
     this.state = {
       __html: '',
+      iframe: false,
     };
   }
 
   componentDidMount() {
     // 通过请求获取生成好的json数据，静态页和json文件在同一个目录下
-    fetch(window.location.pathname.replace(/\.html$/i, '.json'))
-    .then(res => res.json())
-    .then((md) => {
+    let iframe = window.location.pathname.indexOf("feature/index.html") > -1;
+    if (iframe) {
       this.setState({
-        __html: md && md.__html ? md.__html : '',
-      });
-    });
-    this.markdownContainer.addEventListener('click', (e) => {
-      const isAnchor = e.target.nodeName.toLowerCase() === 'a' && e.target.getAttribute('href') && anchorReg.test(e.target.getAttribute('href'));
-      if (isAnchor) {
-        e.preventDefault();
-        const id = e.target.getAttribute('href').slice(1);
-        scroller.scrollTo(id, {
-          duration: 1000,
-          smooth: 'easeInOutQuint',
+        iframe: true,
+        iframeUrl: "/feature/index.html",
+      })
+    } else {
+      fetch(window.location.pathname.replace(/\.html$/i, '.json'))
+        .then(res => res.json())
+        .then((md) => {
+          this.setState({
+            __html: md && md.__html ? md.__html : '',
+          });
         });
-      }
-    });
+      this.markdownContainer.addEventListener('click', (e) => {
+        const isAnchor = e.target.nodeName.toLowerCase() === 'a' && e.target.getAttribute('href') && anchorReg.test(e.target.getAttribute('href'));
+        if (isAnchor) {
+          e.preventDefault();
+          const id = e.target.getAttribute('href').slice(1);
+          scroller.scrollTo(id, {
+            duration: 1000,
+            smooth: 'easeInOutQuint',
+          });
+        }
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -84,6 +93,8 @@ class BlogDetail extends Language {
   render() {
     const language = this.getLanguage();
     const __html = this.props.__html || this.state.__html;
+    const iframe = this.state.iframe;
+    let iframeHeight = window.screen.height - 140;
     return (
       <div className="blog-detail-page">
         <Header
@@ -93,12 +104,18 @@ class BlogDetail extends Language {
           onLanguageChange={this.onLanguageChange}
           forChannel={true}
         />
-        <section
-          className="blog-content markdown-body"
-          ref={(node) => { this.markdownContainer = node; }}
-          dangerouslySetInnerHTML={{ __html }}
-        />
-        <Footer logo="/img/dubbo_gray.png" language={language} />
+        {
+          iframe ?
+            (<iframe src={this.state.iframeUrl} style={{width: '99%', height: iframeHeight, overflow:'visible', margin: '0 auto'}}/>)
+            :
+            (
+              <section
+                className="blog-content markdown-body"
+                ref={(node) => { this.markdownContainer = node; }}
+                dangerouslySetInnerHTML={{ __html }}
+              />
+            )
+        }
       </div>
     );
   }
