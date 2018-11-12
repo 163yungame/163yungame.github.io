@@ -127,7 +127,7 @@ class Header extends React.Component {
         }
       >
         <div className="header-body">
-          <a href={getLink(`/${language}/index.html`)}>
+          <a href={this.props.forChannel ? getLink(`/${language}/blog`): getLink(`/${language}/index.html`)}>
             <img className="logo" alt={siteConfig.name} title={siteConfig.name} src={getLink(logo)} />
           </a>
           {
@@ -152,22 +152,6 @@ class Header extends React.Component {
               </div>
             ) : null
           }
-          {/*{*/}
-            {/*onLanguageChange !== noop ?*/}
-            {/*(<span*/}
-              {/*className={*/}
-                {/*classnames({*/}
-                  {/*'language-switch': true,*/}
-                  {/*[`language-switch-${type}`]: true,*/}
-                {/*})*/}
-              {/*}*/}
-              {/*onClick={this.switchLang}*/}
-            {/*>*/}
-              {/*{languageSwitch.find(lang => lang.value === language).text}*/}
-            {/*</span>)*/}
-            {/*:*/}
-            {/*null*/}
-          {/*}*/}
           <div
             className={
               classnames({
@@ -181,19 +165,21 @@ class Header extends React.Component {
               onClick={this.toggleMenu}
               src={type === 'primary' ? getLink('/img/system/menu_white.png') : getLink('/img/system/menu_gray.png')}
             />
-            <ul>
-              {siteConfig[language].pageMenu.map(item => (
-                <li
-                  className={classnames({
-                    'menu-item': true,
-                    [`menu-item-${type}`]: true,
-                    [`menu-item-${type}-active`]: currentKey === item.key,
-                  })}
-                  key={item.key}
-                >
-                  <a href={getLink(item.link)} target={item.target || '_self'}>{item.text}</a>
-                </li>))}
-            </ul>
+            {this.props.forChannel ? null : 
+              <ul>
+                {siteConfig[language].pageMenu.map(item => (
+                  <li
+                    className={classnames({
+                      'menu-item': true,
+                      [`menu-item-${type}`]: true,
+                      [`menu-item-${type}-active`]: currentKey === item.key,
+                    })}
+                    key={item.key}
+                  >
+                    <a href={getLink(item.link)} target={item.target || '_self'}>{item.text}</a>
+                  </li>))}
+              </ul>
+            }
           </div>
         </div>
       </header>

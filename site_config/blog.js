@@ -18,11 +18,18 @@ export default {
         link: '/zh-cn/blog/channelgc/android.html',
       },
       {
-        title: 'IOS接入文档',
+        title: 'IOS SDK接入文档',
         author: 'Netease',
         dateStr: '2018-10-19',
         desc: '',
-        link: '/zh-cn/blog/channelgc/ios.html',
+        link: '/zh-cn/blog/channelgc/ios_sdk.html',
+      },
+      {
+        title: 'IOS JsBridge接入文档',
+        author: 'Netease',
+        dateStr: '2018-10-19',
+        desc: '',
+        link: '/zh-cn/blog/channelgc/ios_js.html',
       }
     ],
   },

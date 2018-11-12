@@ -1,5 +1,3 @@
-[Toc]
-
 # 命名空间
 
 注:以易信JsBridge为例，命名空间window.YxJsBrige

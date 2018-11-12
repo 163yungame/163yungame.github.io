@@ -23,6 +23,7 @@ class Blog extends Language {
           currentKey="blog"
           language={language}
           onLanguageChange={this.onLanguageChange}
+          forChannel={true}
         />
         <Bar img="/img/system/blog.png" text={dataSource.barText} />
         <section className="blog-container">

@@ -91,6 +91,7 @@ class BlogDetail extends Language {
           currentKey="blog"
           language={language}
           onLanguageChange={this.onLanguageChange}
+          forChannel={true}
         />
         <section
           className="blog-content markdown-body"
