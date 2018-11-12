@@ -4,6 +4,13 @@ export default {
     postsTitle: '',
     list: [
       {
+        title: '游戏中心接入需求文档',
+        author: 'Netease',
+        dateStr: '2018-10-19',
+        desc: '',
+        link: '/feature/index.html',
+      },
+      {
         title: '服务器接入文档',
         author: 'Netease',
         dateStr: '2018-10-19',
