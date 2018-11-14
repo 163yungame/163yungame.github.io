@@ -32,7 +32,7 @@
 ### 接入重要注意事项
 
 1. 接入并开启渠道授权后，需要第一时间联系运营在后台进行配置以下内容
-	* `oauthAppId`和`oauthAppSecret`:渠道方分配给云游戏进行Oauth接入分配的`appId`和`secret`, 后续所有给云游戏分配的`clientId`都需要在这个`appId`的维度下，即同一用户使用同一个`aapId`下不同的`clientId`授权，获取的`openId`是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的
+	* `oauthAppId`和`oauthAppSecret`:渠道方分配给云游戏进行Oauth接入分配的`appId`和`secret`, 后续所有给云游戏分配的`clientId`都需要在这个`appId`的维度下，即同一用户使用同一个`appId`下不同的`clientId`授权，获取的`openId`是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的
 	* `webClientId`和`webClientSecret`:渠道方在上方`oauthAppId`下给云游戏中心webview分配的`clientId`，在渠道的App内也会用到，渠道App进入游戏中心的时候需要获取code并作为参数附到链接后，后文会提到。
 	* 提供的自动注册`ClientId`的接口，需要保证在前面的`oauthAppId`维度下进行。
 	* 授权流程中的`code`换完一次`accessToken`后需要失效

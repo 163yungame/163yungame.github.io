@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="/build/blogDetail.css" />
 </head>
 <body>
-	<div id="root"><div class="blog-detail-page" data-reactroot="" data-reactid="1" data-react-checksum="1151733351"><header class="header-container header-container-normal" data-reactid="2"><div class="header-body" data-reactid="3"><a href="/zh-cn/blog" data-reactid="4"><img class="logo" src="http://nosdn-yx.127.net/yxgame/6dfac650089849dc8281ffef5e164127.png" data-reactid="5"/></a><div class="header-menu" data-reactid="6"><img class="header-menu-toggle" src="/img/system/menu_gray.png" data-reactid="7"/></div></div></header><section class="blog-content markdown-body" data-reactid="8"><h1>云游戏渠道应用接入文档</h1>
+	<div id="root"><div class="blog-detail-page" data-reactroot="" data-reactid="1" data-react-checksum="2092306038"><header class="header-container header-container-normal" data-reactid="2"><div class="header-body" data-reactid="3"><a href="/zh-cn/blog" data-reactid="4"><img class="logo" src="http://nosdn-yx.127.net/yxgame/6dfac650089849dc8281ffef5e164127.png" data-reactid="5"/></a><div class="header-menu" data-reactid="6"><img class="header-menu-toggle" src="/img/system/menu_gray.png" data-reactid="7"/></div></div></header><section class="blog-content markdown-body" data-reactid="8"><h1>云游戏渠道应用接入文档</h1>
 <h2>文档版本更新记录</h2>
 <table>
 <thead>
@@ -84,7 +84,7 @@
 <ol>
 <li>接入并开启渠道授权后，需要第一时间联系运营在后台进行配置以下内容
 <ul>
-<li><code>oauthAppId</code>和<code>oauthAppSecret</code>:渠道方分配给云游戏进行Oauth接入分配的<code>appId</code>和<code>secret</code>, 后续所有给云游戏分配的<code>clientId</code>都需要在这个<code>appId</code>的维度下，即同一用户使用同一个<code>aapId</code>下不同的<code>clientId</code>授权，获取的<code>openId</code>是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的</li>
+<li><code>oauthAppId</code>和<code>oauthAppSecret</code>:渠道方分配给云游戏进行Oauth接入分配的<code>appId</code>和<code>secret</code>, 后续所有给云游戏分配的<code>clientId</code>都需要在这个<code>appId</code>的维度下，即同一用户使用同一个<code>appId</code>下不同的<code>clientId</code>授权，获取的<code>openId</code>是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的</li>
 <li><code>webClientId</code>和<code>webClientSecret</code>:渠道方在上方<code>oauthAppId</code>下给云游戏中心webview分配的<code>clientId</code>，在渠道的App内也会用到，渠道App进入游戏中心的时候需要获取code并作为参数附到链接后，后文会提到。</li>
 <li>提供的自动注册<code>ClientId</code>的接口，需要保证在前面的<code>oauthAppId</code>维度下进行。</li>
 <li>授权流程中的<code>code</code>换完一次<code>accessToken</code>后需要失效</li>
