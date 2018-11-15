@@ -2,9 +2,12 @@
 
 `NCGSDK`是一个为方便独立App快速接入云游戏分发平台的移动端`Web`游戏中心的`SDK`库，`SDK`提供`App`授权登录、游戏下载等等通用`API`接口，开发者可以方便快捷的根据自己需求进行开发实现。
 
-### SDK下载
+### 下载
+#### SDK
 必选 [NCGSDK-1.4.9](http://nosdn-yx.127.net/yxgame/46077fe49b06436d8b9281f530183f4b.aar)   
 可选 [NCGDownloadSDK-1.3.3](http://nosdn-yx.127.net/yxgame/2ae72116b62c4b1faab080528708164a.aar)
+#### Demo
+[Demo](http://nosdn-yx.127.net/yxgame/8a49e813671570e60167158716130001.zip)
 
 ### 快速使用
 #### 参数配置

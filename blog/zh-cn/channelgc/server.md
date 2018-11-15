@@ -7,6 +7,9 @@
 3|修改文档，同步bima-oauth2的所有接口|20181011|1.2|何慧
 
 ## 渠道应用授权登陆流程及接入注意事项
+### 下载
+[Demo](http://nosdn-yx.127.net/yxgame/8a49e813671570e601671588cd5f0002.zip)
+
 ### 授权流程图
 ![授权流程图](http://nosdn-yx.127.net/yxgame/417bf23c05f64116b0ed079e2a616ddc.png)
 
