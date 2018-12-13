@@ -3,7 +3,7 @@ import React from 'react';
 export default {
   'zh-cn': {
     brand: {
-      brandName: '网易云游戏',
+      brandName: '网易易游',
       briefIntroduction: '游戏客户端，服务器接入文档',
       buttons: [
         {

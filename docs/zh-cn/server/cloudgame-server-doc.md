@@ -27,23 +27,23 @@
 
 **参与支付流程交互的角色有：**
 
-+ **游戏APP（以下也称第三方App）**：需要集成网易云游戏SDK
++ **游戏APP（以下也称第三方App）**：需要集成网易易游SDK
 	- 调用游戏Server接口生成订单
 	- 调用SDK接口进行支付
 + **游戏Server（以下也称第三方服务器）**：
-	- 负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与网易云游戏Server交互，生成网易云游戏Server的订单信息（Trade信息），并一起返回给游戏App
+	- 负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与网易易游Server交互，生成网易易游Server的订单信息（Trade信息），并一起返回给游戏App
 	- 负责接收网易有游戏Server支付回调，处理发货逻辑
-+ **网易云游戏Server（以下也称PayServer）**
++ **网易易游Server（以下也称PayServer）**
 	- 根据游戏Server订单，生成订单信息（Trade信息），返回给游戏Server
 	- 接收支付工具Server（如支付宝、微信等）的回调，并回调游戏Server接口
 
 
-从上面的描述中，第三方游戏接入网易云游戏仅需要关心以下部分流程:
+从上面的描述中，第三方游戏接入网易易游仅需要关心以下部分流程:
 
 1.	游戏App向游戏Server发起生成订单
-1.	游戏Server向网易云游戏Server发起生成订单
-1.	游戏App调用网易云游戏SDK接口发起支付
-1.	游戏Server接收网易云游戏Server异步支付成功回调
+1.	游戏Server向网易易游Server发起生成订单
+1.	游戏App调用网易易游SDK接口发起支付
+1.	游戏Server接收网易易游Server异步支付成功回调
 
 ### 1.2 完整交易流程
 ![](https://nosdn-yx.127.net/yxgame/90ba0613bcdd40efb9d517c7317f111b.jpg)
@@ -76,7 +76,7 @@ update Trade set PayState=Payed where PayState=UnPay and Id=?;
 ```
 
 #### 2.1.3 两个公钥，一个私钥![][important]`很重要`![][important]
-网易云游戏需要两个公钥一个私钥。请`谨记`括号里面的名字。
+网易易游需要两个公钥一个私钥。请`谨记`括号里面的名字。
 
 1. 游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称![][important]`游戏方公钥`![][important]或![][important]`游戏方私钥`![][important])
 ![游戏方接入方公私钥获取](http://nosdn-yx.127.net/yxgame/0be8e326369a4f64a44b03c193faf243.jpg)

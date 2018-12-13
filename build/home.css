@@ -16,10 +16,12 @@
     height: 66px;
     line-height: 66px; }
     .header-container .header-body .logo {
+      width: 168px;
+      height: 43px;
+      background-repeat: no-repeat;
+      background-size: contain;
       margin-left: 40px;
-      width: 240px;
-      height: 32px;
-      vertical-align: sub; }
+      vertical-align: middle; }
     .header-container .header-body .header-menu {
       float: right; }
       .header-container .header-body .header-menu .header-menu-toggle {

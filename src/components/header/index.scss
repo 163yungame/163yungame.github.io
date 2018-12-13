@@ -20,10 +20,12 @@
     height: $headerHeight;
     line-height: $headerHeight;
     .logo {
+      width: 168px;
+      height: 43px;
+      background-repeat: no-repeat;
+      background-size: contain;
       margin-left: 40px;
-      width: 240px;
-      height: 32px;
-      vertical-align: sub;
+      vertical-align: middle;
     }
     .header-menu {
       float: right;
