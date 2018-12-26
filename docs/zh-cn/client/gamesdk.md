@@ -65,7 +65,8 @@
 `YXEntryActivity` 和 `AppRegister` 中的xx.xx.xx.xx.替换为游戏中的`真实路径`
 
 #### 初始化SDK
-在`Application`中初始化
+在`Application`中初始化  
+重要：`如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题`
 ```java
 public class xxxApp extends Application {
 

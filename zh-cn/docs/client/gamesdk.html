@@ -80,7 +80,8 @@
 </code></pre>
 <p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的xx.xx.xx.xx.替换为游戏中的<code>真实路径</code></p>
 <h4>初始化SDK</h4>
-<p>在<code>Application</code>中初始化</p>
+<p>在<code>Application</code>中初始化<br>
+重要：<code>如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题</code></p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xxxApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>{
 
     <span class="hljs-keyword">private</span> YXGameApi gameApi;
