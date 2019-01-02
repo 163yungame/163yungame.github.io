@@ -28,7 +28,15 @@ module.exports = {
       {
         test: /\.js|jsx$/,
         exclude: [/node_modules/, /build\/lib/, /\.min\.js$/],
-        use: 'babel-loader',
+        loader: require.resolve('babel-loader'),
+        options: {
+          plugins: [
+            ["import", {
+              "libraryName": "antd",
+              "style": "css" // `style: true` 会加载 less 文件
+            }]
+          ]
+        }
       },
       {
         test: /\.(s)?css$/,
