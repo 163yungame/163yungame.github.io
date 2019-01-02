@@ -104,7 +104,7 @@ update Trade set PayState=Payed where PayState=UnPay and Id=?;
 	+ ![][important]`需要、需要、需要`![][important]进行`URLEncode`
 	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和![][important]`平台公钥`![][important]以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
 ##### 2.1.4.2 生成和验证签名Java Demo
-`php`、`python`Demo请参考Android SDK文档包中的`doc/服务端`
+[在线验证签名](https://163yungame.github.io/zh-cn/util/index.html)
 
 * 生成签名流程
 ```java

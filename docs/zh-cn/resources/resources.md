@@ -5,8 +5,12 @@
 #### AndroidSDK下载
 [GameSDK-5.0.1](http://nosdn-yx.127.net/yxgame/1a9333e847884fe0a1252239f635d91c.zip)
 
-#### 签名工具
+### 签名
+#### APK签名获取工具
 [下载地址](http://nosdn-yx.127.net/yxgame/8a49e8136628c152016628c152460000.apk)
+
+#### 支付接口调用签名验证
+[在线验证](https://163yungame.github.io/zh-cn/util/index.html)
 
 ##### 如何使用签名工具
 1. 使用游戏`线上keystore`对游戏进行签名

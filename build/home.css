@@ -252,23 +252,6 @@
     .header-container .header-body .header-menu-open .menu-item-primary-active a, .header-container .header-body .header-menu-open .menu-item-normal-active a {
       color: #fff;
       opacity: 1; } }
-.button {
-  box-sizing: border-box;
-  display: inline-block;
-  height: 48px;
-  line-height: 48px;
-  min-width: 140px;
-  font-family: Avenir-Heavy;
-  font-size: 16px;
-  color: #FFF;
-  text-align: center;
-  border-radius: 4px;
-  text-decoration: none; }
-  .button-primary {
-    background: #4190FF; }
-  .button-normal {
-    background: transparent;
-    border: 1px solid #fff; }
 @charset "UTF-8";
 @font-face {
   font-family: octicons-link;
@@ -2056,3 +2039,20 @@ h1, h2, h3, h4, h5, h6 {
   .home-page .feature-section, .home-page .users-section {
     padding-left: 20px;
     padding-right: 20px; } }
+.button {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 48px;
+  line-height: 48px;
+  min-width: 140px;
+  font-family: Avenir-Heavy;
+  font-size: 16px;
+  color: #FFF;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none; }
+  .button-primary {
+    background: #4190FF; }
+  .button-normal {
+    background: transparent;
+    border: 1px solid #fff; }
