@@ -1,8 +1,7 @@
 # 1. iOS SDK 使用文档
 
 ## SDK下载
-
-[NCGSDK-1.0.0](http://nosdn-yx.127.net/yxgame/a22b064883d447b28816f2c0f6463ade.zip)
+[NCGSDK-1.0.1](http://nosdn-yx.127.net/yxgame/45231f6dc7494f0cb46871dfa37c78c3.zip)
 
 ## 1.1. pod 依赖库
 ```
@@ -25,7 +24,7 @@ pod 'Fabric',               '= 1.7.12'
 
 ## 1.2. 导入 SDK
 
-将下载包里面 NEGCSDK.h, libNEGCSDK.a 以及含图片资源和JS文件的NEGCBundle.bundle添加到 App 项目中
+将下载包里面 NEGCSDK.h, libNEGCSDK_all.a 以及含图片资源和JS文件的NEGCBundle.bundle添加到 App 项目中
 
 ## 1.3. 启用 API
 
@@ -42,7 +41,8 @@ NSString *NEGCSDKChannelHubbleId = @"MA-84A2-97524E679B46";
 在带有包含navigationbar的viewController中调用如下方法，启动游戏中心页面。
 *可以在Editor -> Embed in -> Navigation Controller，来为viewControllerj添加前置navigationbar
 ```
-[[NEGCSDK sharedSDK]pushViewController:self];
+[NEGCSDK sharedSDK].delegate = self;
+[[NEGCSDK sharedSDK]startGameCenter:self.navigationController animated:YES];
 ```
 
 
@@ -65,5 +65,66 @@ SDK需要app提供code来获取用户信息，code获取请参考服务器端的
 @protocol NEGCSDKDelegate <NSObject>
 @required
 - (void)NEGCSDKGetCode:(void(^_Nonnull)(NSString *_Nullable codeString))handler;
+@end
+```
+
+## 1.6 自定义webViewVC
+
+如果需要实现自定义UI，比如左右键，title文字，修改navBar的属性等，请实现下面的delegate方法
+```
+@protocol NEGCSDKDelegate <NSObject>
+@optional
+- (void)NEGCSDKPushViewController:(UIViewController<NEGCWebViewControllerProtocol> *)webViewController animated:(BOOL)animated;
+@end
+
+- (void)NEGCSDKPushViewController:(UIViewController<NEGCWebViewControllerProtocol> *)webViewController animated:(BOOL)animated {
+    MyWebViewController * myWebVC = [[MyWebViewController alloc]init];
+    myWebVC.childVC = webViewController;
+    myWebVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:myWebVC animated:animated];
+}
+```
+
+并实现MyWebViewController
+```
+@interface MyWebViewController : UIViewController<NEGCWebViewControllerParentProtocol>
+@property (nonatomic, strong) UIViewController<NEGCWebViewControllerProtocol> *childVC;
+@end
+
+@implementation MyWebViewController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addChildViewController:_childVC];
+    [self.view addSubview:_childVC.view];
+    _childVC.view.frame = self.view.frame;
+    [_childVC didMoveToParentViewController:self];
+    if (@available(iOS 11.0, *)) {
+    } else {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        #pragma clang diagnostic pop
+    }
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(bima_backButtonPressed:)];
+}
+#pragma mark - NEGCWebViewControllerParentProtocol
+-(void)setMenuInfo:(NSDictionary *)info {
+    NSNumber *visible = [info objectForKey:@"visible"];
+    NSString *text = [info objectForKey:@"text"];
+    if(visible) {
+    if([visible boolValue]) {
+    if([text length]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:text style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnClick:)];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"webview_share"] style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnClick:)];
+    }
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+...
 @end
 ```

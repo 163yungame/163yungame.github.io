@@ -14,7 +14,7 @@
 <body>
 	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="http://nosdn-yx.127.net/yxgame/8a49e81367a10d270167a11734c30003.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h1>1. iOS SDK 使用文档</h1>
 <h2>SDK下载</h2>
-<p><a href="http://nosdn-yx.127.net/yxgame/a22b064883d447b28816f2c0f6463ade.zip">NCGSDK-1.0.0</a></p>
+<p><a href="http://nosdn-yx.127.net/yxgame/45231f6dc7494f0cb46871dfa37c78c3.zip">NCGSDK-1.0.1</a></p>
 <h2>1.1. pod 依赖库</h2>
 <pre><code>platform :ios, '9.0'
 use_frameworks!
@@ -33,7 +33,7 @@ pod 'WebViewJavascriptBridge', '= 6.0.3'
 pod 'Fabric',               '= 1.7.12'
 </code></pre>
 <h2>1.2. 导入 SDK</h2>
-<p>将下载包里面 NEGCSDK.h, libNEGCSDK.a 以及含图片资源和JS文件的NEGCBundle.bundle添加到 App 项目中</p>
+<p>将下载包里面 NEGCSDK.h, libNEGCSDK_all.a 以及含图片资源和JS文件的NEGCBundle.bundle添加到 App 项目中</p>
 <h2>1.3. 启用 API</h2>
 <p>在 *AppDelegate.m application:didFinishLaunchingWithOptions 方法中调用如下方法，参数依次为 app key，版本和来源渠道。</p>
 <pre><code>NSString *NEGCSDKClientId = @&quot;mslNbTGLKdEsvZGpgZnk2XKZa1LzwoG9PeW9Qalxoj2YYYdvhawjztKs0EN5Vr1W&quot;;
@@ -44,7 +44,8 @@ NSString *NEGCSDKChannelHubbleId = @&quot;MA-84A2-97524E679B46&quot;;
 </code></pre>
 <p>在带有包含navigationbar的viewController中调用如下方法，启动游戏中心页面。
 *可以在Editor -&gt; Embed in -&gt; Navigation Controller，来为viewControllerj添加前置navigationbar</p>
-<pre><code>[[NEGCSDK sharedSDK]pushViewController:self];
+<pre><code>[NEGCSDK sharedSDK].delegate = self;
+[[NEGCSDK sharedSDK]startGameCenter:self.navigationController animated:YES];
 </code></pre>
 <h2>1.4 自定义图片浏览和视频播放器</h2>
 <p>SDK默认带了一套图片浏览和视频器，如果需要自定义可以实现下面的delegate方法</p>
@@ -61,6 +62,62 @@ title:(NSString *_Nullable)title;
 <pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
 @required
 - (void)NEGCSDKGetCode:(void(^_Nonnull)(NSString *_Nullable codeString))handler;
+@end
+</code></pre>
+<h2>1.6 自定义webViewVC</h2>
+<p>如果需要实现自定义UI，比如左右键，title文字，修改navBar的属性等，请实现下面的delegate方法</p>
+<pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
+@optional
+- (void)NEGCSDKPushViewController:(UIViewController&lt;NEGCWebViewControllerProtocol&gt; *)webViewController animated:(BOOL)animated;
+@end
+
+- (void)NEGCSDKPushViewController:(UIViewController&lt;NEGCWebViewControllerProtocol&gt; *)webViewController animated:(BOOL)animated {
+    MyWebViewController * myWebVC = [[MyWebViewController alloc]init];
+    myWebVC.childVC = webViewController;
+    myWebVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:myWebVC animated:animated];
+}
+</code></pre>
+<p>并实现MyWebViewController</p>
+<pre><code>@interface MyWebViewController : UIViewController&lt;NEGCWebViewControllerParentProtocol&gt;
+@property (nonatomic, strong) UIViewController&lt;NEGCWebViewControllerProtocol&gt; *childVC;
+@end
+
+@implementation MyWebViewController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addChildViewController:_childVC];
+    [self.view addSubview:_childVC.view];
+    _childVC.view.frame = self.view.frame;
+    [_childVC didMoveToParentViewController:self];
+    if (@available(iOS 11.0, *)) {
+    } else {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored &quot;-Wdeprecated-declarations&quot;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        #pragma clang diagnostic pop
+    }
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@&quot;返回&quot; style:UIBarButtonItemStylePlain target:self action:@selector(bima_backButtonPressed:)];
+}
+#pragma mark - NEGCWebViewControllerParentProtocol
+-(void)setMenuInfo:(NSDictionary *)info {
+    NSNumber *visible = [info objectForKey:@&quot;visible&quot;];
+    NSString *text = [info objectForKey:@&quot;text&quot;];
+    if(visible) {
+    if([visible boolValue]) {
+    if([text length]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:text style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnClick:)];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@&quot;webview_share&quot;] style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnClick:)];
+    }
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+...
 @end
 </code></pre>
 </section></div></div>

@@ -26,6 +26,11 @@ export default {
         text: '服务器',
         link: '/zh-cn/docs/server/cloudgame-server-doc.html',
       },
+      {
+        key: 'util',
+        text: '工具',
+        link: '/zh-cn/util/index.html',
+      },
     ],
     disclaimer: {
       title: '免责声明',

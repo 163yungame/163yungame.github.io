@@ -151,7 +151,7 @@ class Utils extends Language {
     return (
       <div className="util-page">
         <Header
-          currentKey={this.props.headerKey}
+          currentKey='util'
           type="normal"
           language={language}
         />
