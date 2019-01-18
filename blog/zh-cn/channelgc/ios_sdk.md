@@ -1,7 +1,14 @@
 # 1. iOS SDK 使用文档
 
 ## SDK下载
-[NCGSDK-1.0.1](http://nosdn-yx.127.net/yxgame/45231f6dc7494f0cb46871dfa37c78c3.zip)
+[NCGSDK-1.0.2](http://nosdn-yx.127.net/yxgame/1126f6a28f504ecc8589454412b1f4b3.zip)
+
+- 更新版本：v1.0.2
+1. 对URLScheme调用做了判断，默认作为外部调用，忽略method==2的情况
+2. 去掉默认的视频全屏幕播放支持，减少11MB容量，改为外部实现，请移除Pods配置内的NELivePlayer
+
+[TOC]
+# 1. iOS SDK 使用文档
 
 ## 1.1. pod 依赖库
 ```
@@ -17,7 +24,6 @@ pod 'KVOController',        '= 1.2.0'
 pod 'SVProgressHUD',        '= 2.2.5'
 pod 'Reachability',         '= 3.2'
 pod 'Masonry',              '= 1.1.0'
-pod 'NELivePlayer',         '=1.9.1'
 pod 'WebViewJavascriptBridge', '= 6.0.3'
 pod 'Fabric',               '= 1.7.12'
 ```
@@ -45,20 +51,7 @@ NSString *NEGCSDKChannelHubbleId = @"MA-84A2-97524E679B46";
 [[NEGCSDK sharedSDK]startGameCenter:self.navigationController animated:YES];
 ```
 
-
-## 1.4 自定义图片浏览和视频播放器
-
-SDK默认带了一套图片浏览和视频器，如果需要自定义可以实现下面的delegate方法
-```
-@protocol NEGCSDKDelegate <NSObject>
-@optional
-- (void)NEGCSDKBrowseImages:(NSArray *_Nonnull)imageInfos
-currentIndex:(NSInteger)currentIndex;
-- (void)NEGCSDKBrowseVidel:(NSString *_Nonnull)videoUrl
-title:(NSString *_Nullable)title;
-@end
-```
-## 1.5 用户信息code获取
+## 1.4 用户信息code获取
 
 SDK需要app提供code来获取用户信息，code获取请参考服务器端的协议，请实现下面的delegate方法
 ```
@@ -68,7 +61,25 @@ SDK需要app提供code来获取用户信息，code获取请参考服务器端的
 @end
 ```
 
-## 1.6 自定义webViewVC
+## 1.5 实现全屏幕的视频浏览
+```
+@protocol NEGCSDKDelegate <NSObject>
+@required
+- (void)NEGCSDKBrowseVideo:(NSString *_Nonnull)videoUrl title:(NSString *_Nullable)title;
+@end
+```
+
+## 1.6 自定义图片浏览
+
+SDK默认带了一套图片浏览，如果需要自定义可以实现下面的delegate方法
+```
+@protocol NEGCSDKDelegate <NSObject>
+@optional
+- (void)NEGCSDKBrowseImages:(NSArray *_Nonnull)imageInfos currentIndex:(NSInteger)currentIndex;
+@end
+```
+
+## 1.7 自定义webViewVC
 
 如果需要实现自定义UI，比如左右键，title文字，修改navBar的属性等，请实现下面的delegate方法
 ```

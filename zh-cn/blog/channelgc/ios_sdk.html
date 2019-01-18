@@ -14,7 +14,16 @@
 <body>
 	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="http://nosdn-yx.127.net/yxgame/8a49e81367a10d270167a11734c30003.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h1>1. iOS SDK 使用文档</h1>
 <h2>SDK下载</h2>
-<p><a href="http://nosdn-yx.127.net/yxgame/45231f6dc7494f0cb46871dfa37c78c3.zip">NCGSDK-1.0.1</a></p>
+<p><a href="http://nosdn-yx.127.net/yxgame/1126f6a28f504ecc8589454412b1f4b3.zip">NCGSDK-1.0.2</a></p>
+<ul>
+<li>更新版本：v1.0.2</li>
+</ul>
+<ol>
+<li>对URLScheme调用做了判断，默认作为外部调用，忽略method==2的情况</li>
+<li>去掉默认的视频全屏幕播放支持，减少11MB容量，改为外部实现，请移除Pods配置内的NELivePlayer</li>
+</ol>
+<p>[TOC]</p>
+<h1>1. iOS SDK 使用文档</h1>
 <h2>1.1. pod 依赖库</h2>
 <pre><code>platform :ios, '9.0'
 use_frameworks!
@@ -28,7 +37,6 @@ pod 'KVOController',        '= 1.2.0'
 pod 'SVProgressHUD',        '= 2.2.5'
 pod 'Reachability',         '= 3.2'
 pod 'Masonry',              '= 1.1.0'
-pod 'NELivePlayer',         '=1.9.1'
 pod 'WebViewJavascriptBridge', '= 6.0.3'
 pod 'Fabric',               '= 1.7.12'
 </code></pre>
@@ -47,24 +55,27 @@ NSString *NEGCSDKChannelHubbleId = @&quot;MA-84A2-97524E679B46&quot;;
 <pre><code>[NEGCSDK sharedSDK].delegate = self;
 [[NEGCSDK sharedSDK]startGameCenter:self.navigationController animated:YES];
 </code></pre>
-<h2>1.4 自定义图片浏览和视频播放器</h2>
-<p>SDK默认带了一套图片浏览和视频器，如果需要自定义可以实现下面的delegate方法</p>
-<pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
-@optional
-- (void)NEGCSDKBrowseImages:(NSArray *_Nonnull)imageInfos
-currentIndex:(NSInteger)currentIndex;
-- (void)NEGCSDKBrowseVidel:(NSString *_Nonnull)videoUrl
-title:(NSString *_Nullable)title;
-@end
-</code></pre>
-<h2>1.5 用户信息code获取</h2>
+<h2>1.4 用户信息code获取</h2>
 <p>SDK需要app提供code来获取用户信息，code获取请参考服务器端的协议，请实现下面的delegate方法</p>
 <pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
 @required
 - (void)NEGCSDKGetCode:(void(^_Nonnull)(NSString *_Nullable codeString))handler;
 @end
 </code></pre>
-<h2>1.6 自定义webViewVC</h2>
+<h2>1.5 实现全屏幕的视频浏览</h2>
+<pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
+@required
+- (void)NEGCSDKBrowseVideo:(NSString *_Nonnull)videoUrl title:(NSString *_Nullable)title;
+@end
+</code></pre>
+<h2>1.6 自定义图片浏览</h2>
+<p>SDK默认带了一套图片浏览，如果需要自定义可以实现下面的delegate方法</p>
+<pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
+@optional
+- (void)NEGCSDKBrowseImages:(NSArray *_Nonnull)imageInfos currentIndex:(NSInteger)currentIndex;
+@end
+</code></pre>
+<h2>1.7 自定义webViewVC</h2>
 <p>如果需要实现自定义UI，比如左右键，title文字，修改navBar的属性等，请实现下面的delegate方法</p>
 <pre><code>@protocol NEGCSDKDelegate &lt;NSObject&gt;
 @optional
