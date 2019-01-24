@@ -4,10 +4,10 @@
 
 ### 下载
 #### SDK
-必选 [NCGSDK-1.4.9](http://nosdn-yx.127.net/yxgame/46077fe49b06436d8b9281f530183f4b.aar)   
-可选 [NCGDownloadSDK-1.3.3](http://nosdn-yx.127.net/yxgame/2ae72116b62c4b1faab080528708164a.aar)
+必选 [NCGSDK-1.5.5](http://nosdn-yx.127.net/yxgame/f9d9c9d66fe54816bdea776b5608d0c7.aar)   
+可选 [NCGDownloadSDK-1.5.1](http://nosdn-yx.127.net/yxgame/f4caf5117d5742a8a7762583936f250e.aar)
 #### Demo
-[Demo](http://nosdn-yx.127.net/yxgame/8a49e813671570e60167158716130001.zip)
+[Demo](http://nosdn-yx.127.net/yxgame/bc660d3dcb6341189ee45c5e9fe8859e.zip)
 
 ### 快速使用
 #### 参数配置
