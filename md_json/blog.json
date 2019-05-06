@@ -3,27 +3,27 @@
   "zh-cn": [
     {
       "filename": "android.md",
-      "link": "\\zh-cn\\blog\\channelgc\\android.html",
+      "link": "/zh-cn/blog/channelgc/android.html",
       "meta": {}
     },
     {
       "filename": "ios_js.md",
-      "link": "\\zh-cn\\blog\\channelgc\\ios_js.html",
+      "link": "/zh-cn/blog/channelgc/ios_js.html",
       "meta": {}
     },
     {
       "filename": "ios_sdk.md",
-      "link": "\\zh-cn\\blog\\channelgc\\ios_sdk.html",
+      "link": "/zh-cn/blog/channelgc/ios_sdk.html",
       "meta": {}
     },
     {
       "filename": "server.md",
-      "link": "\\zh-cn\\blog\\channelgc\\server.html",
+      "link": "/zh-cn/blog/channelgc/server.html",
       "meta": {}
     },
     {
       "filename": "index.md",
-      "link": "\\zh-cn\\blog\\feature\\index.html",
+      "link": "/zh-cn/blog/feature/index.html",
       "meta": {}
     }
   ]

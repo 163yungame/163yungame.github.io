@@ -3,37 +3,37 @@
   "zh-cn": [
     {
       "filename": "faq.md",
-      "link": "\\zh-cn\\docs\\client\\faq.html",
+      "link": "/zh-cn/docs/client/faq.html",
       "meta": {}
     },
     {
       "filename": "gamesdk.md",
-      "link": "\\zh-cn\\docs\\client\\gamesdk.html",
+      "link": "/zh-cn/docs/client/gamesdk.html",
       "meta": {}
     },
     {
       "filename": "resources.md",
-      "link": "\\zh-cn\\docs\\resources\\resources.html",
+      "link": "/zh-cn/docs/resources/resources.html",
       "meta": {}
     },
     {
       "filename": "cloudgame-server-doc.md",
-      "link": "\\zh-cn\\docs\\server\\cloudgame-server-doc.html",
+      "link": "/zh-cn/docs/server/cloudgame-server-doc.html",
       "meta": {}
     },
     {
       "filename": "faq.md",
-      "link": "\\zh-cn\\docs\\server\\faq.html",
+      "link": "/zh-cn/docs/server/faq.html",
       "meta": {}
     },
     {
       "filename": "php_sign_demo.md",
-      "link": "\\zh-cn\\docs\\server\\php_sign_demo.html",
+      "link": "/zh-cn/docs/server/php_sign_demo.html",
       "meta": {}
     },
     {
       "filename": "python_sign_demo.md",
-      "link": "\\zh-cn\\docs\\server\\python_sign_demo.html",
+      "link": "/zh-cn/docs/server/python_sign_demo.html",
       "meta": {}
     }
   ]
