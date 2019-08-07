@@ -37,7 +37,7 @@ const propTypes = {
 const defaultProps = {
   type: 'primary',
   language: 'zh-cn',
-  logo: 'http://nosdn-yx.127.net/yxgame/8a49e81367a10d270167a11734c30003.png',
+  logo: 'http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png',
   onLanguageChange: noop,
 };
 
@@ -165,7 +165,7 @@ class Header extends React.Component {
               onClick={this.toggleMenu}
               src={type === 'primary' ? getLink('/img/system/menu_white.png') : getLink('/img/system/menu_gray.png')}
             />
-            {this.props.forChannel ? null : 
+            {this.props.forChannel ? null :
               <ul>
                 {siteConfig[language].pageMenu.map(item => (
                   <li
