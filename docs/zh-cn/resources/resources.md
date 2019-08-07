@@ -16,7 +16,7 @@
 1. 使用游戏`线上keystore`对游戏进行签名
 2. 在安卓机上安装已签名的游戏
 3. 在安卓机上安装GetSignature.apk
-4. 运行GetSignature.apk，填入游戏包名，生成签名，配置到网易易游后台对应的游戏下面
+4. 运行GetSignature.apk，填入游戏包名，生成签名，配置到易信游戏后台对应的游戏下面
 
 #### 自测文档
 [下载地址](http://nosdn-yx.127.net/yxgame/8a49e8136628c1520166291f78bb0001.xlsx)

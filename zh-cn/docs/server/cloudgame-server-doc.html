@@ -110,7 +110,7 @@
 <p><img src="https://nosdn-yx.127.net/yxgame/977e2c0b38784cb181b369d99be3641f.jpg" alt="支付中各角色交互说明"></p>
 <p><strong>参与支付流程交互的角色有：</strong></p>
 <ul>
-<li><strong>游戏APP（以下也称第三方App）</strong>：需要集成网易易游SDK
+<li><strong>游戏APP（以下也称第三方App）</strong>：需要集成易信游戏SDK
 <ul>
 <li>调用游戏Server接口生成订单</li>
 <li>调用SDK接口进行支付</li>
@@ -118,23 +118,23 @@
 </li>
 <li><strong>游戏Server（以下也称第三方服务器）</strong>：
 <ul>
-<li>负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与网易易游Server交互，生成网易易游Server的订单信息（Trade信息），并一起返回给游戏App</li>
-<li>负责接收网易有游戏Server支付回调，处理发货逻辑</li>
+<li>负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与易信游戏Server交互，生成易信游戏Server的订单信息（Trade信息），并一起返回给游戏App</li>
+<li>负责接收易信游戏Server支付回调，处理发货逻辑</li>
 </ul>
 </li>
-<li><strong>网易易游Server（以下也称PayServer）</strong>
+<li><strong>易信游戏Server（以下也称PayServer）</strong>
 <ul>
 <li>根据游戏Server订单，生成订单信息（Trade信息），返回给游戏Server</li>
 <li>接收支付工具Server（如支付宝、微信等）的回调，并回调游戏Server接口</li>
 </ul>
 </li>
 </ul>
-<p>从上面的描述中，第三方游戏接入网易易游仅需要关心以下部分流程:</p>
+<p>从上面的描述中，第三方游戏接入易信游戏仅需要关心以下部分流程:</p>
 <ol>
 <li>游戏App向游戏Server发起生成订单</li>
-<li>游戏Server向网易易游Server发起生成订单</li>
-<li>游戏App调用网易易游SDK接口发起支付</li>
-<li>游戏Server接收网易易游Server异步支付成功回调</li>
+<li>游戏Server向易信游戏Server发起生成订单</li>
+<li>游戏App调用易信游戏SDK接口发起支付</li>
+<li>游戏Server接收易信游戏Server异步支付成功回调</li>
 </ol>
 <h3>1.2 完整交易流程</h3>
 <p><img src="https://nosdn-yx.127.net/yxgame/90ba0613bcdd40efb9d517c7317f111b.jpg" alt=""></p>
@@ -162,7 +162,7 @@
 <pre><code class="language-sql"><span class="hljs-keyword">update</span> Trade <span class="hljs-keyword">set</span> PayState=Payed <span class="hljs-keyword">where</span> PayState=UnPay <span class="hljs-keyword">and</span> <span class="hljs-keyword">Id</span>=?;
 </code></pre>
 <h4>2.1.3 两个公钥，一个私钥<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>很重要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></h4>
-<p>网易易游需要两个公钥一个私钥。请<code>谨记</code>括号里面的名字。</p>
+<p>易信游戏需要两个公钥一个私钥。请<code>谨记</code>括号里面的名字。</p>
 <ol>
 <li>游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">或<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)
 <img src="http://nosdn-yx.127.net/yxgame/0be8e326369a4f64a44b03c193faf243.jpg" alt="游戏方接入方公私钥获取"></li>

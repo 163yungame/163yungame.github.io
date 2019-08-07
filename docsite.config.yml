@@ -3,8 +3,8 @@ pages:
  home:
   # 首页配置
   zh-cn:
-   title: '网易易游'
-   keywords: '网易易游，网易，游戏，SDK'
+   title: '易信游戏'
+   keywords: '易信游戏，网易，游戏，SDK'
   # home config
   en-us:
    title: 'EaseGame'
@@ -12,8 +12,8 @@ pages:
  community:
   # 社区页配置
   zh-cn:
-   title: '网易易游'
-   keywords: '网易易游，网易，游戏，SDK'
+   title: '易信游戏'
+   keywords: '易信游戏，网易，游戏，SDK'
   # community page config
   en-us:
    title: 'EaseGame'
@@ -21,8 +21,8 @@ pages:
  blog:
   # 博客列表页配置
   zh-cn:
-   title: '网易易游'
-   keywords: '网易易游，网易，游戏，SDK'
+   title: '易信游戏'
+   keywords: '易信游戏，网易，游戏，SDK'
   en-us:
    # blog list page config
    title: 'EaseGame'

@@ -53,6 +53,6 @@ export default {
         },
       ],
     },
-    copyright: 'Copyright © 2018 网易易游',
+    copyright: 'Copyright © 2019 易信游戏',
   },
 };
