@@ -2,6 +2,11 @@
   "en-us": [],
   "zh-cn": [
     {
+      "filename": "index.md",
+      "link": "/zh-cn/docs/auth/index.html",
+      "meta": {}
+    },
+    {
       "filename": "faq.md",
       "link": "/zh-cn/docs/client/faq.html",
       "meta": {}

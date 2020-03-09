@@ -45,6 +45,11 @@ export default {
                             },
                         ],
                     },
+                    {
+                        title: '实名认证接入文档',
+                        key: 'auth',
+                        link: '/zh-cn/docs/auth/index.html',
+                    },
                 ],
             },
         ],

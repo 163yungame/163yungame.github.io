@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="index" />
+	<meta name="description" content="index" />
+	<!-- 网页标签标题 -->
+	<title>index</title>
+  <link rel="shortcut icon" href="http://cloudgame-res.127.net/game/resource/images/cloudGame/favicon.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>接入指引</h1>
+<h5>防沉迷系统需要游戏方服务器对接本渠道服务器。</h5>
+<p><img src="http://nosdn-yx.127.net/yxgame/d97c2defabad4f81a6571f745ee7e38f1583742624.jpg" alt="实名认证接入说明"></p>
+<h5>使用场景：本渠道会在用户登录完成后强制未实名用户进行实名信息注册。游戏方可以不定时调用本渠道接口查询认证信息，并根据业务需求进行防沉迷系统处理。</h5>
+<h2>实名认证接入文档</h2>
+<h4>请求地址</h4>
+<pre><code class="language-json">http://game.yixin.im/sdk/user/info
+</code></pre>
+<h4>请求方式</h4>
+<p>GET</p>
+<h4>输入参数说明</h4>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否必须</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sdkUid</td>
+<td>渠道账号唯一标识</td>
+<td>是</td>
+<td>String</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>当前时间戳（毫秒为单位） 5分钟有效</td>
+<td>是</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>请求唯一值 使用uuid</td>
+<td>是</td>
+<td>String</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>参数摘要</td>
+<td>是</td>
+<td>String</td>
+</tr>
+<tr>
+<td>gameId</td>
+<td>游戏id号</td>
+<td>是</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<h4>返回数据</h4>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>返回状态 200 请求成功</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>返回状态描述</td>
+</tr>
+<tr>
+<td>result.id_type</td>
+<td>证件类型 0：身份证 1：中国护照2：海外护照3：其他</td>
+</tr>
+<tr>
+<td>result.verify_status</td>
+<td>验证结果 1-未验证 2-验证通过</td>
+</tr>
+<tr>
+<td>result .id</td>
+<td>证件号码</td>
+</tr>
+<tr>
+<td>result.age</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td>result.oversea</td>
+<td>是否海外用户</td>
+</tr>
+<tr>
+<td>result.birthday</td>
+<td>出生日期</td>
+</tr>
+</tbody>
+</table>
+<h4>返回示例</h4>
+<pre><code class="language-json">{    
+  <span class="hljs-attr">"code"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"msg"</span>: <span class="hljs-string">"请求成功"</span>,
+  <span class="hljs-attr">"result"</span>: {
+     <span class="hljs-attr">"id_type"</span>:<span class="hljs-number">0</span>,
+     <span class="hljs-attr">"verify_status"</span>:<span class="hljs-number">1</span>,
+     <span class="hljs-attr">"id"</span>:<span class="hljs-string">"30230103021"</span>,
+     <span class="hljs-attr">"age"</span>:<span class="hljs-number">0</span>,
+     <span class="hljs-attr">"oversea"</span>:<span class="hljs-literal">false</span>,
+     <span class="hljs-attr">"birthday"</span>:<span class="hljs-string">"20010102"</span>,
+  }
+}
+</code></pre>
+<h4>异常示例</h4>
+<pre><code class="language-json">{    
+  <span class="hljs-attr">"code"</span>:<span class="hljs-number">401</span>,
+  <span class="hljs-attr">"msg"</span>:<span class="hljs-string">"参数错误"</span> 
+}
+</code></pre>
+<h4>code码状态</h4>
+<table>
+<thead>
+<tr>
+<th>code码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>返回成功</td>
+</tr>
+<tr>
+<td>401</td>
+<td>参数错误，检查各个参数是否正确</td>
+</tr>
+<tr>
+<td>403</td>
+<td>禁止操作</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器异常</td>
+</tr>
+</tbody>
+</table>
+<h5>提醒:</h5>
+<ol>
+<li>
+<p>游戏方必须保存用户的标识字段</p>
+</li>
+<li>
+<p>gameId和secretKey必须配套使用</p>
+</li>
+<li>
+<p>timestamp是以毫秒为单位的13位时间戳</p>
+</li>
+<li>
+<p>开发者最好在状态码为401、403状态下，服务宕机情况下，默认设置为通过，并根据实际情况设定相关的预警机制。
+具体问题请咨询云游戏平台。</p>
+</li>
+</ol>
+<h2>附录</h2>
+<p>生成signature签名，示例:</p>
+<p>签名所需参数</p>
+<p>secretKey: 对应开发者后台的gameSecret</p>
+<p>timestamp: 当前时间戳（毫秒为单位）</p>
+<p>nonce: 请求唯一标识</p>
+<p>sdkuid: 渠道账号唯一标识</p>
+<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">genSign</span><span class="hljs-params">(String sdkuid, String secretKey)</span> </span>{ 
+    String nonce = UUIDUtils.createId();
+    <span class="hljs-keyword">long</span> timestamp = System.currentTimeMillis(); 
+    StringBuilder params = <span class="hljs-keyword">new</span> StringBuilder(sdkuid);   
+    params.append(timestamp);  
+    params.append(nonce);  
+    params.append(secretKey);   
+    String md5Hex = DigestUtils.md5Hex(params.toString().getBytes(StandardCharsets.UTF_8)); 
+    <span class="hljs-keyword">return</span> md5Hex；
+}
+</code></pre>
+</div></section></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>
