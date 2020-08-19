@@ -1,15 +1,15 @@
 # 易信游戏SDK接入文档
 
-### 快速使用
-
-#### 资源引入
+## 资源引入
 1. 将gamesdk-x.x.x.jar引入项目
 2. `若游戏打包方式无法将gamesdk-x.x.x.jar中的assets文件夹下内容打包到apk，请手动将assets复制到项目的assets文件夹下`
 
-#### 参数配置
-##### AndroidManifest配置
-1. `versionName` 需要保证为三段式 `x.x.x` (例1.2.3)
-2. GameID, GameSecret 配置再application标签下，例如
+## 参数配置
+### versionName
+`versionName` 需要保证为三段式 `x.x.x` (例如：1.2.3)
+
+### AndroidManifest
+1. 配置 GameID, GameSecret 在application标签下，例如
 ```xml
 <application
     android:label="@string/app_name"
@@ -64,42 +64,70 @@
 ```
 `YXEntryActivity` 和 `AppRegister` 中的xx.xx.xx.xx.替换为游戏中的`真实路径`
 
-#### 初始化SDK
+## YXEntryActivity，AppRegister
+这两个文件，请直接复制Demo中的代码
+
+## 初始化SDK
 在`Application`中初始化  
 重要：`如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题`
 ```java
 public class xxxApp extends Application {
 
-    private YXGameApi gameApi;
+    private YXGameApi mYXGameApi;
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        sApp = this;
+        mYXGameApi = YXGameApiFactory.create(base);
+        mYXGameApi.onApplicationAttachBaseContext(this, base);
+    }
+   
     @Override
     public void onCreate() {
         super.onCreate();
-        gameApi = YXGameApiFactory.init(this, new YXGameCallbackListener<Void>() {
+        mYXGameApi.onApplicationCreate(this, new YXGameCallbackListener<Void>() {
             @Override
             public void callback(int status, Void aVoid) {
                 if (status == YXGameStatusCode.INIT_SUCCESS) {
                     //SDK初始化成功
+                    YXLog.d(DemoApp.class, "api init success");
                 } else if (status == YXGameStatusCode.INIT_ERROR) {
                     //SDK初始化失败
-
+                    YXLog.d(DemoApp.class, "api init error");
                 } else if (status == YXGameStatusCode.LOGIN_SUCCESS) {
                     //调用login后，用户登陆成功
+                    YXLog.d(DemoApp.class, "login success");
                 } else if (status == YXGameStatusCode.ACCOUNT_CHANGE) {
                     //切换用户
+                    YXLog.d(DemoApp.class, "account change");
                 } else if (status == YXGameStatusCode.LOGOUT) {
                     //悬浮窗内退出账户
+                    YXLog.d(DemoApp.class, "logout");
                 }
             }
         });
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mYXGameApi.onApplicationConfigurationChanged(this, newConfig);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        mYXGameApi.onApplicationTerminate(this);
+    }
+
     public YXGameApi yxGameApi() {
-        return gameApi;
+        return mYXGameApi;
     }
 }
 ```
 init接口回调参数说明
+
 | 参数           | 说明                                             |
 | -------------- | ------------------------------------------------ |
 | INIT_SUCCESS   | SDK初始化成功                                    |
@@ -124,25 +152,27 @@ yxGameApi().registerGameMonitor(new YXGameCallbackListener<Void>() {
             }
         });
 ```
-
-#### 登录
-在需要登录的时刻调用login接口
+## 接口调用
+### 登录
+在需要登录时调用login接口
 ```java
 yxGameApi().login(activity)
 ```
-登录结果会回调到初始化和全局监听器注册的回调
+登录结果会回调到初始化和全局监听器注册的回调（部分情况收不到登录回调）
 
-#### YXEntryActivity，AppRegister
-该两个文件，请直接复制Demo中的代码
+### 查询登录状态
+因为部分情况收不到登录回调，所以请在开始游戏前调用这个接口查询登录状态，只有返回`true`才表示登录成功，此时可以进入游戏
+```java
+yxGameApi().isLogin()
+```
 
-#### 接口调用
-1. 获取token
+### 获取token
 ```java
 String token = yxGameApi().getToken()
 ```
 在`登录成功`后可调用，获取到的token一定是有效的token，可以直接给服务器使用，服务器校验token有效性，请参考服务器文档
 
-2. 获取用户信息
+### 获取用户信息
 ```java
 try {
     yxGameApi().getAccountInfo(new YXGameCallbackListener<GameAccount>() {
@@ -159,13 +189,13 @@ try {
 }
 ```
 
-3. 通知SDK登出账户
+### 登出
 ```java
 yxGameApi().logout();
 ```
 登出结果会回调到初始化和全局监听器注册的回调
 
-4. 退出游戏
+### 退出游戏
 ```java
 yxGameApi().exit(this, new YXGameCallbackListener<Boolean>() {
             @Override
@@ -202,12 +232,12 @@ new YXPayApi(PayActivity.this, new YXPayDelegate() {
 ```
 `tradeId`和`payGateUrl`从游戏自己服务器下单后获取，具体请参考服务器支付文档
 
-#### 混淆
+## 混淆
+如果开启混淆，请添加下面的代码：
+
 ```java
-proguard 不要混淆sdk，相关代码 如下
 -keep class com.squareup.** {*;}
 -dontwarn com.squareup.**
 -keep class im.yixin.** {*;}
 -dontwarn im.yixin.**
-
 ```
