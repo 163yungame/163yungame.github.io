@@ -1,8 +1,8 @@
 # 易信游戏SDK接入文档
 
 ## 资源引入
-1. 将gamesdk-x.x.x.jar引入项目
-2. `若游戏打包方式无法将gamesdk-x.x.x.jar中的assets文件夹下内容打包到apk，请手动将assets复制到项目的assets文件夹下`
+1. 将`gamesdk-x.x.x.jar`引入项目
+2. 若游戏打包方式无法将`gamesdk-x.x.x.jar`中的`assets/ncggame`文件夹下内容打包到apk，请手动将`ncggame`复制到项目的`assets`文件夹下
 
 ## 参数配置
 ### versionName
@@ -210,7 +210,7 @@ yxGameApi().exit(this, new YXGameCallbackListener<Boolean>() {
         });
 ```
 
-#### 支付
+### 支付
 ```java
 YXTrade trade = new YXTrade();
 trade.setId(tradeId);
