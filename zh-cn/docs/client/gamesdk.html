@@ -13,17 +13,17 @@
 </head>
 <body>
 	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>易信游戏SDK接入文档</h1>
-<h3>快速使用</h3>
-<h4>资源引入</h4>
+<h2>资源引入</h2>
 <ol>
-<li>将gamesdk-x.x.x.jar引入项目</li>
-<li><code>若游戏打包方式无法将gamesdk-x.x.x.jar中的assets文件夹下内容打包到apk，请手动将assets复制到项目的assets文件夹下</code></li>
+<li>将<code>gamesdk-x.x.x.jar</code>引入项目</li>
+<li>若游戏打包方式无法将<code>gamesdk-x.x.x.jar</code>中的<code>assets/ncggame</code>文件夹下内容打包到apk，请手动将<code>ncggame</code>复制到项目的<code>assets</code>文件夹下</li>
 </ol>
-<h4>参数配置</h4>
-<h5>AndroidManifest配置</h5>
+<h2>参数配置</h2>
+<h3>versionName</h3>
+<p><code>versionName</code> 需要保证为三段式 <code>x.x.x</code> (例如：1.2.3)</p>
+<h3>AndroidManifest</h3>
 <ol>
-<li><code>versionName</code> 需要保证为三段式 <code>x.x.x</code> (例1.2.3)</li>
-<li>GameID, GameSecret 配置再application标签下，例如</li>
+<li>配置 GameID, GameSecret 在application标签下，例如</li>
 </ol>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">application</span>
     <span class="hljs-attr">android:label</span>=<span class="hljs-string">"@string/app_name"</span>
@@ -79,37 +79,63 @@
 
 </code></pre>
 <p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的xx.xx.xx.xx.替换为游戏中的<code>真实路径</code></p>
-<h4>初始化SDK</h4>
+<h2>YXEntryActivity，AppRegister</h2>
+<p>这两个文件，请直接复制Demo中的代码</p>
+<h2>初始化SDK</h2>
 <p>在<code>Application</code>中初始化<br>
 重要：<code>如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题</code></p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xxxApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>{
 
-    <span class="hljs-keyword">private</span> YXGameApi gameApi;
+    <span class="hljs-keyword">private</span> YXGameApi mYXGameApi;
 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">attachBaseContext</span><span class="hljs-params">(Context base)</span> </span>{
+        <span class="hljs-keyword">super</span>.attachBaseContext(base);
+        sApp = <span class="hljs-keyword">this</span>;
+        mYXGameApi = YXGameApiFactory.create(base);
+        mYXGameApi.onApplicationAttachBaseContext(<span class="hljs-keyword">this</span>, base);
+    }
+   
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-keyword">super</span>.onCreate();
-        gameApi = YXGameApiFactory.init(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
+        mYXGameApi.onApplicationCreate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
             <span class="hljs-meta">@Override</span>
             <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Void aVoid)</span> </span>{
                 <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_SUCCESS) {
                     <span class="hljs-comment">//SDK初始化成功</span>
+                    YXLog.d(DemoApp.class, <span class="hljs-string">"api init success"</span>);
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_ERROR) {
                     <span class="hljs-comment">//SDK初始化失败</span>
-
+                    YXLog.d(DemoApp.class, <span class="hljs-string">"api init error"</span>);
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGIN_SUCCESS) {
                     <span class="hljs-comment">//调用login后，用户登陆成功</span>
+                    YXLog.d(DemoApp.class, <span class="hljs-string">"login success"</span>);
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.ACCOUNT_CHANGE) {
                     <span class="hljs-comment">//切换用户</span>
+                    YXLog.d(DemoApp.class, <span class="hljs-string">"account change"</span>);
                 } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGOUT) {
                     <span class="hljs-comment">//悬浮窗内退出账户</span>
+                    YXLog.d(DemoApp.class, <span class="hljs-string">"logout"</span>);
                 }
             }
         });
     }
 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onConfigurationChanged</span><span class="hljs-params">(@NonNull Configuration newConfig)</span> </span>{
+        <span class="hljs-keyword">super</span>.onConfigurationChanged(newConfig);
+        mYXGameApi.onApplicationConfigurationChanged(<span class="hljs-keyword">this</span>, newConfig);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onTerminate</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onTerminate();
+        mYXGameApi.onApplicationTerminate(<span class="hljs-keyword">this</span>);
+    }
+
     <span class="hljs-function"><span class="hljs-keyword">public</span> YXGameApi <span class="hljs-title">yxGameApi</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> gameApi;
+        <span class="hljs-keyword">return</span> mYXGameApi;
     }
 }
 </code></pre>
@@ -159,23 +185,21 @@
             }
         });
 </code></pre>
-<h4>登录</h4>
-<p>在需要登录的时刻调用login接口</p>
+<h2>接口调用</h2>
+<h3>登录</h3>
+<p>在需要登录时调用login接口</p>
 <pre><code class="language-java">yxGameApi().login(activity)
 </code></pre>
-<p>登录结果会回调到初始化和全局监听器注册的回调</p>
-<h4>YXEntryActivity，AppRegister</h4>
-<p>该两个文件，请直接复制Demo中的代码</p>
-<h4>接口调用</h4>
-<ol>
-<li>获取token</li>
-</ol>
+<p>登录结果会回调到初始化和全局监听器注册的回调（部分情况收不到登录回调）</p>
+<h3>查询登录状态</h3>
+<p>因为部分情况收不到登录回调，所以请在开始游戏前调用这个接口查询登录状态，只有返回<code>true</code>才表示登录成功，此时可以进入游戏</p>
+<pre><code class="language-java">yxGameApi().isLogin()
+</code></pre>
+<h3>获取token</h3>
 <pre><code class="language-java">String token = yxGameApi().getToken()
 </code></pre>
 <p>在<code>登录成功</code>后可调用，获取到的token一定是有效的token，可以直接给服务器使用，服务器校验token有效性，请参考服务器文档</p>
-<ol start="2">
-<li>获取用户信息</li>
-</ol>
+<h3>获取用户信息</h3>
 <pre><code class="language-java"><span class="hljs-keyword">try</span> {
     yxGameApi().getAccountInfo(<span class="hljs-keyword">new</span> YXGameCallbackListener&lt;GameAccount&gt;() {
         <span class="hljs-meta">@Override</span>
@@ -190,15 +214,11 @@
     e.printStackTrace();
 }
 </code></pre>
-<ol start="3">
-<li>通知SDK登出账户</li>
-</ol>
+<h3>登出</h3>
 <pre><code class="language-java">yxGameApi().logout();
 </code></pre>
 <p>登出结果会回调到初始化和全局监听器注册的回调</p>
-<ol start="4">
-<li>退出游戏</li>
-</ol>
+<h3>退出游戏</h3>
 <pre><code class="language-java">yxGameApi().exit(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Boolean&gt;() {
             <span class="hljs-meta">@Override</span>
             <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Boolean exit)</span> </span>{
@@ -211,7 +231,7 @@
             }
         });
 </code></pre>
-<h4>支付</h4>
+<h3>支付</h3>
 <pre><code class="language-java">YXTrade trade = <span class="hljs-keyword">new</span> YXTrade();
 trade.setId(tradeId);
 trade.setGateUrl(payGateUrl);
@@ -231,13 +251,12 @@ trade.setResult(YXTrade.RESULT_OK);
             }).pay(trade);
 </code></pre>
 <p><code>tradeId</code>和<code>payGateUrl</code>从游戏自己服务器下单后获取，具体请参考服务器支付文档</p>
-<h4>混淆</h4>
-<pre><code class="language-java">proguard 不要混淆sdk，相关代码 如下
--keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">squareup</span>.** </span>{*;}
+<h2>混淆</h2>
+<p>如果开启混淆，请添加下面的代码：</p>
+<pre><code class="language-java">-keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">squareup</span>.** </span>{*;}
 -dontwarn com.squareup.**
 -keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">im</span>.<span class="hljs-title">yixin</span>.** </span>{*;}
 -dontwarn im.yixin.**
-
 </code></pre>
 </div></section></div></div>
 	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
