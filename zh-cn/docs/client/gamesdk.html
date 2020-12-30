@@ -12,19 +12,65 @@
 	<link rel="stylesheet" href="/build/documentation.css" />
 </head>
 <body>
-	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>易信游戏SDK接入文档</h1>
-<h2>资源引入</h2>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h2>易信游戏SDK接入文档</h2>
+<h3>1.项目准备及接入</h3>
+<h4>1.1 游戏配置ID申请</h4>
+<ul>
+<li>在<a href="https://game.yixin.im/">易信游戏后台</a>申请游戏<code>GameId</code>及<code>GameSecret</code></li>
+</ul>
+<h4>1.2 依赖库及资源文件导入</h4>
 <ol>
 <li>将<code>gamesdk-x.x.x.jar</code>引入项目</li>
 <li>若游戏打包方式无法将<code>gamesdk-x.x.x.jar</code>中的<code>assets/ncggame</code>文件夹下内容打包到apk，请手动将<code>ncggame</code>复制到项目的<code>assets</code>文件夹下</li>
 </ol>
-<h2>参数配置</h2>
-<h3>versionName</h3>
-<p><code>versionName</code> 需要保证为三段式 <code>x.x.x</code> (例如：1.2.3)</p>
-<h3>AndroidManifest</h3>
+<h4>1.3 Application配置（必接）</h4>
+<ul>
+<li>游戏的<code>Application</code>必须继承自<code>im.yixin.gamesdk.base.YXApplication</code>。</li>
+<li>如果游戏重写了生命周期回调，必须通过<code>super</code>调用对应的父类实现。</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">XXGameApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">YXApplication</span></span>{
+    <span class="hljs-comment">//...</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onCreate();
+        <span class="hljs-comment">//游戏添加自己的逻辑</span>
+    }
+}
+</code></pre>
+<h4>1.4 闪屏Activity配置（必接）</h4>
+<ul>
+<li>游戏闪屏<code>Activity</code>必须继承自<code>im.yixin.gamesdk.base.YXSplashActivity</code>，对于没有闪屏页的游戏需先新建闪屏<code>Activity</code></li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">XXGameSplashActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">YXSplashActivity</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getBackgroundColor</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//返回默认背景色</span>
+        <span class="hljs-keyword">return</span> Color.WHITE;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSplashStop</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//闪屏页结束回调，在此启动游戏主页面</span>
+    }
+}
+</code></pre>
+<h4>1.5 清单文件 AndroidManifest 配置（必接）</h4>
 <ol>
-<li>配置 GameID, GameSecret 在application标签下，例如</li>
+<li>versionName</li>
 </ol>
+<p><code>versionName</code> 需要保证为三段式 <code>x.x.x</code> (例如：1.2.3)</p>
+<ol start="2">
+<li>配置 <code>GameID, GameSecret</code> 在<code>application</code>标签下。</li>
+</ol>
+<blockquote>
+<p>示例</p>
+</blockquote>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">application</span>
     <span class="hljs-attr">android:label</span>=<span class="hljs-string">"@string/app_name"</span>
     <span class="hljs-attr">android:icon</span>=<span class="hljs-string">"@mipmap/ic_launcher"</span>
@@ -39,7 +85,7 @@
         <span class="hljs-attr">android:value</span>=<span class="hljs-string">"${YX_GAME_SECRET}"</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span>
 </code></pre>
-<ol start="2">
+<ol start="3">
 <li>权限配置</li>
 </ol>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span>/&gt;</span>
@@ -54,7 +100,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.GET_TASKS"</span>/&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CALL_PHONE"</span>/&gt;</span>
 </code></pre>
-<ol start="3">
+<ol start="4">
 <li>其他配置</li>
 </ol>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
@@ -70,7 +116,7 @@
     <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
     <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>/&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">receiver</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx..yxapi.AppRegister"</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.AppRegister"</span>
     <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"im.yixin.sdk.permission.YIXIN_SDK_MESSAGE"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"</span>/&gt;</span>
@@ -78,185 +124,822 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
 
 </code></pre>
-<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的xx.xx.xx.xx.替换为游戏中的<code>真实路径</code></p>
-<h2>YXEntryActivity，AppRegister</h2>
-<p>这两个文件，请直接复制Demo中的代码</p>
-<h2>初始化SDK</h2>
-<p>在<code>Application</code>中初始化<br>
-重要：<code>如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题</code></p>
-<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xxxApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>{
-
-    <span class="hljs-keyword">private</span> YXGameApi mYXGameApi;
-
+<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的<code>xx.xx.xx.xx</code>替换为游戏的包名。</p>
+<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 这两个文件，请直接复制Demo中的代码</p>
+<h4>1.6 targetSdkVersion</h4>
+<p><code>targetSdkVersion = 26</code></p>
+<h4>1.7 签名</h4>
+<p>只能使用v1签名，不能用v2签名。</p>
+<h3>2.接口文档</h3>
+<h4>2.1 SDK初始化（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.YXSDK.init(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Activity| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity启动时调用</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java"><span class="hljs-comment">//step1.添加初始化监听</span>
+YXSDK.get().getInitMonitor().setInitCallback(<span class="hljs-keyword">new</span> IInitMonitor.InitCallback() {
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">attachBaseContext</span><span class="hljs-params">(Context base)</span> </span>{
-        <span class="hljs-keyword">super</span>.attachBaseContext(base);
-        sApp = <span class="hljs-keyword">this</span>;
-        mYXGameApi = YXGameApiFactory.create(base);
-        mYXGameApi.onApplicationAttachBaseContext(<span class="hljs-keyword">this</span>, base);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitSuccess</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//初始化成功回调</span>
     }
-   
+
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">super</span>.onCreate();
-        mYXGameApi.onApplicationCreate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
-            <span class="hljs-meta">@Override</span>
-            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Void aVoid)</span> </span>{
-                <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_SUCCESS) {
-                    <span class="hljs-comment">//SDK初始化成功</span>
-                    YXLog.d(DemoApp.class, <span class="hljs-string">"api init success"</span>);
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.INIT_ERROR) {
-                    <span class="hljs-comment">//SDK初始化失败</span>
-                    YXLog.d(DemoApp.class, <span class="hljs-string">"api init error"</span>);
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGIN_SUCCESS) {
-                    <span class="hljs-comment">//调用login后，用户登陆成功</span>
-                    YXLog.d(DemoApp.class, <span class="hljs-string">"login success"</span>);
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.ACCOUNT_CHANGE) {
-                    <span class="hljs-comment">//切换用户</span>
-                    YXLog.d(DemoApp.class, <span class="hljs-string">"account change"</span>);
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGOUT) {
-                    <span class="hljs-comment">//悬浮窗内退出账户</span>
-                    YXLog.d(DemoApp.class, <span class="hljs-string">"logout"</span>);
-                }
-            }
-        });
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//初始化失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+<span class="hljs-comment">//step2.执行sdk初始化</span>
+YXSDK.get().init(activity);
+</code></pre>
+<h4>2.2 用户登录（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IAuthMonitor.login(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Actiivty| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏调用用户登录，返回游戏用户信息。每次应用新启动都需要执行</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">
+YXSDK.get().getAuthMonitor().setLoginCallback(<span class="hljs-keyword">new</span> IAuthMonitor.LoginCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLoginSuccess</span><span class="hljs-params">(GameUserInfo info)</span> </span>{
+        <span class="hljs-comment">//用户登录成功，返回GameUserInfo</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLoginCancel</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//用户取消登录回调</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLoginFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//用户登录失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+YXSDK.get().getAuthMonitor().login(activity);
+</code></pre>
+<h4>2.3 用户注销（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IAuthMonitor.logout(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏注销用户前调用，在回调成功之后再执行游戏的用户注销</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">
+YXSDK.get().getAuthMonitor().setLogoutCallback(<span class="hljs-keyword">new</span> IAuthMonitor.LogoutCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLogoutSuccess</span><span class="hljs-params">()</span> </span>{
+       <span class="hljs-comment">//用户注销成功回调</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLogoutFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//用户注销失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+YXSDK.get().getAuthMonitor().logout(activity);
+</code></pre>
+<h4>2.4 用户切换（非必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IAuthMonitor.switchAccount(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏切换用户前调用，在回调成功之后再执行游戏的用户切换</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">
+YXSDK.get().getAuthMonitor().setSwitchAccountCallback(<span class="hljs-keyword">new</span> IAuthMonitor.SwitchAccountCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSwitchSuccess</span><span class="hljs-params">(GameUserInfo info)</span> </span>{
+        <span class="hljs-comment">//切换用户成功，返回新用户的userInfo</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSwitchCancel</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//用户取消切换的回调</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSwitchFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//用户切换失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+YXSDK.get().getAuthMonitor().switchAccount(activity);
+</code></pre>
+<h4>2.5 实名认证（非必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IAuthMonitor.verify(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>游戏主动调用实名认证接口，成功则返回用户实名认证信息</li>
+<li>需要预先添加回调监听器</li>
+<li><strong>大部分情况已在登录阶段进行了强制实名要求，未实名判定为登录失败，一般无需主动调用</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">
+YXSDK.get().getAuthMonitor().setVerifyCallback(<span class="hljs-keyword">new</span> IAuthMonitor.VerifyCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifySuccess</span><span class="hljs-params">(GameUserInfo info)</span> </span>{
+        <span class="hljs-comment">//返回实名认证用户信息</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifyCancel</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//用户取消实名认证回调</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifyFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//用户实名失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+</code></pre>
+<h4>2.6 退出SDK（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IInitMonitor.exit(Activity activity)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏退出应用前调用，清理sdk内部资源，在回调成功之后再执行游戏app退出操作</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">YXSDK.get().getInitMonitor().setSDKExitCallback(<span class="hljs-keyword">new</span> IInitMonitor.SDKExitCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onExitSuccess</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">//返回成功之后，退出app</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onExitFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
+        <span class="hljs-comment">//退出sdk失败回调，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+
+YXSDK.get().getInitMonitor().exit(activity)
+</code></pre>
+<h4>2.7 保存游戏角色信息（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IAuthMonitor.saveGameInfo(Activity activity, GameRoleInfo info, int type)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+<li>info | 类型GameRoleInfo | <strong>必传</strong> | 参考 <a href="#define">章节4. 对象类型定义</a></li>
+<li>type | 类型int | 保存时机 | <strong>必传</strong>
+<ul>
+<li>0: 创建游戏角色</li>
+<li>1: 游戏角色登录</li>
+<li>2: 游戏角色退出</li>
+<li>3: 游戏角色升级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏实时保存游戏角色数据</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java">GameRoleInfo info = <span class="hljs-keyword">new</span> GameRoleInfo();
+    info.gameRoleId = <span class="hljs-string">"123456000"</span>; <span class="hljs-comment">//角色id，必传，非空非null</span>
+    info.gameRoleName = <span class="hljs-string">"Diablo"</span>;  <span class="hljs-comment">//角色名称，必传，非空非null</span>
+    info.gameRoleLevel = <span class="hljs-string">"57"</span>; <span class="hljs-comment">//角色等级，必传，非空非null</span>
+    info.serverId = <span class="hljs-string">"12345890"</span>; <span class="hljs-comment">//服务器id，整型字符串，必传，非空非null</span>
+    info.serverName = <span class="hljs-string">"奥格瑞玛"</span>; <span class="hljs-comment">//服务器名称，必传，非空非null</span>
+    
+    info.vipLevel = <span class="hljs-string">"3"</span>; <span class="hljs-comment">//用户vip等级，整型字符串，非必传</span>
+    info.gameBalance = <span class="hljs-string">"9999"</span>; <span class="hljs-comment">//角色金额，整型字符串，非必传</span>
+    info.experience = <span class="hljs-string">"1000001"</span>; <span class="hljs-comment">//角色经验，非必传</span>
+    info.roleCreateTime = <span class="hljs-number">1608463800</span>; <span class="hljs-comment">//角色创建时间，从1970年到现在的时间，单位秒，非必传</span>
+    info.roleLevelUpTime = <span class="hljs-number">1608463800</span>; <span class="hljs-comment">//角色升级时间，从1970年到现在的时间，单位秒，非必传</span>
+    info.partyId = <span class="hljs-string">"100"</span>; <span class="hljs-comment">//公会id，整型字符串，非必传</span>
+    info.partyName = <span class="hljs-string">"复仇者联盟"</span>; <span class="hljs-comment">//公会名称，非必传</span>
+    info.partyMasterID = <span class="hljs-string">"001"</span>; <span class="hljs-comment">//公会会长ID，非必传</span>
+    info.partyMasterName = <span class="hljs-string">"乔峰"</span>; <span class="hljs-comment">//公会会长名称，非必传</span>
+    info.roleGender = <span class="hljs-string">"男"</span>; <span class="hljs-comment">//角色性别，非必传</span>
+    info.rolePower = <span class="hljs-string">"10"</span>; <span class="hljs-comment">//战力，整型字符串，非必传</span>
+    info.partyRoleId = <span class="hljs-string">"101"</span>; <span class="hljs-comment">//角色在帮派中的id，非必传</span>
+    info.partyRoleName = <span class="hljs-string">"yixin"</span>; <span class="hljs-comment">//角色在帮派中的名称，非必传</span>
+    info.professionId = <span class="hljs-string">"40"</span>; <span class="hljs-comment">//角色职业id，非必传</span>
+    info.profession = <span class="hljs-string">"法师"</span>; <span class="hljs-comment">//角色职业名称，非必传</span>
+    info.friendList = <span class="hljs-string">""</span>; <span class="hljs-comment">//好友关系列表，有值传入json数组字符串，没有填写“无”，非必传</span>
+<span class="hljs-comment">//此接口不提供回调监听</span>
+YXSDK.get().getAuthMonitor().saveGameInfo(info, <span class="hljs-number">0</span>);
+</code></pre>
+<h4>2.8 支付（必接）</h4>
+<ul>
+<li>im.yixin.gamesdk.base.intef.IPayMonitor.pay(Activity activity, GamePaymentInfo payment)
+<ul>
+<li>入参
+<ul>
+<li>activity | 类型Acitivty| <strong>必传</strong></li>
+<li>payment | 类型GamePaymentInfo | <strong>必传</strong> | 参考 <a href="#define">章节4. 对象类型定义</a></li>
+</ul>
+</li>
+<li>描述：
+<ul>
+<li>用于游戏内进行支付调用</li>
+<li>需要预先添加回调监听器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java"><span class="hljs-comment">//构造订单对象</span>
+GamePaymentInfo payment = <span class="hljs-keyword">new</span> GamePaymentInfo();
+payment.orderId = <span class="hljs-string">"123456000"</span>; <span class="hljs-comment">//游戏方生成的订单id，必传，非空非null</span>
+
+<span class="hljs-comment">//支付总金额 = price * goodsCount</span>
+payment.price = <span class="hljs-number">1.00</span>d; <span class="hljs-comment">//商品单价（单位：元）|double|必传，非空非null</span>
+payment.goodsCount = <span class="hljs-number">1</span>; <span class="hljs-comment">//商品数量|int|必传</span>
+
+payment.orderTime = System.currentTimeMillis(); <span class="hljs-comment">//下单时间，单位ms</span>
+payment.goodsName = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品名称，必传非null</span>
+payment.goodsCode = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品code，没有则传goodsName，必传非null</span>
+payment.goodsDesc = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品描述，必传非null</span>
+payment.serverId = <span class="hljs-string">"1234500"</span>; <span class="hljs-comment">//所在服务器id，必传非null</span>
+payment.serverName = <span class="hljs-string">"奥格瑞玛"</span>; <span class="hljs-comment">//所在服务器名称，必传非null</span>
+payment.gameRoleId = <span class="hljs-string">"1239000"</span>; <span class="hljs-comment">//角色id，必传非null</span>
+payment.gameRoleName = <span class="hljs-string">"Diablo"</span>; <span class="hljs-comment">//角色名称，必传非null</span>
+
+payment.roleLevel = <span class="hljs-string">""</span>; <span class="hljs-comment">//角色等级，非必传</span>
+payment.vipLevel = <span class="hljs-string">""</span>; <span class="hljs-comment">//角色vip等级，非必传</span>
+
+YXSDK.get().getPayMonitor().setPayCallback(<span class="hljs-keyword">new</span> IPayMonitor.PayCallback() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPaySuccess</span><span class="hljs-params">(String orderId, String cpOrderId)</span> </span>{
+        <span class="hljs-comment">//支付成功回调，返回易信新生成的orderId + 游戏初始cpOrderId</span>
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPayFailure</span><span class="hljs-params">(String cpOrderId, String code, String message)</span> </span>{
+        <span class="hljs-comment">//支付失败，返回游戏初始cpOrderId，code参阅 【章节3.错误码对照表】</span>
+    }
+});
+
+YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this</span>, payment);
+</code></pre>
+<h4>2.9 Activity生命周期回调（必接）</h4>
+<ul>
+<li>对于游戏内的主Activity，需调用sdk监听器内的各回调方法</li>
+<li>生命周期监听器，可以通过<code>YXSDK.get().getLifecycleMonitor()</code>获取</li>
+</ul>
+<blockquote>
+<p>调用示例</p>
+</blockquote>
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GameBaseActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(@Nullable Bundle savedInstanceState)</span> </span>{
+        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);
+        YXSDK.get().getLifecycleMonitor().onCreate(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onStart();
+        YXSDK.get().getLifecycleMonitor().onStart(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onResume();
+        YXSDK.get().getLifecycleMonitor().onResume(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPause</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onPause();
+        YXSDK.get().getLifecycleMonitor().onPause(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onStop();
+        YXSDK.get().getLifecycleMonitor().onStop(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onDestroy();
+        YXSDK.get().getLifecycleMonitor().onDestroy(<span class="hljs-keyword">this</span>);
     }
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onConfigurationChanged</span><span class="hljs-params">(@NonNull Configuration newConfig)</span> </span>{
         <span class="hljs-keyword">super</span>.onConfigurationChanged(newConfig);
-        mYXGameApi.onApplicationConfigurationChanged(<span class="hljs-keyword">this</span>, newConfig);
+        YXSDK.get().getLifecycleMonitor().onConfigurationChanged(getApplication(), newConfig);
     }
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onTerminate</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">super</span>.onTerminate();
-        mYXGameApi.onApplicationTerminate(<span class="hljs-keyword">this</span>);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onWindowFocusChanged</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> hasFocus)</span> </span>{
+        <span class="hljs-keyword">super</span>.onWindowFocusChanged(hasFocus);
+        YXSDK.get().getLifecycleMonitor().onWindowFocusChanged(hasFocus);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> YXGameApi <span class="hljs-title">yxGameApi</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> mYXGameApi;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onRequestPermissionsResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> requestCode, @NonNull String[] permissions, @NonNull <span class="hljs-keyword">int</span>[] grantResults)</span> </span>{
+        <span class="hljs-keyword">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        YXSDK.get().getLifecycleMonitor().onRequestPermissionsResult(<span class="hljs-keyword">this</span>, requestCode, permissions, grantResults);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onActivityResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> requestCode, <span class="hljs-keyword">int</span> resultCode, Intent data)</span> </span>{
+        <span class="hljs-keyword">super</span>.onActivityResult(requestCode, resultCode, data);
+        YXSDK.get().getLifecycleMonitor().onActivityResult(<span class="hljs-keyword">this</span>, requestCode, resultCode, data);
     }
 }
 </code></pre>
-<p>init接口回调参数说明</p>
+<h3>3.错误码对照表</h3>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>说明</th>
+<th style="text-align:left">错误码</th>
+<th style="text-align:left">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>INIT_SUCCESS</td>
-<td>SDK初始化成功</td>
+<td style="text-align:left">400</td>
+<td style="text-align:left">客户端请求参数错误</td>
 </tr>
 <tr>
-<td>INIT_ERROR</td>
-<td>SDK初始化失败</td>
+<td style="text-align:left">404</td>
+<td style="text-align:left">接口not found</td>
 </tr>
 <tr>
-<td>LOGOUT</td>
-<td>悬浮窗内退出账户</td>
+<td style="text-align:left">500</td>
+<td style="text-align:left">服务器异常</td>
 </tr>
 <tr>
-<td>LOGIN_SUCCESS</td>
-<td>用户登陆成功</td>
+<td style="text-align:left">-1</td>
+<td style="text-align:left">未知异常</td>
 </tr>
 <tr>
-<td>ACCOUNT_CHANGE</td>
-<td>该次登陆的用户与之前缓存的用户信息不是同一个用户</td>
+<td style="text-align:left">-2</td>
+<td style="text-align:left">网络未连接</td>
+</tr>
+<tr>
+<td style="text-align:left">-3</td>
+<td style="text-align:left">数据解析异常</td>
+</tr>
+<tr>
+<td style="text-align:left">-400</td>
+<td style="text-align:left">sdk未初始化</td>
+</tr>
+<tr>
+<td style="text-align:left">-401</td>
+<td style="text-align:left">sdk初始化失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-402</td>
+<td style="text-align:left">用户退出游戏失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-403</td>
+<td style="text-align:left">用户取消退出</td>
+</tr>
+<tr>
+<td style="text-align:left">-404</td>
+<td style="text-align:left">用户登录失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-405</td>
+<td style="text-align:left">用户取消登录</td>
+</tr>
+<tr>
+<td style="text-align:left">-406</td>
+<td style="text-align:left">用户注销失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-407</td>
+<td style="text-align:left">用户切换失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-408</td>
+<td style="text-align:left">用户实名失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-409</td>
+<td style="text-align:left">用户取消实名认证</td>
+</tr>
+<tr>
+<td style="text-align:left">-410</td>
+<td style="text-align:left">登录失败，保存用户数据到服务器失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-411</td>
+<td style="text-align:left">登录失败，用户未实名认证</td>
+</tr>
+<tr>
+<td style="text-align:left">-412</td>
+<td style="text-align:left">登录失败，用户取消实名认证</td>
+</tr>
+<tr>
+<td style="text-align:left">-413</td>
+<td style="text-align:left">登录失败，停新增</td>
+</tr>
+<tr>
+<td style="text-align:left">-414</td>
+<td style="text-align:left">支付参数非法</td>
+</tr>
+<tr>
+<td style="text-align:left">-415</td>
+<td style="text-align:left">支付失败</td>
+</tr>
+<tr>
+<td style="text-align:left">-416</td>
+<td style="text-align:left">支付失败，停支付</td>
+</tr>
+<tr>
+<td style="text-align:left">-417</td>
+<td style="text-align:left">用户取消支付</td>
 </tr>
 </tbody>
 </table>
-<h4>注册全局监听器（可选）</h4>
-<p>可在需要的地方注册全局状态监听器，来监听账户改变，回调参数通init接口中的一致</p>
-<pre><code class="language-java">yxGameApi().registerGameMonitor(<span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Void&gt;() {
-            <span class="hljs-meta">@Override</span>
-            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Void aVoid)</span> </span>{
-                <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGIN_SUCCESS) {
-                    <span class="hljs-comment">//调用login后，用户登陆成功</span>
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.ACCOUNT_CHANGE) {
-                    <span class="hljs-comment">//切换用户</span>
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == YXGameStatusCode.LOGOUT) {
-                    <span class="hljs-comment">//悬浮窗内退出账户</span>
-                }
-            }
-        });
-</code></pre>
-<h2>接口调用</h2>
-<h3>登录</h3>
-<p>在需要登录时调用login接口</p>
-<pre><code class="language-java">yxGameApi().login(activity)
-</code></pre>
-<p>登录结果会回调到初始化和全局监听器注册的回调（部分情况收不到登录回调）</p>
-<h3>查询登录状态</h3>
-<p>因为部分情况收不到登录回调，所以请在开始游戏前调用这个接口查询登录状态，只有返回<code>true</code>才表示登录成功，此时可以进入游戏</p>
-<pre><code class="language-java">yxGameApi().isLogin()
-</code></pre>
-<h3>获取token</h3>
-<pre><code class="language-java">String token = yxGameApi().getToken()
-</code></pre>
-<p>在<code>登录成功</code>后可调用，获取到的token一定是有效的token，可以直接给服务器使用，服务器校验token有效性，请参考服务器文档</p>
-<h3>获取用户信息</h3>
-<pre><code class="language-java"><span class="hljs-keyword">try</span> {
-    yxGameApi().getAccountInfo(<span class="hljs-keyword">new</span> YXGameCallbackListener&lt;GameAccount&gt;() {
-        <span class="hljs-meta">@Override</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, GameAccount account)</span> </span>{
-            <span class="hljs-keyword">if</span> (status != YXGameStatusCode.SUCCESS || account == <span class="hljs-keyword">null</span>) {
-                <span class="hljs-keyword">return</span>;
-            }
-            System.out.println(account.getAccountId());
-        }
-    });
-} <span class="hljs-keyword">catch</span> (Exception e) {
-    e.printStackTrace();
-}
-</code></pre>
-<h3>登出</h3>
-<pre><code class="language-java">yxGameApi().logout();
-</code></pre>
-<p>登出结果会回调到初始化和全局监听器注册的回调</p>
-<h3>退出游戏</h3>
-<pre><code class="language-java">yxGameApi().exit(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXGameCallbackListener&lt;Boolean&gt;() {
-            <span class="hljs-meta">@Override</span>
-            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">callback</span><span class="hljs-params">(<span class="hljs-keyword">int</span> status, Boolean exit)</span> </span>{
-                <span class="hljs-keyword">if</span> (exit) {
-                    <span class="hljs-comment">//退出游戏</span>
-                    finish();
-                } <span class="hljs-keyword">else</span> {
-                    <span class="hljs-comment">//不退出</span>
-                }
-            }
-        });
-</code></pre>
-<h3>支付</h3>
-<pre><code class="language-java">YXTrade trade = <span class="hljs-keyword">new</span> YXTrade();
-trade.setId(tradeId);
-trade.setGateUrl(payGateUrl);
-trade.setResult(YXTrade.RESULT_OK);
-<span class="hljs-keyword">new</span> YXPayApi(PayActivity.<span class="hljs-keyword">this</span>, <span class="hljs-keyword">new</span> YXPayDelegate() {
-                <span class="hljs-meta">@Override</span>
-                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onTradeComplete</span><span class="hljs-params">(<span class="hljs-keyword">int</span> resultCode)</span> </span>{
-                    <span class="hljs-comment">// 注意回调在UI主线程中，对http请求需要异步调用</span>
-                    <span class="hljs-keyword">if</span> (resultCode == YXPayResultCode.SUCCESS) {
-                        <span class="hljs-comment">//支付成功</span>
-                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (resultCode == YXPayResultCode.USER_CANCEL) {
-                        <span class="hljs-comment">//用户取消支付</span>
-                    } <span class="hljs-keyword">else</span> {
-                        <span class="hljs-comment">//支付异常</span>
-                    }
-                }
-            }).pay(trade);
-</code></pre>
-<p><code>tradeId</code>和<code>payGateUrl</code>从游戏自己服务器下单后获取，具体请参考服务器支付文档</p>
-<h2>混淆</h2>
-<p>如果开启混淆，请添加下面的代码：</p>
-<pre><code class="language-java">-keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">squareup</span>.** </span>{*;}
--dontwarn com.squareup.**
--keep <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">im</span>.<span class="hljs-title">yixin</span>.** </span>{*;}
+<a id="define"/>
+<h3>4.对象类型定义</h3>
+<blockquote>
+<p>GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">uid</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户id</td>
+</tr>
+<tr>
+<td style="text-align:left">userName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户名</td>
+</tr>
+<tr>
+<td style="text-align:left">token</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户令牌</td>
+</tr>
+<tr>
+<td style="text-align:left">isVerified</td>
+<td style="text-align:left">bool</td>
+<td style="text-align:left">是否实名 true:已实名；false:未实名</td>
+</tr>
+<tr>
+<td style="text-align:left">age</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">年龄</td>
+</tr>
+<tr>
+<td style="text-align:left">birthday</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">生日</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>GamePaymentInfo: 游戏支付信息</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">必传</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">orderId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">游戏订单id，由游戏方生成, 非空非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">price</td>
+<td style="text-align:left">double</td>
+<td style="text-align:left">商品单价（单位：元），必传</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">orderTime</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">下单时间，单位ms</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">goodsCount</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">商品数量，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">goodsName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">商品名称，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">goodsDesc</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">商品描述，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">goodsCode</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">商品代号，没有则传goodsName，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">serverId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色服务器id，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">serverName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色服务器名称，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">gameRoleId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色id，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">gameRoleName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色名字，非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">roleLevel</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色等级</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">vipLevel</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户vip等级</td>
+<td style="text-align:left">No</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>GameRoleInfo: 游戏角色信息</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">必传</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">gameRoleId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户角色id，非空非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">gameRoleName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户角色名字，非空非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">gameRoleLevel</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户角色等级，非空非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">gameRoleLevel</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">用户角色等级，非空非null</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">serverId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">所在服务器id</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">serverName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">所在服务器名称</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">vipLevel</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色vip等级</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">gameBalance</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色当前余额</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">experience</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色经验值</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">roleCreateTime</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">角色创建时间</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">roleLevelUpTime</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">角色升级时间</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">公会id</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">公会名称</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyMasterID</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">公会会长ID</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyMasterName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">公会会长名称</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">roleGender</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色性别</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">rolePower</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">战力</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyRoleId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色在帮派中的id</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">partyRoleName</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色在帮派中的名称</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">professionId</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色职业id</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">profession</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">角色职业名称</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">friendList</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">好友关系列表</td>
+<td style="text-align:left">No</td>
+</tr>
+</tbody>
+</table>
+<h3>5.混淆规则</h3>
+<blockquote>
+<p>游戏方需添加以下混淆规则</p>
+</blockquote>
+<pre><code>-keep class im.yixin.** {*;}
 -dontwarn im.yixin.**
+-keep class android.app.** {*;}
+-keep class com.squareup.** {*;}
+-dontwarn com.squareup.**
+-dontwarn okio.**
+-keep class okhttp3.**{ *;}
+-keep class com.google.gson.**{*;}
 </code></pre>
 </div></section></div></div>
 	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
