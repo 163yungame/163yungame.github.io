@@ -3,11 +3,11 @@
 ## 资源下载
 
 #### AndroidSDK下载
-[GameSDK-5.3.0](http://nos.netease.com/yxgame/9528edb181369d25ab11da0da0961b7f.zip?download=gamesdk-5.3.0.zip)
+[GameSDK-5.3.0](https://nos.netease.com/yxgame/9528edb181369d25ab11da0da0961b7f.zip?download=gamesdk-5.3.0.zip)
 
 ### 签名
 #### APK签名获取工具
-[下载地址](http://nosdn-yx.127.net/yxgame/8a49e8136628c152016628c152460000.apk)
+[下载地址](https://nosdn-yx.127.net/yxgame/8a49e8136628c152016628c152460000.apk)
 
 #### 支付接口调用签名验证
 [在线验证](https://163yungame.github.io/zh-cn/util/index.html)
