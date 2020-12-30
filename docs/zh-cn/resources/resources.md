@@ -3,7 +3,7 @@
 ## 资源下载
 
 #### AndroidSDK下载
-[GameSDK-5.2.0](http://nos.netease.com/yxgame/073fc082dae9b2be3293dac81b808c3e.zip?download=gamesdk-5.2.0.zip)
+[GameSDK-5.3.0](http://nos.netease.com/yxgame/9528edb181369d25ab11da0da0961b7f.zip?download=gamesdk-5.3.0.zip)
 
 ### 签名
 #### APK签名获取工具
