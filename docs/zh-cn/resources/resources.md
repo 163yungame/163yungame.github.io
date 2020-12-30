@@ -25,4 +25,4 @@
 1. 先申请GameID，GameSecret，交给对应开发
 2. 为保证授权，支付等可以正常调试，调试前请确认后台相关包名，签名是否配置正确
 3. 包名后缀cloudgame (例com.netease.yys.cloudgame)
-4. APK不需要角标，不需要闪屏
+4. APK不需要角标，需要闪屏

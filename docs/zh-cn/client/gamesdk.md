@@ -1,15 +1,54 @@
-# 易信游戏SDK接入文档
+## 易信游戏SDK接入文档
 
-## 资源引入
+### 1.项目准备及接入
+
+#### 1.1 游戏配置ID申请
+* 在[易信游戏后台](https://game.yixin.im/)申请游戏`GameId`及`GameSecret`
+
+#### 1.2 依赖库及资源文件导入
 1. 将`gamesdk-x.x.x.jar`引入项目
 2. 若游戏打包方式无法将`gamesdk-x.x.x.jar`中的`assets/ncggame`文件夹下内容打包到apk，请手动将`ncggame`复制到项目的`assets`文件夹下
 
-## 参数配置
-### versionName
+#### 1.3 Application配置（必接）
+* 游戏的`Application`必须继承自`im.yixin.gamesdk.base.YXApplication`。
+* 如果游戏重写了生命周期回调，必须通过`super`调用对应的父类实现。
+> 示例
+```java
+public class XXGameApp extends YXApplication{
+    //...
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //游戏添加自己的逻辑
+    }
+}
+```
+
+#### 1.4 闪屏Activity配置（必接）
+* 游戏闪屏`Activity`必须继承自`im.yixin.gamesdk.base.YXSplashActivity`，对于没有闪屏页的游戏需先新建闪屏`Activity`
+> 示例
+```java
+public class XXGameSplashActivity extends YXSplashActivity {
+    @Override
+    public int getBackgroundColor() {
+        //返回默认背景色
+        return Color.WHITE;
+    }
+
+    @Override
+    public void onSplashStop() {
+        //闪屏页结束回调，在此启动游戏主页面
+    }
+}
+```
+
+#### 1.5 清单文件 AndroidManifest 配置（必接）
+1. versionName
+
 `versionName` 需要保证为三段式 `x.x.x` (例如：1.2.3)
 
-### AndroidManifest
-1. 配置 GameID, GameSecret 在application标签下，例如
+2. 配置 `GameID, GameSecret` 在`application`标签下。
+> 示例
 ```xml
 <application
     android:label="@string/app_name"
@@ -25,7 +64,7 @@
         android:value="${YX_GAME_SECRET}"/>
 </application>
 ```
-2. 权限配置
+3. 权限配置
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -39,7 +78,7 @@
 <uses-permission android:name="android.permission.GET_TASKS"/>
 <uses-permission android:name="android.permission.CALL_PHONE"/>
 ```
-3. 其他配置
+4. 其他配置
 ```xml
 <activity
     android:name="im.yixin.gamesdk.activity.YXComponentActivity"
@@ -54,7 +93,7 @@
     android:exported="true"
     android:launchMode="singleTask"/>
 <receiver
-    android:name="xx.xx.xx.xx..yxapi.AppRegister"
+    android:name="xx.xx.xx.xx.yxapi.AppRegister"
     android:permission="im.yixin.sdk.permission.YIXIN_SDK_MESSAGE">
     <intent-filter>
         <action android:name="im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"/>
@@ -62,182 +101,432 @@
 </receiver>
 
 ```
-`YXEntryActivity` 和 `AppRegister` 中的xx.xx.xx.xx.替换为游戏中的`真实路径`
+`YXEntryActivity` 和 `AppRegister` 中的`xx.xx.xx.xx`替换为游戏的包名。
 
-## YXEntryActivity，AppRegister
-这两个文件，请直接复制Demo中的代码
+`YXEntryActivity` 和 `AppRegister` 这两个文件，请直接复制Demo中的代码
 
-## 初始化SDK
-在`Application`中初始化  
-重要：`如果项目中使用了多进程，请只在主进程中初始化，否则可能会导致意想不到的问题`
+#### 1.6 targetSdkVersion
+`targetSdkVersion = 26`
+
+#### 1.7 签名
+只能使用v1签名，不能用v2签名。
+
+### 2.接口文档
+
+#### 2.1 SDK初始化（必接）
+* im.yixin.gamesdk.base.YXSDK.init(Activity activity)
+    * 入参
+        * activity | 类型Activity| **必传**
+    * 描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity启动时调用
+> 调用示例
 ```java
-public class xxxApp extends Application {
-
-    private YXGameApi mYXGameApi;
-
+//step1.添加初始化监听
+YXSDK.get().getInitMonitor().setInitCallback(new IInitMonitor.InitCallback() {
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        sApp = this;
-        mYXGameApi = YXGameApiFactory.create(base);
-        mYXGameApi.onApplicationAttachBaseContext(this, base);
+    public void onInitSuccess() {
+        //初始化成功回调
     }
-   
+
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mYXGameApi.onApplicationCreate(this, new YXGameCallbackListener<Void>() {
-            @Override
-            public void callback(int status, Void aVoid) {
-                if (status == YXGameStatusCode.INIT_SUCCESS) {
-                    //SDK初始化成功
-                    YXLog.d(DemoApp.class, "api init success");
-                } else if (status == YXGameStatusCode.INIT_ERROR) {
-                    //SDK初始化失败
-                    YXLog.d(DemoApp.class, "api init error");
-                } else if (status == YXGameStatusCode.LOGIN_SUCCESS) {
-                    //调用login后，用户登陆成功
-                    YXLog.d(DemoApp.class, "login success");
-                } else if (status == YXGameStatusCode.ACCOUNT_CHANGE) {
-                    //切换用户
-                    YXLog.d(DemoApp.class, "account change");
-                } else if (status == YXGameStatusCode.LOGOUT) {
-                    //悬浮窗内退出账户
-                    YXLog.d(DemoApp.class, "logout");
-                }
-            }
-        });
+    public void onInitFailure(String code, String message) {
+        //初始化失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+//step2.执行sdk初始化
+YXSDK.get().init(activity);
+```
+
+#### 2.2 用户登录（必接）
+* im.yixin.gamesdk.base.intef.IAuthMonitor.login(Activity activity)
+    * 入参
+        * activity | 类型Actiivty| **必传**
+    * 描述：
+        * 用于游戏调用用户登录，返回游戏用户信息。每次应用新启动都需要执行
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+
+YXSDK.get().getAuthMonitor().setLoginCallback(new IAuthMonitor.LoginCallback() {
+    @Override
+    public void onLoginSuccess(GameUserInfo info) {
+        //用户登录成功，返回GameUserInfo
+    }
+
+    @Override
+    public void onLoginCancel() {
+        //用户取消登录回调
+    }
+
+    @Override
+    public void onLoginFailure(String code, String message) {
+        //用户登录失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+YXSDK.get().getAuthMonitor().login(activity);
+```
+
+#### 2.3 用户注销（必接）
+* im.yixin.gamesdk.base.intef.IAuthMonitor.logout(Activity activity)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+    * 描述：
+        * 用于游戏注销用户前调用，在回调成功之后再执行游戏的用户注销
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+
+YXSDK.get().getAuthMonitor().setLogoutCallback(new IAuthMonitor.LogoutCallback() {
+    @Override
+    public void onLogoutSuccess() {
+       //用户注销成功回调
+    }
+
+    @Override
+    public void onLogoutFailure(String code, String message) {
+        //用户注销失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+YXSDK.get().getAuthMonitor().logout(activity);
+```
+
+#### 2.4 用户切换（非必接）
+* im.yixin.gamesdk.base.intef.IAuthMonitor.switchAccount(Activity activity)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+    * 描述：
+        * 用于游戏切换用户前调用，在回调成功之后再执行游戏的用户切换
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+
+YXSDK.get().getAuthMonitor().setSwitchAccountCallback(new IAuthMonitor.SwitchAccountCallback() {
+    @Override
+    public void onSwitchSuccess(GameUserInfo info) {
+        //切换用户成功，返回新用户的userInfo
+    }
+
+    @Override
+    public void onSwitchCancel() {
+        //用户取消切换的回调
+    }
+
+    @Override
+    public void onSwitchFailure(String code, String message) {
+        //用户切换失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+YXSDK.get().getAuthMonitor().switchAccount(activity);
+```
+
+#### 2.5 实名认证（非必接）
+* im.yixin.gamesdk.base.intef.IAuthMonitor.verify(Activity activity)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+    * 描述：
+        * 游戏主动调用实名认证接口，成功则返回用户实名认证信息
+        * 需要预先添加回调监听器
+        * **大部分情况已在登录阶段进行了强制实名要求，未实名判定为登录失败，一般无需主动调用**
+> 调用示例
+```java
+
+YXSDK.get().getAuthMonitor().setVerifyCallback(new IAuthMonitor.VerifyCallback() {
+    @Override
+    public void onVerifySuccess(GameUserInfo info) {
+        //返回实名认证用户信息
+    }
+
+    @Override
+    public void onVerifyCancel() {
+        //用户取消实名认证回调
+    }
+
+    @Override
+    public void onVerifyFailure(String code, String message) {
+        //用户实名失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+```
+
+#### 2.6 退出SDK（必接）
+* im.yixin.gamesdk.base.intef.IInitMonitor.exit(Activity activity)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+    * 描述：
+        * 用于游戏退出应用前调用，清理sdk内部资源，在回调成功之后再执行游戏app退出操作
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+YXSDK.get().getInitMonitor().setSDKExitCallback(new IInitMonitor.SDKExitCallback() {
+    @Override
+    public void onExitSuccess() {
+        //返回成功之后，退出app
+    }
+
+    @Override
+    public void onExitFailure(String code, String message) {
+        //退出sdk失败回调，code参阅 【章节3.错误码对照表】
+    }
+});
+
+YXSDK.get().getInitMonitor().exit(activity)
+```
+
+#### 2.7 保存游戏角色信息（必接）
+* im.yixin.gamesdk.base.intef.IAuthMonitor.saveGameInfo(Activity activity, GameRoleInfo info, int type)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+        * info | 类型GameRoleInfo | **必传** | 参考 <a href="#define">章节4. 对象类型定义</a>
+        * type | 类型int | 保存时机 | **必传**
+            * 0: 创建游戏角色
+            * 1: 游戏角色登录
+            * 2: 游戏角色退出
+            * 3: 游戏角色升级
+    * 描述：
+        * 用于游戏实时保存游戏角色数据
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+GameRoleInfo info = new GameRoleInfo();
+    info.gameRoleId = "123456000"; //角色id，必传，非空非null
+    info.gameRoleName = "Diablo";  //角色名称，必传，非空非null
+    info.gameRoleLevel = "57"; //角色等级，必传，非空非null
+    info.serverId = "12345890"; //服务器id，整型字符串，必传，非空非null
+    info.serverName = "奥格瑞玛"; //服务器名称，必传，非空非null
+    
+    info.vipLevel = "3"; //用户vip等级，整型字符串，非必传
+    info.gameBalance = "9999"; //角色金额，整型字符串，非必传
+    info.experience = "1000001"; //角色经验，非必传
+    info.roleCreateTime = 1608463800; //角色创建时间，从1970年到现在的时间，单位秒，非必传
+    info.roleLevelUpTime = 1608463800; //角色升级时间，从1970年到现在的时间，单位秒，非必传
+    info.partyId = "100"; //公会id，整型字符串，非必传
+    info.partyName = "复仇者联盟"; //公会名称，非必传
+    info.partyMasterID = "001"; //公会会长ID，非必传
+    info.partyMasterName = "乔峰"; //公会会长名称，非必传
+    info.roleGender = "男"; //角色性别，非必传
+    info.rolePower = "10"; //战力，整型字符串，非必传
+    info.partyRoleId = "101"; //角色在帮派中的id，非必传
+    info.partyRoleName = "yixin"; //角色在帮派中的名称，非必传
+    info.professionId = "40"; //角色职业id，非必传
+    info.profession = "法师"; //角色职业名称，非必传
+    info.friendList = ""; //好友关系列表，有值传入json数组字符串，没有填写“无”，非必传
+//此接口不提供回调监听
+YXSDK.get().getAuthMonitor().saveGameInfo(info, 0);
+```
+
+#### 2.8 支付（必接）
+* im.yixin.gamesdk.base.intef.IPayMonitor.pay(Activity activity, GamePaymentInfo payment)
+    * 入参
+        * activity | 类型Acitivty| **必传**
+        * payment | 类型GamePaymentInfo | **必传** | 参考 <a href="#define">章节4. 对象类型定义</a>
+    * 描述：
+        * 用于游戏内进行支付调用
+        * 需要预先添加回调监听器
+> 调用示例
+```java
+//构造订单对象
+GamePaymentInfo payment = new GamePaymentInfo();
+payment.orderId = "123456000"; //游戏方生成的订单id，必传，非空非null
+
+//支付总金额 = price * goodsCount
+payment.price = 1.00d; //商品单价（单位：元）|double|必传，非空非null
+payment.goodsCount = 1; //商品数量|int|必传
+
+payment.orderTime = System.currentTimeMillis(); //下单时间，单位ms
+payment.goodsName = "coin"; //商品名称，必传非null
+payment.goodsCode = "coin"; //商品code，没有则传goodsName，必传非null
+payment.goodsDesc = "coin"; //商品描述，必传非null
+payment.serverId = "1234500"; //所在服务器id，必传非null
+payment.serverName = "奥格瑞玛"; //所在服务器名称，必传非null
+payment.gameRoleId = "1239000"; //角色id，必传非null
+payment.gameRoleName = "Diablo"; //角色名称，必传非null
+
+payment.roleLevel = ""; //角色等级，非必传
+payment.vipLevel = ""; //角色vip等级，非必传
+
+YXSDK.get().getPayMonitor().setPayCallback(new IPayMonitor.PayCallback() {
+    @Override
+    public void onPaySuccess(String orderId, String cpOrderId) {
+        //支付成功回调，返回易信新生成的orderId + 游戏初始cpOrderId
+    }
+
+    @Override
+    public void onPayFailure(String cpOrderId, String code, String message) {
+        //支付失败，返回游戏初始cpOrderId，code参阅 【章节3.错误码对照表】
+    }
+});
+
+YXSDK.get().getPayMonitor().pay(DemoPayActivity.this, payment);
+```
+
+#### 2.9 Activity生命周期回调（必接）
+* 对于游戏内的主Activity，需调用sdk监听器内的各回调方法
+* 生命周期监听器，可以通过`YXSDK.get().getLifecycleMonitor()`获取
+> 调用示例
+```java
+public class GameBaseActivity extends Activity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        YXSDK.get().getLifecycleMonitor().onCreate(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        YXSDK.get().getLifecycleMonitor().onStart(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        YXSDK.get().getLifecycleMonitor().onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        YXSDK.get().getLifecycleMonitor().onPause(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        YXSDK.get().getLifecycleMonitor().onStop(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        YXSDK.get().getLifecycleMonitor().onDestroy(this);
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mYXGameApi.onApplicationConfigurationChanged(this, newConfig);
+        YXSDK.get().getLifecycleMonitor().onConfigurationChanged(getApplication(), newConfig);
     }
 
     @Override
-    public void onTerminate() {
-        super.onTerminate();
-        mYXGameApi.onApplicationTerminate(this);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        YXSDK.get().getLifecycleMonitor().onWindowFocusChanged(hasFocus);
     }
 
-    public YXGameApi yxGameApi() {
-        return mYXGameApi;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        YXSDK.get().getLifecycleMonitor().onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        YXSDK.get().getLifecycleMonitor().onActivityResult(this, requestCode, resultCode, data);
     }
 }
 ```
-init接口回调参数说明
 
-| 参数           | 说明                                             |
-| -------------- | ------------------------------------------------ |
-| INIT_SUCCESS   | SDK初始化成功                                    |
-| INIT_ERROR     | SDK初始化失败                                   |
-| LOGOUT         | 悬浮窗内退出账户                                 |
-| LOGIN_SUCCESS  | 用户登陆成功                                     |
-| ACCOUNT_CHANGE | 该次登陆的用户与之前缓存的用户信息不是同一个用户 |
+### 3.错误码对照表
 
-#### 注册全局监听器（可选）
-可在需要的地方注册全局状态监听器，来监听账户改变，回调参数通init接口中的一致
-```java
-yxGameApi().registerGameMonitor(new YXGameCallbackListener<Void>() {
-            @Override
-            public void callback(int status, Void aVoid) {
-                if (status == YXGameStatusCode.LOGIN_SUCCESS) {
-                    //调用login后，用户登陆成功
-                } else if (status == YXGameStatusCode.ACCOUNT_CHANGE) {
-                    //切换用户
-                } else if (status == YXGameStatusCode.LOGOUT) {
-                    //悬浮窗内退出账户
-                }
-            }
-        });
+| 错误码 | 描述 |
+| :-- | :-- |
+| 400 | 客户端请求参数错误 |
+| 404 | 接口not found |
+| 500 | 服务器异常 |
+| -1 | 未知异常 |
+| -2 | 网络未连接 |
+| -3 | 数据解析异常 |
+| -400 |  sdk未初始化 |
+| -401 |  sdk初始化失败 |
+| -402 | 用户退出游戏失败 |
+| -403 | 用户取消退出 |
+| -404 | 用户登录失败 |
+| -405 | 用户取消登录 |
+| -406 | 用户注销失败 |
+| -407 | 用户切换失败 |
+| -408 | 用户实名失败 |
+| -409 | 用户取消实名认证 |
+| -410 | 登录失败，保存用户数据到服务器失败 |
+| -411 | 登录失败，用户未实名认证 |
+| -412 | 登录失败，用户取消实名认证 |
+| -413 | 登录失败，停新增 |
+| -414 | 支付参数非法 |
+| -415 | 支付失败 |
+| -416 | 支付失败，停支付 |
+| -417 | 用户取消支付 |
+
+<a id="define"/>
+
+### 4.对象类型定义
+
+> GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调
+
+| 字段名 | 类型 | 描述 |
+| :-- | :-- | :-- |
+| uid | string | 用户id |
+| userName | string | 用户名 |
+| token | string | 用户令牌 |
+| isVerified | bool | 是否实名 true:已实名；false:未实名 |
+| age | int | 年龄 |
+| birthday | string | 生日 |
+
+> GamePaymentInfo: 游戏支付信息
+
+| 字段名 | 类型 | 描述 | 必传 |
+| :-- | :-- | :-- | :-- |
+| orderId | string | 游戏订单id，由游戏方生成, 非空非null | Yes |
+| price | double | 商品单价（单位：元），必传 | Yes |
+| orderTime | long | 下单时间，单位ms | No |
+| goodsCount | int | 商品数量，非null | Yes |
+| goodsName | string | 商品名称，非null | Yes |
+| goodsDesc | string | 商品描述，非null | Yes |
+| goodsCode | string | 商品代号，没有则传goodsName，非null | Yes |
+| serverId | string | 角色服务器id，非null | Yes |
+| serverName | string | 角色服务器名称，非null | Yes |
+| gameRoleId | string | 角色id，非null | Yes |
+| gameRoleName | string | 角色名字，非null | Yes |
+| roleLevel |string | 角色等级 | No |
+| vipLevel | string | 用户vip等级 | No |
+
+
+> GameRoleInfo: 游戏角色信息
+
+| 字段名 | 类型 | 描述 | 必传 |
+| :-- | :-- | :-- | :-- |
+| gameRoleId | string | 用户角色id，非空非null | Yes |
+| gameRoleName | string | 用户角色名字，非空非null | Yes |
+| gameRoleLevel | string | 用户角色等级，非空非null | Yes |
+| gameRoleLevel | string | 用户角色等级，非空非null | Yes |
+| serverId | string | 所在服务器id | Yes |
+| serverName | string | 所在服务器名称 | Yes |
+| vipLevel | string | 角色vip等级 | No |
+| gameBalance | string | 角色当前余额 | No |
+| experience | string | 角色经验值 | No |
+| roleCreateTime | long | 角色创建时间 | No |
+| roleLevelUpTime | long | 角色升级时间 | No |
+| partyId | string | 公会id | No |
+| partyName | string | 公会名称 | No |
+| partyMasterID | string | 公会会长ID | No |
+| partyMasterName | string | 公会会长名称 | No |
+| roleGender | string | 角色性别 | No |
+| rolePower | string | 战力 | No |
+| partyRoleId | string | 角色在帮派中的id | No |
+| partyRoleName | string | 角色在帮派中的名称 | No |
+| professionId | string | 角色职业id | No |
+| profession | string | 角色职业名称 | No |
+| friendList | string | 好友关系列表 | No |
+
+
+### 5.混淆规则
+
+> 游戏方需添加以下混淆规则
 ```
-## 接口调用
-### 登录
-在需要登录时调用login接口
-```java
-yxGameApi().login(activity)
-```
-登录结果会回调到初始化和全局监听器注册的回调（部分情况收不到登录回调）
-
-### 查询登录状态
-因为部分情况收不到登录回调，所以请在开始游戏前调用这个接口查询登录状态，只有返回`true`才表示登录成功，此时可以进入游戏
-```java
-yxGameApi().isLogin()
-```
-
-### 获取token
-```java
-String token = yxGameApi().getToken()
-```
-在`登录成功`后可调用，获取到的token一定是有效的token，可以直接给服务器使用，服务器校验token有效性，请参考服务器文档
-
-### 获取用户信息
-```java
-try {
-    yxGameApi().getAccountInfo(new YXGameCallbackListener<GameAccount>() {
-        @Override
-        public void callback(int status, GameAccount account) {
-            if (status != YXGameStatusCode.SUCCESS || account == null) {
-                return;
-            }
-            System.out.println(account.getAccountId());
-        }
-    });
-} catch (Exception e) {
-    e.printStackTrace();
-}
-```
-
-### 登出
-```java
-yxGameApi().logout();
-```
-登出结果会回调到初始化和全局监听器注册的回调
-
-### 退出游戏
-```java
-yxGameApi().exit(this, new YXGameCallbackListener<Boolean>() {
-            @Override
-            public void callback(int status, Boolean exit) {
-                if (exit) {
-                    //退出游戏
-                    finish();
-                } else {
-                    //不退出
-                }
-            }
-        });
-```
-
-### 支付
-```java
-YXTrade trade = new YXTrade();
-trade.setId(tradeId);
-trade.setGateUrl(payGateUrl);
-trade.setResult(YXTrade.RESULT_OK);
-new YXPayApi(PayActivity.this, new YXPayDelegate() {
-                @Override
-                public void onTradeComplete(int resultCode) {
-                    // 注意回调在UI主线程中，对http请求需要异步调用
-                    if (resultCode == YXPayResultCode.SUCCESS) {
-                        //支付成功
-                    } else if (resultCode == YXPayResultCode.USER_CANCEL) {
-                        //用户取消支付
-                    } else {
-                        //支付异常
-                    }
-                }
-            }).pay(trade);
-```
-`tradeId`和`payGateUrl`从游戏自己服务器下单后获取，具体请参考服务器支付文档
-
-## 混淆
-如果开启混淆，请添加下面的代码：
-
-```java
--keep class com.squareup.** {*;}
--dontwarn com.squareup.**
 -keep class im.yixin.** {*;}
 -dontwarn im.yixin.**
-```
+-keep class android.app.** {*;}
+-keep class com.squareup.** {*;}
+-dontwarn com.squareup.**
+-dontwarn okio.**
+-keep class okhttp3.**{ *;}
+-keep class com.google.gson.**{*;}
