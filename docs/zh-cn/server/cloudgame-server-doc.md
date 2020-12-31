@@ -23,7 +23,7 @@
 
 ## 1.支付流程
 ### 1.1 支付中各角色交互说明
-![支付中各角色交互说明](https://nosdn-yx.127.net/yxgame/977e2c0b38784cb181b369d99be3641f.jpg)
+![支付中各角色交互说明](https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg)
 
 **参与支付流程交互的角色有：**
 
@@ -45,7 +45,7 @@
 1.	游戏Server接收易信游戏Server异步支付成功回调
 
 ### 1.2 完整交易流程
-![](https://nosdn-yx.127.net/yxgame/90ba0613bcdd40efb9d517c7317f111b.jpg)
+![](https://nosdn-yx.127.net/yxgame/9f90aedb103cdde8459dcd908662b138.jpg)
 
 **流程说明**
 
