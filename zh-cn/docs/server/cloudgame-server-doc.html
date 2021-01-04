@@ -145,8 +145,8 @@
 <p><strong>流程说明</strong></p>
 <p>由流程图可知</p>
 <ol>
-<li><code>第三方APP</code>负责调用<code>第三方Server``生成订单1.1</code>，并处理返回值、封装成trade参数调用支付接口。用户支付完成后，<code>SDK</code>回调<code>接口返回支付结果2.8</code>给<code>第三方APP</code></li>
-<li><code>第三方Server</code>负责生成订单，并将订单信息持久化到数据库。（删除）</li>
+<li><code>第三方APP</code>负责调用<code>第三方Server``生成订单1.1</code>，并处理返回值、调用支付接口。用户支付完成后，<code>SDK</code>回调<code>接口返回支付结果2.7</code>给<code>第三方APP</code></li>
+<li><code>第三方Server</code>负责生成订单，并将订单信息持久化到数据库。</li>
 <li><code>第三方Server</code>负责处理支付通知，并对支付成功的订单进行发货、更改数据库状态，在支付成功后，<code>PayServer</code>通过<code>异步发送支付通知4.1</code>通知<code>第三方Server</code>发货，<code>第三方Server</code>自行进行发货。</li>
 </ol>
 <p><strong><code>流程注意点</code></strong></p>
