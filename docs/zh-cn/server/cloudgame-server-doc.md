@@ -20,10 +20,11 @@
 增加支付流程角色说明|20170917|2.3
 梳理异常和签名错误FAQ|20171010|2.4
 文档markdown，删除无用信息|20180813|2.5
+支付流程变更 | 20210104|  3.0
 
 ## 1.支付流程
 ### 1.1 支付中各角色交互说明
-![支付中各角色交互说明](https://nosdn-yx.127.net/yxgame/977e2c0b38784cb181b369d99be3641f.jpg)
+![支付中各角色交互说明](https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg)
 
 **参与支付流程交互的角色有：**
 
@@ -31,28 +32,27 @@
 	- 调用游戏Server接口生成订单
 	- 调用SDK接口进行支付
 + **游戏Server（以下也称第三方服务器）**：
-	- 负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与易信游戏Server交互，生成易信游戏Server的订单信息（Trade信息），并一起返回给游戏App
+	- 负责生成订单，并将订单信息持久化到第三方服务器
 	- 负责接收易信游戏Server支付回调，处理发货逻辑
 + **易信游戏Server（以下也称PayServer）**
-	- 根据游戏Server订单，生成订单信息（Trade信息），返回给游戏Server
+	- 根据游戏Server订单，生成订单信息（Trade信息），返回给游戏App
 	- 接收支付工具Server（如支付宝、微信等）的回调，并回调游戏Server接口
 
 
 从上面的描述中，第三方游戏接入易信游戏仅需要关心以下部分流程:
 
 1.	游戏App向游戏Server发起生成订单
-1.	游戏Server向易信游戏Server发起生成订单
 1.	游戏App调用易信游戏SDK接口发起支付
 1.	游戏Server接收易信游戏Server异步支付成功回调
 
 ### 1.2 完整交易流程
-![](https://nosdn-yx.127.net/yxgame/90ba0613bcdd40efb9d517c7317f111b.jpg)
+![](https://nosdn-yx.127.net/yxgame/9f90aedb103cdde8459dcd908662b138.jpg)
 
 **流程说明**
 
 由流程图可知
 
-1. `第三方APP`负责调用`第三方Server``生成订单1.1`，并处理返回值、封装成trade参数调用`sdk.pay(trade)2.1`接口。用户支付完成后，`SDK`回调`接口返回支付结果2.8`给`第三方APP`
+1. `第三方APP`负责调用`第三方Server``生成订单1.1`，并处理返回值、调用支付接口。用户支付完成后，`SDK`回调`接口返回支付结果2.7`给`第三方APP`
 1. `第三方Server`负责生成订单，并将订单信息持久化到数据库。
 1. `第三方Server`负责处理支付通知，并对支付成功的订单进行发货、更改数据库状态，在支付成功后，`PayServer`通过`异步发送支付通知4.1`通知`第三方Server`发货，`第三方Server`自行进行发货。
 
@@ -91,14 +91,6 @@ update Trade set PayState=Payed where PayState=UnPay and Id=?;
 
 ##### 2.1.4.1 注意点
 1. 拼接在请求URL上的参数，需要进行URLEncode, 如`String param = URLEncoder.encode("2014-01-01 12:12:12", "UTF-8");`, 输出为`2014-01-01+12%3A12%3A12`
-1. `第三方Server`请求`PayServer`的接口，传递的参数中的`sign签名`字段的操作
-	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
-	+ ![][important]`需要、需要、需要`![][important]进行`URLEncode`
-	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.sign()`接口和![][important]`游戏方私钥`![][important]以及上述拼接字符串生成签名串
-1. `第三方Server`请求`PayServer`的接口后校验返回的参数中的`sign签名`字段的操作
-	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
-	+ ![][important]`不需要、不需要、不需要`![][important]进行`URLEncode`
-	+ 使用`Android Demo`工程的类`im.yixin.game.demo.rsa.RSA`中的`RSA.verify()`接口和![][important]`平台公钥`![][important]以及上述拼接字符串验证`sign`参数是否正确，正确再执行业务逻辑
 1. `第三方Server`接收`PayServer`的支付通知回调接口的`sign签名`字段操作
 	+ 将参与签名的参数进行`字符串拼接` (参与签名计算的参数会在每个接口中进行说明)
 	+ ![][important]`需要、需要、需要`![][important]进行`URLEncode`
@@ -167,67 +159,21 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 -101|服务器内部错误，数据库异常|支付数据请求失败，请重试
 -1001|渠道游戏的状态为停用，无法下单|无效订单
 
-### 2.3 生成订单接口
-本接口为流程图中的`生成支付订单1.2`接口，`第三方Server`在生成订单时调用`PayServer`的此接口。
-#### 2.3.1 接口定义
-+ URL: `https://open.game.163.com/pay/games/{gameid}/add/trades`
-+ 提供方: `PayServer`
-+ 调用方: `第三方Server`
-+ 请求方式: `POST`
-+ 路径参数: `gameid`接入方的游戏id，有游戏中心分配，在开发者后台创建游戏时自动生成
-+ 订单唯一性保证: 相同的`thirdpart_orderid`、`thirdpart_ordertime`为`第三方Server`唯一订单号，不能重复调用此接口生成订单
 
-#### 2.3.2 请求参数
-![][important]`拼接在URL中`![][important]
-
-参数|参数名称(FulfillWithEngCharacter)|参数说明|类型(字符长度)|必传
------|-----|-----|-----|-----
-v|接口版本号|接口版本号。将来版本兼容使用。该参数请从客户端SDK中`YXPayConstants.YX_PAY_SDK_VERSION`动态获取后传递到服务端, 不要写死在服务端|String|是
-thirdpart_orderid|第三方唯一订单id|同一订单	String(64)|是
-thirdpart_ordertime|第三方订单下单时间|格式(yyyy-MM-dd HH:mm:ss)|String(64)|是
-tradeName|商品名称|小写英文字母或数字或中文|String(240)|是
-price|商品单价|金额，单位元，精确到分，如0.01元|String|是
-access_token|oauth token|登陆时返回，用于账号验证。|String|是
-goodscount|购买数量|为兼容老版，不传默认为1|Int|否
-sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`需要URLEncode`![][important], `v+thirdpart_orderid+thirdpart_ordertime+tradeName+access_token+goodscount`,`goodscount`不传或者为1时![][important]`不参与`![][important]签名字符串拼接,使用![][important]`游戏方私钥`![][important]进行签名生成计算|String|是
-
-#### 2.3.3 返回值
-+ 返回值格式: `JSON`
-+ 异常返回格式: 返回码见上面
-
-```json
-{
-	"result":-1,
-	"errorMsg":"服务器异常"
-}
-```
-+ 正常返回时，无上述两个字段
-
-参数|参数名称(FulfillWithEngCharacter)|参数说明|类型
------|-----|-----|-----
-v|接口版本号||String
-thirdpart_orderid|第三方唯一订单id||String
-thirdpart_ordertime|第三方订单下单时间||String
-result|返回结果|正常0、异常时返回异常号|int
-trade_serialid|支付平台订单序列号||String
-goodsprice|商品单价|单位元，精确到分，如0.01元|String
-goodsamount|支付总金额|单位元，精确到分，如0.01元|String
-pay_url|支付工具页面跳转url|包含支付页面需要的参数。第三方Server需要原样返回给客户端。|String
-sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`不需要URLEncode`![][important]，`v+thirdpart_orderid+thirdpart_ordertime+result+trade_serialid+goodsprice+goodsamount+pay_url+goodscount`, `goodscount`为请求时的参数，不传或者为1时![][important]`不参与`![][important]签名字符串拼接，使用![][important]`平台公钥`![][important]进行签名验证计算|String
-### 2.4 PayServer异步支付通知
+### 2.3 PayServer异步支付通知
 本接口为流程图中的`异步发送支付通知 4.1`接口。Android页面通知可能因为网络故障导致通知失败，需要`PayServer`多次异步通知来保证通知到`第三方Server`。
 
 1. `第三方Server`可以将此接口和Android页面通知接口在同一个接口中合并处理，此接口增加了`notifyid`、`notifytime`两个参数，并且`from`值不一样。
 1. `第三方Server`需要去重，可能会重复通知，避免多次发货
 1. 当`第三方Server`响应`success`字符串时，`PayServer`停止异步通知，否则按如下时间间隔不断通知直到收到`success`：40秒、2分钟、5分钟、10分钟、30分钟、1小时、2小时、6小时、15小时，超过以上时间后，即使没接收到`success`也不再通知。
 
-#### 2.4.1 接口定义
+#### 2.3.1 接口定义
 + URL: `第三方Server`定义并填写到开发者后台的对应游戏配置中
 + 提供方: `第三方Server`
 + 调用方: `PayServer`
 + 请求方式: `POST`
 
-#### 2.4.2 请求参数
+#### 2.3.2 请求参数
 ![][important]`拼接在URL中`![][important]
 
 参数|参数名称(FulfillWithEngCharacter)|参数说明|类型(字符长度)
@@ -247,24 +193,24 @@ notifyid|通知内部id|用于校验|long
 notifytime|通知时间戳||long
 from|来源参数|值固定为`backend`|String
 sign|签名|请先阅读[2.1.4 签名校验及参数值编码](#sign),参与签名的参数![][important]严格![][important]依照以下顺序，中间的`+`表示前后字符串直接拼接，不要把`+`加到字符串中，拼接后![][important]`需要URLEncode`![][important], `v+thirdpart_orderid+thirdpart_ordertime+tradeName+result+trade_serialid+goodsprice+goodsamount+paystatus+paytime+paytooltype+notifyid+notifytime+from`,使用![][important]`平台公钥`![][important]进行签名验证计算|String
-#### 2.4.3 返回值
+#### 2.3.3 返回值
 成功处理则返回`success`这7个字符，失败返回`fail`。
-### 2.5 获取用户信息
+### 2.4 获取用户信息
 获取用户信息，校验access_token有效性, 本接口无签名校验
-#### 2.5.1 接口定义
+#### 2.4.1 接口定义
 + URL: `https://open.game.163.com/api/user/info`
 + 提供方: `PayServer`
 + 调用方: `第三方Server`
 + 请求方式: `GET`
 
-#### 2.5.2 请求参数
+#### 2.4.2 请求参数
 拼接在URL中
 
 参数|参数名称(FulfillWithEngCharacter)|参数说明|类型(字符长度)
 -----|-----|-----|-----
 access_token|token值|从客户端获取的token值|String
 
-#### 2.5.3 返回值
+#### 2.4.3 返回值
 + 返回值格式: `JSON`
 + 异常返回格式: `非1`的`code`值都是异常返回，`code`一定有，`errorMsg`可能没有
 

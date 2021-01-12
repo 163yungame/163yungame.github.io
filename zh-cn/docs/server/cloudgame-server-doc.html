@@ -103,11 +103,16 @@
 <td>20180813</td>
 <td>2.5</td>
 </tr>
+<tr>
+<td>支付流程变更</td>
+<td>20210104</td>
+<td>3.0</td>
+</tr>
 </tbody>
 </table>
 <h2>1.支付流程</h2>
 <h3>1.1 支付中各角色交互说明</h3>
-<p><img src="https://nosdn-yx.127.net/yxgame/977e2c0b38784cb181b369d99be3641f.jpg" alt="支付中各角色交互说明"></p>
+<p><img src="https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg" alt="支付中各角色交互说明"></p>
 <p><strong>参与支付流程交互的角色有：</strong></p>
 <ul>
 <li><strong>游戏APP（以下也称第三方App）</strong>：需要集成易信游戏SDK
@@ -118,13 +123,13 @@
 </li>
 <li><strong>游戏Server（以下也称第三方服务器）</strong>：
 <ul>
-<li>负责生成订单，并将订单信息持久化到第三方服务器，生成订单过程中需要与易信游戏Server交互，生成易信游戏Server的订单信息（Trade信息），并一起返回给游戏App</li>
+<li>负责生成订单，并将订单信息持久化到第三方服务器</li>
 <li>负责接收易信游戏Server支付回调，处理发货逻辑</li>
 </ul>
 </li>
 <li><strong>易信游戏Server（以下也称PayServer）</strong>
 <ul>
-<li>根据游戏Server订单，生成订单信息（Trade信息），返回给游戏Server</li>
+<li>根据游戏Server订单，生成订单信息（Trade信息），返回给游戏App</li>
 <li>接收支付工具Server（如支付宝、微信等）的回调，并回调游戏Server接口</li>
 </ul>
 </li>
@@ -132,16 +137,15 @@
 <p>从上面的描述中，第三方游戏接入易信游戏仅需要关心以下部分流程:</p>
 <ol>
 <li>游戏App向游戏Server发起生成订单</li>
-<li>游戏Server向易信游戏Server发起生成订单</li>
 <li>游戏App调用易信游戏SDK接口发起支付</li>
 <li>游戏Server接收易信游戏Server异步支付成功回调</li>
 </ol>
 <h3>1.2 完整交易流程</h3>
-<p><img src="https://nosdn-yx.127.net/yxgame/90ba0613bcdd40efb9d517c7317f111b.jpg" alt=""></p>
+<p><img src="https://nosdn-yx.127.net/yxgame/9f90aedb103cdde8459dcd908662b138.jpg" alt=""></p>
 <p><strong>流程说明</strong></p>
 <p>由流程图可知</p>
 <ol>
-<li><code>第三方APP</code>负责调用<code>第三方Server``生成订单1.1</code>，并处理返回值、封装成trade参数调用<code>sdk.pay(trade)2.1</code>接口。用户支付完成后，<code>SDK</code>回调<code>接口返回支付结果2.8</code>给<code>第三方APP</code></li>
+<li><code>第三方APP</code>负责调用<code>第三方Server``生成订单1.1</code>，并处理返回值、调用支付接口。用户支付完成后，<code>SDK</code>回调<code>接口返回支付结果2.7</code>给<code>第三方APP</code></li>
 <li><code>第三方Server</code>负责生成订单，并将订单信息持久化到数据库。</li>
 <li><code>第三方Server</code>负责处理支付通知，并对支付成功的订单进行发货、更改数据库状态，在支付成功后，<code>PayServer</code>通过<code>异步发送支付通知4.1</code>通知<code>第三方Server</code>发货，<code>第三方Server</code>自行进行发货。</li>
 </ol>
@@ -175,20 +179,6 @@
 <h5>2.1.4.1 注意点</h5>
 <ol>
 <li>拼接在请求URL上的参数，需要进行URLEncode, 如<code>String param = URLEncoder.encode(&quot;2014-01-01 12:12:12&quot;, &quot;UTF-8&quot;);</code>, 输出为<code>2014-01-01+12%3A12%3A12</code></li>
-<li><code>第三方Server</code>请求<code>PayServer</code>的接口，传递的参数中的<code>sign签名</code>字段的操作
-<ul>
-<li>将参与签名的参数进行<code>字符串拼接</code> (参与签名计算的参数会在每个接口中进行说明)</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要、需要、需要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行<code>URLEncode</code></li>
-<li>使用<code>Android Demo</code>工程的类<code>im.yixin.game.demo.rsa.RSA</code>中的<code>RSA.sign()</code>接口和<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">以及上述拼接字符串生成签名串</li>
-</ul>
-</li>
-<li><code>第三方Server</code>请求<code>PayServer</code>的接口后校验返回的参数中的<code>sign签名</code>字段的操作
-<ul>
-<li>将参与签名的参数进行<code>字符串拼接</code> (参与签名计算的参数会在每个接口中进行说明)</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>不需要、不需要、不需要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行<code>URLEncode</code></li>
-<li>使用<code>Android Demo</code>工程的类<code>im.yixin.game.demo.rsa.RSA</code>中的<code>RSA.verify()</code>接口和<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">以及上述拼接字符串验证<code>sign</code>参数是否正确，正确再执行业务逻辑</li>
-</ul>
-</li>
 <li><code>第三方Server</code>接收<code>PayServer</code>的支付通知回调接口的<code>sign签名</code>字段操作
 <ul>
 <li>将参与签名的参数进行<code>字符串拼接</code> (参与签名计算的参数会在每个接口中进行说明)</li>
@@ -324,182 +314,21 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 </tr>
 </tbody>
 </table>
-<h3>2.3 生成订单接口</h3>
-<p>本接口为流程图中的<code>生成支付订单1.2</code>接口，<code>第三方Server</code>在生成订单时调用<code>PayServer</code>的此接口。</p>
-<h4>2.3.1 接口定义</h4>
-<ul>
-<li>URL: <code>https://open.game.163.com/pay/games/{gameid}/add/trades</code></li>
-<li>提供方: <code>PayServer</code></li>
-<li>调用方: <code>第三方Server</code></li>
-<li>请求方式: <code>POST</code></li>
-<li>路径参数: <code>gameid</code>接入方的游戏id，有游戏中心分配，在开发者后台创建游戏时自动生成</li>
-<li>订单唯一性保证: 相同的<code>thirdpart_orderid</code>、<code>thirdpart_ordertime</code>为<code>第三方Server</code>唯一订单号，不能重复调用此接口生成订单</li>
-</ul>
-<h4>2.3.2 请求参数</h4>
-<p><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>拼接在URL中</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>参数名称(FulfillWithEngCharacter)</th>
-<th>参数说明</th>
-<th>类型(字符长度)</th>
-<th>必传</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>v</td>
-<td>接口版本号</td>
-<td>接口版本号。将来版本兼容使用。该参数请从客户端SDK中<code>YXPayConstants.YX_PAY_SDK_VERSION</code>动态获取后传递到服务端, 不要写死在服务端</td>
-<td>String</td>
-<td>是</td>
-</tr>
-<tr>
-<td>thirdpart_orderid</td>
-<td>第三方唯一订单id</td>
-<td>同一订单	String(64)</td>
-<td>是</td>
-<td></td>
-</tr>
-<tr>
-<td>thirdpart_ordertime</td>
-<td>第三方订单下单时间</td>
-<td>格式(yyyy-MM-dd HH:mm:ss)</td>
-<td>String(64)</td>
-<td>是</td>
-</tr>
-<tr>
-<td>tradeName</td>
-<td>商品名称</td>
-<td>小写英文字母或数字或中文</td>
-<td>String(240)</td>
-<td>是</td>
-</tr>
-<tr>
-<td>price</td>
-<td>商品单价</td>
-<td>金额，单位元，精确到分，如0.01元</td>
-<td>String</td>
-<td>是</td>
-</tr>
-<tr>
-<td>access_token</td>
-<td>oauth token</td>
-<td>登陆时返回，用于账号验证。</td>
-<td>String</td>
-<td>是</td>
-</tr>
-<tr>
-<td>goodscount</td>
-<td>购买数量</td>
-<td>为兼容老版，不传默认为1</td>
-<td>Int</td>
-<td>否</td>
-</tr>
-<tr>
-<td>sign</td>
-<td>签名</td>
-<td>请先阅读<a href="#sign">2.1.4 签名校验及参数值编码</a>,参与签名的参数<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">严格<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">依照以下顺序，中间的<code>+</code>表示前后字符串直接拼接，不要把<code>+</code>加到字符串中，拼接后<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要URLEncode</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">, <code>v+thirdpart_orderid+thirdpart_ordertime+tradeName+access_token+goodscount</code>,<code>goodscount</code>不传或者为1时<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>不参与</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">签名字符串拼接,使用<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行签名生成计算</td>
-<td>String</td>
-<td>是</td>
-</tr>
-</tbody>
-</table>
-<h4>2.3.3 返回值</h4>
-<ul>
-<li>返回值格式: <code>JSON</code></li>
-<li>异常返回格式: 返回码见上面</li>
-</ul>
-<pre><code class="language-json">{
-	<span class="hljs-attr">"result"</span>:<span class="hljs-number">-1</span>,
-	<span class="hljs-attr">"errorMsg"</span>:<span class="hljs-string">"服务器异常"</span>
-}
-</code></pre>
-<ul>
-<li>正常返回时，无上述两个字段</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>参数名称(FulfillWithEngCharacter)</th>
-<th>参数说明</th>
-<th>类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>v</td>
-<td>接口版本号</td>
-<td></td>
-<td>String</td>
-</tr>
-<tr>
-<td>thirdpart_orderid</td>
-<td>第三方唯一订单id</td>
-<td></td>
-<td>String</td>
-</tr>
-<tr>
-<td>thirdpart_ordertime</td>
-<td>第三方订单下单时间</td>
-<td></td>
-<td>String</td>
-</tr>
-<tr>
-<td>result</td>
-<td>返回结果</td>
-<td>正常0、异常时返回异常号</td>
-<td>int</td>
-</tr>
-<tr>
-<td>trade_serialid</td>
-<td>支付平台订单序列号</td>
-<td></td>
-<td>String</td>
-</tr>
-<tr>
-<td>goodsprice</td>
-<td>商品单价</td>
-<td>单位元，精确到分，如0.01元</td>
-<td>String</td>
-</tr>
-<tr>
-<td>goodsamount</td>
-<td>支付总金额</td>
-<td>单位元，精确到分，如0.01元</td>
-<td>String</td>
-</tr>
-<tr>
-<td>pay_url</td>
-<td>支付工具页面跳转url</td>
-<td>包含支付页面需要的参数。第三方Server需要原样返回给客户端。</td>
-<td>String</td>
-</tr>
-<tr>
-<td>sign</td>
-<td>签名</td>
-<td>请先阅读<a href="#sign">2.1.4 签名校验及参数值编码</a>,参与签名的参数<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">严格<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">依照以下顺序，中间的<code>+</code>表示前后字符串直接拼接，不要把<code>+</code>加到字符串中，拼接后<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>不需要URLEncode</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">，<code>v+thirdpart_orderid+thirdpart_ordertime+result+trade_serialid+goodsprice+goodsamount+pay_url+goodscount</code>, <code>goodscount</code>为请求时的参数，不传或者为1时<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>不参与</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">签名字符串拼接，使用<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行签名验证计算</td>
-<td>String</td>
-</tr>
-</tbody>
-</table>
-<h3>2.4 PayServer异步支付通知</h3>
+<h3>2.3 PayServer异步支付通知</h3>
 <p>本接口为流程图中的<code>异步发送支付通知 4.1</code>接口。Android页面通知可能因为网络故障导致通知失败，需要<code>PayServer</code>多次异步通知来保证通知到<code>第三方Server</code>。</p>
 <ol>
 <li><code>第三方Server</code>可以将此接口和Android页面通知接口在同一个接口中合并处理，此接口增加了<code>notifyid</code>、<code>notifytime</code>两个参数，并且<code>from</code>值不一样。</li>
 <li><code>第三方Server</code>需要去重，可能会重复通知，避免多次发货</li>
 <li>当<code>第三方Server</code>响应<code>success</code>字符串时，<code>PayServer</code>停止异步通知，否则按如下时间间隔不断通知直到收到<code>success</code>：40秒、2分钟、5分钟、10分钟、30分钟、1小时、2小时、6小时、15小时，超过以上时间后，即使没接收到<code>success</code>也不再通知。</li>
 </ol>
-<h4>2.4.1 接口定义</h4>
+<h4>2.3.1 接口定义</h4>
 <ul>
 <li>URL: <code>第三方Server</code>定义并填写到开发者后台的对应游戏配置中</li>
 <li>提供方: <code>第三方Server</code></li>
 <li>调用方: <code>PayServer</code></li>
 <li>请求方式: <code>POST</code></li>
 </ul>
-<h4>2.4.2 请求参数</h4>
+<h4>2.3.2 请求参数</h4>
 <p><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>拼接在URL中</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></p>
 <table>
 <thead>
@@ -603,18 +432,18 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 </tr>
 </tbody>
 </table>
-<h4>2.4.3 返回值</h4>
+<h4>2.3.3 返回值</h4>
 <p>成功处理则返回<code>success</code>这7个字符，失败返回<code>fail</code>。</p>
-<h3>2.5 获取用户信息</h3>
+<h3>2.4 获取用户信息</h3>
 <p>获取用户信息，校验access_token有效性, 本接口无签名校验</p>
-<h4>2.5.1 接口定义</h4>
+<h4>2.4.1 接口定义</h4>
 <ul>
 <li>URL: <code>https://open.game.163.com/api/user/info</code></li>
 <li>提供方: <code>PayServer</code></li>
 <li>调用方: <code>第三方Server</code></li>
 <li>请求方式: <code>GET</code></li>
 </ul>
-<h4>2.5.2 请求参数</h4>
+<h4>2.4.2 请求参数</h4>
 <p>拼接在URL中</p>
 <table>
 <thead>
@@ -634,7 +463,7 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 </tr>
 </tbody>
 </table>
-<h4>2.5.3 返回值</h4>
+<h4>2.4.3 返回值</h4>
 <ul>
 <li>返回值格式: <code>JSON</code></li>
 <li>异常返回格式: <code>非1</code>的<code>code</code>值都是异常返回，<code>code</code>一定有，<code>errorMsg</code>可能没有</li>
