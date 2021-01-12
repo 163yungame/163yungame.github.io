@@ -5,11 +5,19 @@
 #### 1.1 游戏配置ID申请
 * 在[易信游戏后台](https://game.yixin.im/)申请游戏`GameId`及`GameSecret`
 
-#### 1.2 依赖库及资源文件导入
+#### 1.2 urs签名备案
+* 下载[urs签名获取工具](https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk)获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 huxiaodan@yixin.im）进入签名备案流程，
+备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式，在这之前可以先用易信授权登录测试。
+
+#### 1.3 依赖库及资源文件导入
 1. 将`gamesdk-x.x.x.jar`引入项目
 2. 若游戏打包方式无法将`gamesdk-x.x.x.jar`中的`assets/ncggame`文件夹下内容打包到apk，请手动将`ncggame`复制到项目的`assets`文件夹下
+3. 在模块级`build.gradle`文件中添加依赖：
+```
+    implementation 'com.google.code.gson:gson:2.8.0'
+```
 
-#### 1.3 Application配置（必接）
+#### 1.4 Application配置（必接）
 * 游戏的`Application`必须继承自`im.yixin.gamesdk.base.YXApplication`。
 * 如果游戏重写了生命周期回调，必须通过`super`调用对应的父类实现。
 > 示例
@@ -24,7 +32,7 @@ public class XXGameApp extends YXApplication{
 }
 ```
 
-#### 1.4 闪屏Activity配置（必接）
+#### 1.5 闪屏Activity配置（必接）
 * 游戏闪屏`Activity`必须继承自`im.yixin.gamesdk.base.YXSplashActivity`，对于没有闪屏页的游戏需先新建闪屏`Activity`
 > 示例
 ```java
@@ -42,7 +50,7 @@ public class XXGameSplashActivity extends YXSplashActivity {
 }
 ```
 
-#### 1.5 清单文件 AndroidManifest 配置（必接）
+#### 1.6 清单文件 AndroidManifest 配置（必接）
 1. versionName
 
 `versionName` 需要保证为三段式 `x.x.x` (例如：1.2.3)
@@ -105,10 +113,10 @@ public class XXGameSplashActivity extends YXSplashActivity {
 
 `YXEntryActivity` 和 `AppRegister` 这两个文件，请直接复制Demo中的代码
 
-#### 1.6 targetSdkVersion
+#### 1.7 targetSdkVersion
 `targetSdkVersion = 26`
 
-#### 1.7 签名
+#### 1.8 签名
 只能使用v1签名，不能用v2签名。
 
 ### 2.接口文档
