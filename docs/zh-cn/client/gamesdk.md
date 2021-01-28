@@ -341,7 +341,7 @@ payment.goodsCount = 1; //商品数量|int|必传
 
 payment.orderTime = System.currentTimeMillis(); //下单时间，单位ms
 payment.goodsName = "coin"; //商品名称，必传非null
-payment.goodsCode = "coin"; //商品code，没有则传goodsName，必传非null
+payment.goodsCode = "coin"; //商品名称，必传非null（是的，这里没有写错）
 payment.goodsDesc = "coin"; //商品描述，必传非null
 payment.serverId = "1234500"; //所在服务器id，必传非null
 payment.serverName = "奥格瑞玛"; //所在服务器名称，必传非null
@@ -489,7 +489,7 @@ public class GameBaseActivity extends Activity {
 | goodsCount | int | 商品数量，非null | Yes |
 | goodsName | string | 商品名称，非null | Yes |
 | goodsDesc | string | 商品描述，非null | Yes |
-| goodsCode | string | 商品代号，没有则传goodsName，非null | Yes |
+| goodsCode | string | 商品名称，必传非null（是的，这里没有写错） | Yes |
 | serverId | string | 角色服务器id，非null | Yes |
 | serverName | string | 角色服务器名称，非null | Yes |
 | gameRoleId | string | 角色id，非null | Yes |
