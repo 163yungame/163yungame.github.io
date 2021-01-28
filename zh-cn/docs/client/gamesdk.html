@@ -448,7 +448,7 @@ payment.goodsCount = <span class="hljs-number">1</span>; <span class="hljs-comme
 
 payment.orderTime = System.currentTimeMillis(); <span class="hljs-comment">//下单时间，单位ms</span>
 payment.goodsName = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品名称，必传非null</span>
-payment.goodsCode = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品code，没有则传goodsName，必传非null</span>
+payment.goodsCode = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品名称，必传非null（是的，这里没有写错）</span>
 payment.goodsDesc = <span class="hljs-string">"coin"</span>; <span class="hljs-comment">//商品描述，必传非null</span>
 payment.serverId = <span class="hljs-string">"1234500"</span>; <span class="hljs-comment">//所在服务器id，必传非null</span>
 payment.serverName = <span class="hljs-string">"奥格瑞玛"</span>; <span class="hljs-comment">//所在服务器名称，必传非null</span>
@@ -748,7 +748,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 <tr>
 <td style="text-align:left">goodsCode</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">商品代号，没有则传goodsName，非null</td>
+<td style="text-align:left">商品名称，必传非null（是的，这里没有写错）</td>
 <td style="text-align:left">Yes</td>
 </tr>
 <tr>
