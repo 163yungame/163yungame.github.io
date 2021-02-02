@@ -8,6 +8,7 @@
 #### 1.2 urs签名备案
 * 下载[urs签名获取工具](https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk)获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 huxiaodan@yixin.im）进入签名备案流程，
 备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式，在这之前可以先用易信授权登录测试。
+注意：此签名只用于备案，不能填写在易信后台。只有第一次对接的游戏需要备案，备案过的游戏无需再备案。
 
 #### 1.3 依赖库及资源文件导入
 1. 将`gamesdk-x.x.x.jar`引入项目
@@ -197,7 +198,7 @@ YXSDK.get().getAuthMonitor().setLogoutCallback(new IAuthMonitor.LogoutCallback()
 YXSDK.get().getAuthMonitor().logout(activity);
 ```
 
-#### 2.4 用户切换（非必接）
+#### 2.4 用户切换（必接）
 * im.yixin.gamesdk.base.intef.IAuthMonitor.switchAccount(Activity activity)
     * 入参
         * activity | 类型Acitivty| **必传**
