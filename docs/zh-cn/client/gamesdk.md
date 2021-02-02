@@ -1,12 +1,17 @@
 ## 易信游戏SDK接入文档
 
+### 版本变更记录
+修订内容描述|修订日期|版本号
+-----|-----|-----
+优化接口|2020.08.19|5.2.0
+接口大改、易信订单改为YXSDK发起生成|2020.12.30|5.3.0
 ### 1.项目准备及接入
 
 #### 1.1 游戏配置ID申请
 * 在[易信游戏后台](https://game.yixin.im/)申请游戏`GameId`及`GameSecret`
 
 #### 1.2 urs签名备案
-* 下载[urs签名获取工具](https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk)获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 huxiaodan@yixin.im）进入签名备案流程，
+* 从5.3.0版本开始，需下载[urs签名获取工具](https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk)获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 huxiaodan@yixin.im）进入签名备案流程，
 备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式，在这之前可以先用易信授权登录测试。
 注意：此签名只用于备案，不能填写在易信后台。只有第一次对接的游戏需要备案，备案过的游戏无需再备案。
 
@@ -126,7 +131,7 @@ public class XXGameSplashActivity extends YXSplashActivity {
 * im.yixin.gamesdk.base.YXSDK.init(Activity activity)
     * 入参
         * activity | 类型Activity| **必传**
-    * 描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity启动时调用
+    * 描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity的onCreate()方法中调用（其他时机调用将导致未知问题！）
 > 调用示例
 ```java
 //step1.添加初始化监听
