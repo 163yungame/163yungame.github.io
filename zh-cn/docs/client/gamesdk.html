@@ -13,6 +13,28 @@
 </head>
 <body>
 	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h2>易信游戏SDK接入文档</h2>
+<h3>版本变更记录</h3>
+<table>
+<thead>
+<tr>
+<th>修订内容描述</th>
+<th>修订日期</th>
+<th>版本号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化接口</td>
+<td>2020.08.19</td>
+<td>5.2.0</td>
+</tr>
+<tr>
+<td>接口大改、易信订单改为YXSDK发起生成</td>
+<td>2020.12.30</td>
+<td>5.3.0</td>
+</tr>
+</tbody>
+</table>
 <h3>1.项目准备及接入</h3>
 <h4>1.1 游戏配置ID申请</h4>
 <ul>
@@ -20,7 +42,7 @@
 </ul>
 <h4>1.2 urs签名备案</h4>
 <ul>
-<li>下载<a href="https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk">urs签名获取工具</a>获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 <a href="mailto:huxiaodan@yixin.im">huxiaodan@yixin.im</a>）进入签名备案流程，
+<li>从5.3.0版本开始，需下载<a href="https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk">urs签名获取工具</a>获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 <a href="mailto:huxiaodan@yixin.im">huxiaodan@yixin.im</a>）进入签名备案流程，
 备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式，在这之前可以先用易信授权登录测试。
 注意：此签名只用于备案，不能填写在易信后台。只有第一次对接的游戏需要备案，备案过的游戏无需再备案。</li>
 </ul>
@@ -149,7 +171,7 @@
 <li>activity | 类型Activity| <strong>必传</strong></li>
 </ul>
 </li>
-<li>描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity启动时调用</li>
+<li>描述：通过添加初始化监听器异步监听初始化结果，在游戏主Activity的onCreate()方法中调用（其他时机调用将导致未知问题！）</li>
 </ul>
 </li>
 </ul>
