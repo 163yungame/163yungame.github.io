@@ -1,11 +1,12 @@
 ## 易信游戏SDK接入文档
 
-### 版本变更记录
-修订内容描述|修订日期|版本号
+### 版本更新记录
+更新内容|更新日期|版本号
 -----|-----|-----
 优化接口|2020.08.19|5.2.0
 接口大改、易信订单改为YXSDK发起生成|2020.12.30|5.3.0
 初始化回调切到主线程|2021.03.04|5.3.1
+中宣部实名、优化用户信息字段、接入情况检测、多处UI适配|2021.04|5.3.2
 ### 1.项目准备及接入
 
 #### 1.1 游戏配置ID申请
@@ -126,9 +127,23 @@ public class XXGameSplashActivity extends YXSplashActivity {
 #### 1.8 签名
 只能使用v1签名，不能用v2签名。
 
-### 2.接口文档
+### 2 中宣部实名
+易信游戏SDK提供实名认证功能，游戏方无需进行实名认证。
 
-#### 2.1 SDK初始化（必接）
+该功能采用中宣部提供的服务，请游戏方通过易信服务端获取中宣部返回的pi等实名信息。
+
+游戏方需要使用这个pi完成中宣部要求的游戏用户行为数据上报工作。
+
+### 3 接入情况检测
+为保证游戏方接入完整，易信游戏SDK将会在游戏方开发阶段进行接入情况检测。
+
+该检测在调用支付接口时触发，如果接入不完整，将会弹窗提示并中止支付。
+
+游戏方应按照提示完成接入，并在支付前上报角色、回到桌面再进入游戏以通过接口检测。
+
+### 4.接口文档
+
+#### 4.1 SDK初始化（必接）
 * im.yixin.gamesdk.base.YXSDK.init(Activity activity)
     * 入参
         * activity | 类型Activity| **必传**
@@ -151,12 +166,12 @@ YXSDK.get().getInitMonitor().setInitCallback(new IInitMonitor.InitCallback() {
 YXSDK.get().init(activity);
 ```
 
-#### 2.2 用户登录（必接）
+#### 4.2 用户登录（必接）
 * im.yixin.gamesdk.base.intef.IAuthMonitor.login(Activity activity)
     * 入参
         * activity | 类型Actiivty| **必传**
     * 描述：
-        * 用于游戏调用用户登录，返回游戏用户信息。每次应用新启动都需要执行
+        * 调用登录，返回游戏用户信息(不包含实名信息，请游戏方通过易信服务端获取实名信息)。每次应用新启动都需要执行
         * 需要预先添加回调监听器
 > 调用示例
 ```java
@@ -180,7 +195,7 @@ YXSDK.get().getAuthMonitor().setLoginCallback(new IAuthMonitor.LoginCallback() {
 YXSDK.get().getAuthMonitor().login(activity);
 ```
 
-#### 2.3 用户注销（必接）
+#### 4.3 用户注销（必接）
 * im.yixin.gamesdk.base.intef.IAuthMonitor.logout(Activity activity)
     * 入参
         * activity | 类型Acitivty| **必传**
@@ -204,7 +219,7 @@ YXSDK.get().getAuthMonitor().setLogoutCallback(new IAuthMonitor.LogoutCallback()
 YXSDK.get().getAuthMonitor().logout(activity);
 ```
 
-#### 2.4 用户切换（必接）
+#### 4.4 用户切换（必接）
 * im.yixin.gamesdk.base.intef.IAuthMonitor.switchAccount(Activity activity)
     * 入参
         * activity | 类型Acitivty| **必传**
@@ -233,36 +248,7 @@ YXSDK.get().getAuthMonitor().setSwitchAccountCallback(new IAuthMonitor.SwitchAcc
 YXSDK.get().getAuthMonitor().switchAccount(activity);
 ```
 
-#### 2.5 实名认证（非必接）
-* im.yixin.gamesdk.base.intef.IAuthMonitor.verify(Activity activity)
-    * 入参
-        * activity | 类型Acitivty| **必传**
-    * 描述：
-        * 游戏主动调用实名认证接口，成功则返回用户实名认证信息
-        * 需要预先添加回调监听器
-        * **大部分情况已在登录阶段进行了强制实名要求，未实名判定为登录失败，一般无需主动调用**
-> 调用示例
-```java
-
-YXSDK.get().getAuthMonitor().setVerifyCallback(new IAuthMonitor.VerifyCallback() {
-    @Override
-    public void onVerifySuccess(GameUserInfo info) {
-        //返回实名认证用户信息
-    }
-
-    @Override
-    public void onVerifyCancel() {
-        //用户取消实名认证回调
-    }
-
-    @Override
-    public void onVerifyFailure(String code, String message) {
-        //用户实名失败回调，code参阅 【章节3.错误码对照表】
-    }
-});
-```
-
-#### 2.6 退出SDK（必接）
+#### 4.5 退出SDK（必接）
 * im.yixin.gamesdk.base.intef.IInitMonitor.exit(Activity activity)
     * 入参
         * activity | 类型Acitivty| **必传**
@@ -286,7 +272,7 @@ YXSDK.get().getInitMonitor().setSDKExitCallback(new IInitMonitor.SDKExitCallback
 YXSDK.get().getInitMonitor().exit(activity)
 ```
 
-#### 2.7 保存游戏角色信息（必接）
+#### 4.6 保存游戏角色信息（必接）
 * im.yixin.gamesdk.base.intef.IAuthMonitor.saveGameInfo(Activity activity, GameRoleInfo info, int type)
     * 入参
         * activity | 类型Acitivty| **必传**
@@ -328,7 +314,7 @@ GameRoleInfo info = new GameRoleInfo();
 YXSDK.get().getAuthMonitor().saveGameInfo(info, 0);
 ```
 
-#### 2.8 支付（必接）
+#### 4.7 支付（必接）
 * im.yixin.gamesdk.base.intef.IPayMonitor.pay(Activity activity, GamePaymentInfo payment)
     * 入参
         * activity | 类型Acitivty| **必传**
@@ -373,7 +359,7 @@ YXSDK.get().getPayMonitor().setPayCallback(new IPayMonitor.PayCallback() {
 YXSDK.get().getPayMonitor().pay(DemoPayActivity.this, payment);
 ```
 
-#### 2.9 Activity生命周期回调（必接）
+#### 4.8 Activity生命周期回调（必接）
 * 对于游戏内的主Activity，需调用sdk监听器内的各回调方法
 * 生命周期监听器，可以通过`YXSDK.get().getLifecycleMonitor()`获取
 > 调用示例
@@ -442,7 +428,7 @@ public class GameBaseActivity extends Activity {
 }
 ```
 
-### 3.错误码对照表
+### 5.错误码对照表
 
 | 错误码 | 描述 |
 | :-- | :-- |
@@ -473,7 +459,7 @@ public class GameBaseActivity extends Activity {
 
 <a id="define"/>
 
-### 4.对象类型定义
+### 6.对象类型定义
 
 > GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调
 
@@ -482,9 +468,6 @@ public class GameBaseActivity extends Activity {
 | uid | string | 用户id |
 | userName | string | 用户名 |
 | token | string | 用户令牌 |
-| isVerified | bool | 是否实名 true:已实名；false:未实名 |
-| age | int | 年龄 |
-| birthday | string | 生日 |
 
 > GamePaymentInfo: 游戏支付信息
 
@@ -533,7 +516,7 @@ public class GameBaseActivity extends Activity {
 | friendList | string | 好友关系列表 | No |
 
 
-### 5.混淆规则
+### 7.混淆规则
 
 > 游戏方需添加以下混淆规则
 ```
