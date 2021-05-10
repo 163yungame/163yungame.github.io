@@ -3,7 +3,7 @@
 ## 资源下载
 
 #### AndroidSDK下载
-[GameSDK-5.3.x](https://nos.netease.com/yxgame/gamesdk-5.3.x.zip)
+[GameSDK-5.3.2](https://nos-yx.netease.com/yxgame/gamesdk-5.3.2.zip)
 
 ### 签名
 #### APK签名获取工具
@@ -24,5 +24,5 @@
 ## 注意事项
 1. 先申请GameID，GameSecret，交给对应开发
 2. 为保证授权，支付等可以正常调试，调试前请确认后台相关包名，签名是否配置正确
-3. 包名后缀cloudgame (例com.netease.yys.cloudgame)
+3. 包名后缀cloudgame (例com.netease.yys.cloudgame，如果易信后台已经配置了包名后缀为yixin，则与后台配置保持一致)
 4. APK不需要角标，需要闪屏
