@@ -13,12 +13,12 @@
 </head>
 <body>
 	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h2>易信游戏SDK接入文档</h2>
-<h3>版本变更记录</h3>
+<h3>版本更新记录</h3>
 <table>
 <thead>
 <tr>
-<th>修订内容描述</th>
-<th>修订日期</th>
+<th>更新内容</th>
+<th>更新日期</th>
 <th>版本号</th>
 </tr>
 </thead>
@@ -38,6 +38,11 @@
 <td>2021.03.04</td>
 <td>5.3.1</td>
 </tr>
+<tr>
+<td>中宣部实名、优化用户信息字段、接入情况检测、多处UI适配</td>
+<td>2021.05.08</td>
+<td>5.3.2</td>
+</tr>
 </tbody>
 </table>
 <h3>1.项目准备及接入</h3>
@@ -47,9 +52,12 @@
 </ul>
 <h4>1.2 urs签名备案</h4>
 <ul>
-<li>从5.3.0版本开始，需下载<a href="https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk">urs签名获取工具</a>获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 <a href="mailto:huxiaodan@yixin.im">huxiaodan@yixin.im</a>）进入签名备案流程，
-备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式，在这之前可以先用易信授权登录测试。
-注意：此签名只用于备案，不能填写在易信后台。只有第一次对接的游戏需要备案，备案过的游戏无需再备案。</li>
+<li>
+<p>从5.3.0版本开始，需下载<a href="https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk">urs签名获取工具</a>获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给易信商务同学(popo或邮箱联系：胡晓丹 <a href="mailto:huxiaodan@yixin.im">huxiaodan@yixin.im</a>）进入签名备案流程，
+备案通过后才能使用手机号、邮箱、QQ、微博4种登录方式（未备案会出现&quot;初始化失败，请重试&quot;的提示），在这之前可以先用易信授权登录测试。</p>
+<p>注意：此签名只用于备案，不能填写在易信后台。</p>
+<p>只有第一次对接的游戏需要备案，备案过的游戏无需再备案。</p>
+</li>
 </ul>
 <h4>1.3 依赖库及资源文件导入</h4>
 <ol>
@@ -166,8 +174,16 @@
 <p><code>targetSdkVersion = 26</code></p>
 <h4>1.8 签名</h4>
 <p>只能使用v1签名，不能用v2签名。</p>
-<h3>2.接口文档</h3>
-<h4>2.1 SDK初始化（必接）</h4>
+<h3>2.中宣部实名</h3>
+<p>易信游戏SDK提供实名认证功能，游戏方无需进行实名认证。</p>
+<p>该功能采用中宣部提供的服务，请游戏方通过易信服务端获取中宣部返回的pi等实名信息。</p>
+<p>游戏方需要使用这个pi完成中宣部要求的游戏用户行为数据上报工作。</p>
+<h3>3.接入情况检测</h3>
+<p>为保证游戏方接入完整，易信游戏SDK将会在游戏方开发阶段进行接入情况检测。</p>
+<p>该检测在调用支付接口时触发，如果接入不完整，将会弹窗提示并中止支付。</p>
+<p>游戏方应按照提示完成接入，并在支付前上报角色、回到桌面再进入游戏以通过接口检测。</p>
+<h3>4.接口文档</h3>
+<h4>4.1 SDK初始化（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.YXSDK.init(Activity activity)
 <ul>
@@ -198,7 +214,7 @@ YXSDK.get().getInitMonitor().setInitCallback(<span class="hljs-keyword">new</spa
 <span class="hljs-comment">//step2.执行sdk初始化</span>
 YXSDK.get().init(activity);
 </code></pre>
-<h4>2.2 用户登录（必接）</h4>
+<h4>4.2 用户登录（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IAuthMonitor.login(Activity activity)
 <ul>
@@ -209,7 +225,7 @@ YXSDK.get().init(activity);
 </li>
 <li>描述：
 <ul>
-<li>用于游戏调用用户登录，返回游戏用户信息。每次应用新启动都需要执行</li>
+<li>调用登录，返回游戏用户信息(不包含实名信息，请游戏方通过易信服务端获取实名信息)。每次应用新启动都需要执行</li>
 <li>需要预先添加回调监听器</li>
 </ul>
 </li>
@@ -238,7 +254,7 @@ YXSDK.get().getAuthMonitor().setLoginCallback(<span class="hljs-keyword">new</sp
 });
 YXSDK.get().getAuthMonitor().login(activity);
 </code></pre>
-<h4>2.3 用户注销（必接）</h4>
+<h4>4.3 用户注销（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IAuthMonitor.logout(Activity activity)
 <ul>
@@ -273,7 +289,7 @@ YXSDK.get().getAuthMonitor().setLogoutCallback(<span class="hljs-keyword">new</s
 });
 YXSDK.get().getAuthMonitor().logout(activity);
 </code></pre>
-<h4>2.4 用户切换（必接）</h4>
+<h4>4.4 用户切换（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IAuthMonitor.switchAccount(Activity activity)
 <ul>
@@ -313,47 +329,7 @@ YXSDK.get().getAuthMonitor().setSwitchAccountCallback(<span class="hljs-keyword"
 });
 YXSDK.get().getAuthMonitor().switchAccount(activity);
 </code></pre>
-<h4>2.5 实名认证（非必接）</h4>
-<ul>
-<li>im.yixin.gamesdk.base.intef.IAuthMonitor.verify(Activity activity)
-<ul>
-<li>入参
-<ul>
-<li>activity | 类型Acitivty| <strong>必传</strong></li>
-</ul>
-</li>
-<li>描述：
-<ul>
-<li>游戏主动调用实名认证接口，成功则返回用户实名认证信息</li>
-<li>需要预先添加回调监听器</li>
-<li><strong>大部分情况已在登录阶段进行了强制实名要求，未实名判定为登录失败，一般无需主动调用</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>调用示例</p>
-</blockquote>
-<pre><code class="language-java">
-YXSDK.get().getAuthMonitor().setVerifyCallback(<span class="hljs-keyword">new</span> IAuthMonitor.VerifyCallback() {
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifySuccess</span><span class="hljs-params">(GameUserInfo info)</span> </span>{
-        <span class="hljs-comment">//返回实名认证用户信息</span>
-    }
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifyCancel</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">//用户取消实名认证回调</span>
-    }
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onVerifyFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//用户实名失败回调，code参阅 【章节3.错误码对照表】</span>
-    }
-});
-</code></pre>
-<h4>2.6 退出SDK（必接）</h4>
+<h4>4.5 退出SDK（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IInitMonitor.exit(Activity activity)
 <ul>
@@ -388,7 +364,7 @@ YXSDK.get().getAuthMonitor().setVerifyCallback(<span class="hljs-keyword">new</s
 
 YXSDK.get().getInitMonitor().exit(activity)
 </code></pre>
-<h4>2.7 保存游戏角色信息（必接）</h4>
+<h4>4.6 保存游戏角色信息（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IAuthMonitor.saveGameInfo(Activity activity, GameRoleInfo info, int type)
 <ul>
@@ -444,7 +420,7 @@ YXSDK.get().getInitMonitor().exit(activity)
 <span class="hljs-comment">//此接口不提供回调监听</span>
 YXSDK.get().getAuthMonitor().saveGameInfo(info, <span class="hljs-number">0</span>);
 </code></pre>
-<h4>2.8 支付（必接）</h4>
+<h4>4.7 支付（必接）</h4>
 <ul>
 <li>im.yixin.gamesdk.base.intef.IPayMonitor.pay(Activity activity, GamePaymentInfo payment)
 <ul>
@@ -500,7 +476,7 @@ YXSDK.get().getPayMonitor().setPayCallback(<span class="hljs-keyword">new</span>
 
 YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this</span>, payment);
 </code></pre>
-<h4>2.9 Activity生命周期回调（必接）</h4>
+<h4>4.8 Activity生命周期回调（必接）</h4>
 <ul>
 <li>对于游戏内的主Activity，需调用sdk监听器内的各回调方法</li>
 <li>生命周期监听器，可以通过<code>YXSDK.get().getLifecycleMonitor()</code>获取</li>
@@ -571,7 +547,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
     }
 }
 </code></pre>
-<h3>3.错误码对照表</h3>
+<h3>5.错误码对照表</h3>
 <table>
 <thead>
 <tr>
@@ -679,7 +655,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 </tbody>
 </table>
 <a id="define"/>
-<h3>4.对象类型定义</h3>
+<h3>6.对象类型定义</h3>
 <blockquote>
 <p>GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调</p>
 </blockquote>
@@ -706,21 +682,6 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 <td style="text-align:left">token</td>
 <td style="text-align:left">string</td>
 <td style="text-align:left">用户令牌</td>
-</tr>
-<tr>
-<td style="text-align:left">isVerified</td>
-<td style="text-align:left">bool</td>
-<td style="text-align:left">是否实名 true:已实名；false:未实名</td>
-</tr>
-<tr>
-<td style="text-align:left">age</td>
-<td style="text-align:left">int</td>
-<td style="text-align:left">年龄</td>
-</tr>
-<tr>
-<td style="text-align:left">birthday</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">生日</td>
 </tr>
 </tbody>
 </table>
@@ -964,7 +925,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 </tr>
 </tbody>
 </table>
-<h3>5.混淆规则</h3>
+<h3>7.混淆规则</h3>
 <blockquote>
 <p>游戏方需添加以下混淆规则</p>
 </blockquote>
