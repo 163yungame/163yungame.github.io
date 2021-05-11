@@ -26,7 +26,7 @@
 <font color=red>重大提醒：</font>
 - 客户端5.3.0之前版本下单流程由游戏服务端发起，客户端5.3.0版本及以上由客户端直接发起下单，服务器不再需要请求原下单接口，请各游戏渠道做到版本兼容。
 
-- 客户端5.3.2版本及以上实名认证请求新接口：http://game.yixin.im/sdk/user/center/info，请各游戏渠道做到版本兼容。
+- 客户端5.3.2版本及以上实名认证请求新接口：http://game.yixin.im/sdk/user/center/info， 请各游戏渠道做到版本兼容。
 ### 1.1 支付中各角色交互说明
 ![支付中各角色交互说明](https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg)
 
