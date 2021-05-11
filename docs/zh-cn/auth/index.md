@@ -56,7 +56,7 @@ GET
   "msg":"参数错误" 
 }
 ```
-5.3.2及以上的请求地址
+<font color=red>5.3.2及以上的请求地址</font>
 ```json
  http://game.yixin.im/sdk/user/center/info
 ``` 
