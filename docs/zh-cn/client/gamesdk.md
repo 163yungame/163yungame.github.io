@@ -137,6 +137,8 @@ public class XXGameSplashActivity extends YXSplashActivity {
 
 游戏方需要使用这个pi完成中宣部要求的游戏用户行为数据上报工作。
 
+注意：首次接入时游戏方需先在中宣部后台关联易信，然后联系易信商务同学(popo或邮箱联系：杨晖 yanghui@yixin.im）进行游戏备案码关联才能实名成功。
+
 ### 3.接入情况检测
 为保证游戏方接入完整，易信游戏SDK将会在游戏方开发阶段进行接入情况检测。
 
