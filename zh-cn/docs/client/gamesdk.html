@@ -43,6 +43,11 @@
 <td>2021.05.08</td>
 <td>5.3.2</td>
 </tr>
+<tr>
+<td>支持qq一键登录、游戏实名级别可控制</td>
+<td>2021.09.15</td>
+<td>5.4.0</td>
+</tr>
 </tbody>
 </table>
 <h3>1.项目准备及接入</h3>
@@ -159,6 +164,7 @@
     <span class="hljs-attr">android:excludeFromRecents</span>=<span class="hljs-string">"true"</span>
     <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
     <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>/&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">receiver</span>
     <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.AppRegister"</span>
     <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"im.yixin.sdk.permission.YIXIN_SDK_MESSAGE"</span>&gt;</span>
@@ -166,6 +172,24 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"</span>/&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- qq一键登录 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.gamesdk.activity.QQEntryActivity"</span>
+    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
+    <span class="hljs-attr">android:excludeFromRecents</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.DEFAULT"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.VIEW"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.BROWSABLE"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">data</span>
+            <span class="hljs-attr">android:host</span>=<span class="hljs-string">"ssl.ptlogin2.qq.com"</span>
+            <span class="hljs-attr">android:path</span>=<span class="hljs-string">"/jump"</span>
+            <span class="hljs-attr">android:scheme</span>=<span class="hljs-string">"https"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
 
 </code></pre>
 <p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的<code>xx.xx.xx.xx</code>替换为游戏的包名。</p>
@@ -209,7 +233,7 @@ YXSDK.get().getInitMonitor().setInitCallback(<span class="hljs-keyword">new</spa
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//初始化失败回调，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//初始化失败回调</span>
     }
 });
 <span class="hljs-comment">//step2.执行sdk初始化</span>
@@ -250,7 +274,7 @@ YXSDK.get().getAuthMonitor().setLoginCallback(<span class="hljs-keyword">new</sp
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLoginFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//用户登录失败回调，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//用户登录失败回调</span>
     }
 });
 YXSDK.get().getAuthMonitor().login(activity);
@@ -285,7 +309,7 @@ YXSDK.get().getAuthMonitor().setLogoutCallback(<span class="hljs-keyword">new</s
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLogoutFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//用户注销失败回调，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//用户注销失败回调</span>
     }
 });
 YXSDK.get().getAuthMonitor().logout(activity);
@@ -325,7 +349,7 @@ YXSDK.get().getAuthMonitor().setSwitchAccountCallback(<span class="hljs-keyword"
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSwitchFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//用户切换失败回调，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//用户切换失败回调</span>
     }
 });
 YXSDK.get().getAuthMonitor().switchAccount(activity);
@@ -359,7 +383,7 @@ YXSDK.get().getAuthMonitor().switchAccount(activity);
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onExitFailure</span><span class="hljs-params">(String code, String message)</span> </span>{
-        <span class="hljs-comment">//退出sdk失败回调，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//退出sdk失败回调</span>
     }
 });
 
@@ -372,7 +396,7 @@ YXSDK.get().getInitMonitor().exit(activity)
 <li>入参
 <ul>
 <li>activity | 类型Acitivty| <strong>必传</strong></li>
-<li>info | 类型GameRoleInfo | <strong>必传</strong> | 参考 <a href="#define">章节4. 对象类型定义</a></li>
+<li>info | 类型GameRoleInfo | <strong>必传</strong> | 参考 <a href="#define">章节5. 对象类型定义</a></li>
 <li>type | 类型int | 保存时机 | <strong>必传</strong>
 <ul>
 <li>0: 创建游戏角色</li>
@@ -428,7 +452,7 @@ YXSDK.get().getAuthMonitor().saveGameInfo(info, <span class="hljs-number">0</spa
 <li>入参
 <ul>
 <li>activity | 类型Acitivty| <strong>必传</strong></li>
-<li>payment | 类型GamePaymentInfo | <strong>必传</strong> | 参考 <a href="#define">章节4. 对象类型定义</a></li>
+<li>payment | 类型GamePaymentInfo | <strong>必传</strong> | 参考 <a href="#define">章节5. 对象类型定义</a></li>
 </ul>
 </li>
 <li>描述：
@@ -471,7 +495,7 @@ YXSDK.get().getPayMonitor().setPayCallback(<span class="hljs-keyword">new</span>
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPayFailure</span><span class="hljs-params">(String cpOrderId, String code, String message)</span> </span>{
-        <span class="hljs-comment">//支付失败，返回游戏初始cpOrderId，code参阅 【章节3.错误码对照表】</span>
+        <span class="hljs-comment">//支付失败，返回游戏初始cpOrderId</span>
     }
 });
 
@@ -548,115 +572,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
     }
 }
 </code></pre>
-<h3>5.错误码对照表</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">错误码</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">400</td>
-<td style="text-align:left">客户端请求参数错误</td>
-</tr>
-<tr>
-<td style="text-align:left">404</td>
-<td style="text-align:left">接口not found</td>
-</tr>
-<tr>
-<td style="text-align:left">500</td>
-<td style="text-align:left">服务器异常</td>
-</tr>
-<tr>
-<td style="text-align:left">-1</td>
-<td style="text-align:left">未知异常</td>
-</tr>
-<tr>
-<td style="text-align:left">-2</td>
-<td style="text-align:left">网络未连接</td>
-</tr>
-<tr>
-<td style="text-align:left">-3</td>
-<td style="text-align:left">数据解析异常</td>
-</tr>
-<tr>
-<td style="text-align:left">-400</td>
-<td style="text-align:left">sdk未初始化</td>
-</tr>
-<tr>
-<td style="text-align:left">-401</td>
-<td style="text-align:left">sdk初始化失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-402</td>
-<td style="text-align:left">用户退出游戏失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-403</td>
-<td style="text-align:left">用户取消退出</td>
-</tr>
-<tr>
-<td style="text-align:left">-404</td>
-<td style="text-align:left">用户登录失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-405</td>
-<td style="text-align:left">用户取消登录</td>
-</tr>
-<tr>
-<td style="text-align:left">-406</td>
-<td style="text-align:left">用户注销失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-407</td>
-<td style="text-align:left">用户切换失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-408</td>
-<td style="text-align:left">用户实名失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-409</td>
-<td style="text-align:left">用户取消实名认证</td>
-</tr>
-<tr>
-<td style="text-align:left">-410</td>
-<td style="text-align:left">登录失败，保存用户数据到服务器失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-411</td>
-<td style="text-align:left">登录失败，用户未实名认证</td>
-</tr>
-<tr>
-<td style="text-align:left">-412</td>
-<td style="text-align:left">登录失败，用户取消实名认证</td>
-</tr>
-<tr>
-<td style="text-align:left">-413</td>
-<td style="text-align:left">登录失败，停新增</td>
-</tr>
-<tr>
-<td style="text-align:left">-414</td>
-<td style="text-align:left">支付参数非法</td>
-</tr>
-<tr>
-<td style="text-align:left">-415</td>
-<td style="text-align:left">支付失败</td>
-</tr>
-<tr>
-<td style="text-align:left">-416</td>
-<td style="text-align:left">支付失败，停支付</td>
-</tr>
-<tr>
-<td style="text-align:left">-417</td>
-<td style="text-align:left">用户取消支付</td>
-</tr>
-</tbody>
-</table>
-<a id="define"/>
-<h3>6.对象类型定义</h3>
+<h3>5.对象类型定义</h3>
 <blockquote>
 <p>GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调</p>
 </blockquote>
@@ -926,7 +842,7 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 </tr>
 </tbody>
 </table>
-<h3>7.混淆规则</h3>
+<h3>6.混淆规则</h3>
 <blockquote>
 <p>游戏方需添加以下混淆规则</p>
 </blockquote>
