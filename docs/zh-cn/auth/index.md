@@ -5,57 +5,6 @@
 备注：sdk5.3.2版本及以上接入了中宣部的实名认证，实名信息的查询接口发生了变更，返回参数中新增了中宣部的pi值
 ## 实名认证接入文档
 
-#### 请求地址
-```json
-http://game.yixin.im/sdk/user/info
-``` 
-
-#### 请求方式
-GET
-#### 输入参数说明
-| 参数            | 描述                                             | 是否必须           | 类型           |                                  
-| -------------- | ------------------------------------------------ | --------------    |-------------- |
-| sdkUid         | 渠道账号唯一标识                                   |   是                  |String      |
-| timestamp      | 当前时间戳（毫秒为单位） 5分钟有效                   |   是                  |Long        |
-| nonce          | 请求唯一值 使用uuid                                |   是                  |String      |
-| signature      | 参数摘要                                          |   是                   |String     |
-| gameId         | 游戏id号                                          |   是                   |String     |
-
-#### 返回数据
-
-| 返回值            | 描述                                             |                                      
-| -------------- | ------------------------------------------------ |
-| code         | 返回状态 200 请求成功                                  | 
-| msg      | 返回状态描述                  |  
-| result.id_type          | 证件类型 0：身份证 1：中国护照2：海外护照3：其他                               |   
-| result.verify_status      | 验证结果 1-未验证 2-验证通过                                          |   
-| result .id         | 证件号码                                          |   
-| result.age         | 年龄                                          |   
-| result.oversea        | 是否海外用户                                          |   
-| result.birthday        | 出生日期                                          |   
-
-#### 返回示例
-```json
-{    
-  "code": 200,
-  "msg": "请求成功",
-  "result": {
-     "id_type":0,
-     "verify_status":1,
-     "id":"30230103021",
-     "age":0,
-     "oversea":false,
-     "birthday":"20010102",
-  }
-}
-```
-#### 异常示例
-```json
-{    
-  "code":401,
-  "msg":"参数错误" 
-}
-```
 <font color=red>5.3.2及以上的请求地址</font>
 ```json
  http://game.yixin.im/sdk/user/center/info
