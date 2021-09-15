@@ -7,6 +7,7 @@
 接口大改、易信订单改为YXSDK发起生成|2020.12.30|5.3.0
 初始化回调切到主线程|2021.03.04|5.3.1
 中宣部实名、优化用户信息字段、接入情况检测、多处UI适配|2021.05.08|5.3.2
+支持qq一键登录、游戏实名级别可控制|2021.09.15|5.4.0
 ### 1.项目准备及接入
 
 #### 1.1 游戏配置ID申请
@@ -111,6 +112,7 @@ public class XXGameSplashActivity extends YXSplashActivity {
     android:excludeFromRecents="true"
     android:exported="true"
     android:launchMode="singleTask"/>
+
 <receiver
     android:name="xx.xx.xx.xx.yxapi.AppRegister"
     android:permission="im.yixin.sdk.permission.YIXIN_SDK_MESSAGE">
@@ -118,6 +120,24 @@ public class XXGameSplashActivity extends YXSplashActivity {
         <action android:name="im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"/>
     </intent-filter>
 </receiver>
+
+<!-- qq一键登录 -->
+<activity
+    android:name="im.yixin.gamesdk.activity.QQEntryActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:excludeFromRecents="true"
+    android:exported="true"
+    android:launchMode="singleTask">
+    <intent-filter>
+        <category android:name="android.intent.category.DEFAULT" />
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data
+            android:host="ssl.ptlogin2.qq.com"
+            android:path="/jump"
+            android:scheme="https" />
+    </intent-filter>
+</activity>
 
 ```
 `YXEntryActivity` 和 `AppRegister` 中的`xx.xx.xx.xx`替换为游戏的包名。
@@ -164,7 +184,7 @@ YXSDK.get().getInitMonitor().setInitCallback(new IInitMonitor.InitCallback() {
 
     @Override
     public void onInitFailure(String code, String message) {
-        //初始化失败回调，code参阅 【章节3.错误码对照表】
+        //初始化失败回调
     }
 });
 //step2.执行sdk初始化
@@ -194,7 +214,7 @@ YXSDK.get().getAuthMonitor().setLoginCallback(new IAuthMonitor.LoginCallback() {
 
     @Override
     public void onLoginFailure(String code, String message) {
-        //用户登录失败回调，code参阅 【章节3.错误码对照表】
+        //用户登录失败回调
     }
 });
 YXSDK.get().getAuthMonitor().login(activity);
@@ -218,7 +238,7 @@ YXSDK.get().getAuthMonitor().setLogoutCallback(new IAuthMonitor.LogoutCallback()
 
     @Override
     public void onLogoutFailure(String code, String message) {
-        //用户注销失败回调，code参阅 【章节3.错误码对照表】
+        //用户注销失败回调
     }
 });
 YXSDK.get().getAuthMonitor().logout(activity);
@@ -247,7 +267,7 @@ YXSDK.get().getAuthMonitor().setSwitchAccountCallback(new IAuthMonitor.SwitchAcc
 
     @Override
     public void onSwitchFailure(String code, String message) {
-        //用户切换失败回调，code参阅 【章节3.错误码对照表】
+        //用户切换失败回调
     }
 });
 YXSDK.get().getAuthMonitor().switchAccount(activity);
@@ -270,7 +290,7 @@ YXSDK.get().getInitMonitor().setSDKExitCallback(new IInitMonitor.SDKExitCallback
 
     @Override
     public void onExitFailure(String code, String message) {
-        //退出sdk失败回调，code参阅 【章节3.错误码对照表】
+        //退出sdk失败回调
     }
 });
 
@@ -281,7 +301,7 @@ YXSDK.get().getInitMonitor().exit(activity)
 * im.yixin.gamesdk.base.intef.IAuthMonitor.saveGameInfo(Activity activity, GameRoleInfo info, int type)
     * 入参
         * activity | 类型Acitivty| **必传**
-        * info | 类型GameRoleInfo | **必传** | 参考 <a href="#define">章节4. 对象类型定义</a>
+        * info | 类型GameRoleInfo | **必传** | 参考 <a href="#define">章节5. 对象类型定义</a>
         * type | 类型int | 保存时机 | **必传**
             * 0: 创建游戏角色
             * 1: 游戏角色登录
@@ -323,7 +343,7 @@ YXSDK.get().getAuthMonitor().saveGameInfo(info, 0);
 * im.yixin.gamesdk.base.intef.IPayMonitor.pay(Activity activity, GamePaymentInfo payment)
     * 入参
         * activity | 类型Acitivty| **必传**
-        * payment | 类型GamePaymentInfo | **必传** | 参考 <a href="#define">章节4. 对象类型定义</a>
+        * payment | 类型GamePaymentInfo | **必传** | 参考 <a href="#define">章节5. 对象类型定义</a>
     * 描述：
         * 用于游戏内进行支付调用
         * 需要预先添加回调监听器
@@ -357,7 +377,7 @@ YXSDK.get().getPayMonitor().setPayCallback(new IPayMonitor.PayCallback() {
 
     @Override
     public void onPayFailure(String cpOrderId, String code, String message) {
-        //支付失败，返回游戏初始cpOrderId，code参阅 【章节3.错误码对照表】
+        //支付失败，返回游戏初始cpOrderId
     }
 });
 
@@ -433,38 +453,7 @@ public class GameBaseActivity extends Activity {
 }
 ```
 
-### 5.错误码对照表
-
-| 错误码 | 描述 |
-| :-- | :-- |
-| 400 | 客户端请求参数错误 |
-| 404 | 接口not found |
-| 500 | 服务器异常 |
-| -1 | 未知异常 |
-| -2 | 网络未连接 |
-| -3 | 数据解析异常 |
-| -400 |  sdk未初始化 |
-| -401 |  sdk初始化失败 |
-| -402 | 用户退出游戏失败 |
-| -403 | 用户取消退出 |
-| -404 | 用户登录失败 |
-| -405 | 用户取消登录 |
-| -406 | 用户注销失败 |
-| -407 | 用户切换失败 |
-| -408 | 用户实名失败 |
-| -409 | 用户取消实名认证 |
-| -410 | 登录失败，保存用户数据到服务器失败 |
-| -411 | 登录失败，用户未实名认证 |
-| -412 | 登录失败，用户取消实名认证 |
-| -413 | 登录失败，停新增 |
-| -414 | 支付参数非法 |
-| -415 | 支付失败 |
-| -416 | 支付失败，停支付 |
-| -417 | 用户取消支付 |
-
-<a id="define"/>
-
-### 6.对象类型定义
+### 5.对象类型定义
 
 > GameUserInfo: 游戏用户信息|登录、切换用户成功、实名认证成功之后回调
 
@@ -521,7 +510,7 @@ public class GameBaseActivity extends Activity {
 | friendList | string | 好友关系列表 | No |
 
 
-### 7.混淆规则
+### 6.混淆规则
 
 > 游戏方需添加以下混淆规则
 ```
