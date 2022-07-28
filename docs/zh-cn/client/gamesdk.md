@@ -8,6 +8,8 @@
 初始化回调切到主线程|2021.03.04|5.3.1
 中宣部实名、优化用户信息字段、接入情况检测、多处UI适配|2021.05.08|5.3.2
 支持qq一键登录、游戏实名级别可控制|2021.09.15|5.4.0
+修复部分机型上的闪退|2022.07.29|5.5.0
+
 ### 1.项目准备及接入
 
 #### 1.1 游戏配置ID申请
@@ -22,12 +24,7 @@
     只有第一次对接的游戏需要备案，备案过的游戏无需再备案。
 
 #### 1.3 依赖库及资源文件导入
-1. 将`gamesdk-x.x.x.jar`引入项目
-2. 若游戏打包方式无法将`gamesdk-x.x.x.jar`中的`assets/ncggame`文件夹下内容打包到apk，请手动将`ncggame`复制到项目的`assets`文件夹下
-3. 在模块级`build.gradle`文件中添加依赖：
-```
-    implementation 'com.google.code.gson:gson:2.8.0'
-```
+1. 将`yx_game_x.x.x.zip`中的所有`aar`引入项目
 
 #### 1.4 Application配置（必接）
 * 游戏的`Application`必须继承自`im.yixin.gamesdk.base.YXApplication`。
@@ -100,11 +97,6 @@ public class XXGameSplashActivity extends YXSplashActivity {
 ```
 4. 其他配置
 ```xml
-<activity
-    android:name="im.yixin.gamesdk.activity.YXComponentActivity"
-    android:configChanges="keyboardHidden|orientation|screenSize"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar">
-</activity>
 
 <activity
     android:name="xx.xx.xx.xx.yxapi.YXEntryActivity"
@@ -121,28 +113,9 @@ public class XXGameSplashActivity extends YXSplashActivity {
     </intent-filter>
 </receiver>
 
-<!-- qq一键登录 -->
-<activity
-    android:name="im.yixin.gamesdk.activity.QQEntryActivity"
-    android:configChanges="keyboardHidden|orientation|screenSize"
-    android:excludeFromRecents="true"
-    android:exported="true"
-    android:launchMode="singleTask">
-    <intent-filter>
-        <category android:name="android.intent.category.DEFAULT" />
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data
-            android:host="ssl.ptlogin2.qq.com"
-            android:path="/jump"
-            android:scheme="https" />
-    </intent-filter>
-</activity>
-
 ```
 `YXEntryActivity` 和 `AppRegister` 中的`xx.xx.xx.xx`替换为游戏的包名。
-
-`YXEntryActivity` 和 `AppRegister` 这两个文件，请直接复制Demo中的代码
+复制`yx_game_x.x.x.zip`中的`YXEntryActivity` 和 `AppRegister` 这两个文件到路径`[包名]/yxapi`
 
 #### 1.7 targetSdkVersion
 `targetSdkVersion = 26`
@@ -522,3 +495,8 @@ public class GameBaseActivity extends Activity {
 -dontwarn okio.**
 -keep class okhttp3.**{ *;}
 -keep class com.google.gson.**{*;}
+-keep class com.alipay.** {*;}
+-keep class com.ta.** {*;}
+-keep class com.ut.** {*;}
+-keep class com.netease.** {*;}
+-keep class ray.toolkit.pocketx.** {*;}
