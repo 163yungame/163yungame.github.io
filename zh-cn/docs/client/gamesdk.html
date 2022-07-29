@@ -48,6 +48,11 @@
 <td>2021.09.15</td>
 <td>5.4.0</td>
 </tr>
+<tr>
+<td>修复部分机型上的闪退</td>
+<td>2022.07.29</td>
+<td>5.5.0</td>
+</tr>
 </tbody>
 </table>
 <h3>1.项目准备及接入</h3>
@@ -66,12 +71,8 @@
 </ul>
 <h4>1.3 依赖库及资源文件导入</h4>
 <ol>
-<li>将<code>gamesdk-x.x.x.jar</code>引入项目</li>
-<li>若游戏打包方式无法将<code>gamesdk-x.x.x.jar</code>中的<code>assets/ncggame</code>文件夹下内容打包到apk，请手动将<code>ncggame</code>复制到项目的<code>assets</code>文件夹下</li>
-<li>在模块级<code>build.gradle</code>文件中添加依赖：</li>
+<li>将<code>yx_game_x.x.x.zip</code>中的所有<code>aar</code>引入项目</li>
 </ol>
-<pre><code>    implementation 'com.google.code.gson:gson:2.8.0'
-</code></pre>
 <h4>1.4 Application配置（必接）</h4>
 <ul>
 <li>游戏的<code>Application</code>必须继承自<code>im.yixin.gamesdk.base.YXApplication</code>。</li>
@@ -152,12 +153,7 @@
 <ol start="4">
 <li>其他配置</li>
 </ol>
-<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.gamesdk.activity.YXComponentActivity"</span>
-    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
-    <span class="hljs-attr">android:theme</span>=<span class="hljs-string">"@android:style/Theme.Translucent.NoTitleBar"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
-
+<pre><code class="language-xml">
 <span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
     <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.YXEntryActivity"</span>
     <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
@@ -173,27 +169,9 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
 
-<span class="hljs-comment">&lt;!-- qq一键登录 --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.gamesdk.activity.QQEntryActivity"</span>
-    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
-    <span class="hljs-attr">android:excludeFromRecents</span>=<span class="hljs-string">"true"</span>
-    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
-    <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.DEFAULT"</span> /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.VIEW"</span> /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.BROWSABLE"</span> /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">data</span>
-            <span class="hljs-attr">android:host</span>=<span class="hljs-string">"ssl.ptlogin2.qq.com"</span>
-            <span class="hljs-attr">android:path</span>=<span class="hljs-string">"/jump"</span>
-            <span class="hljs-attr">android:scheme</span>=<span class="hljs-string">"https"</span> /&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
-
 </code></pre>
-<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的<code>xx.xx.xx.xx</code>替换为游戏的包名。</p>
-<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 这两个文件，请直接复制Demo中的代码</p>
+<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的<code>xx.xx.xx.xx</code>替换为游戏的包名。
+复制<code>yx_game_x.x.x.zip</code>中的<code>YXEntryActivity</code> 和 <code>AppRegister</code> 这两个文件到路径<code>[包名]/yxapi</code></p>
 <h4>1.7 targetSdkVersion</h4>
 <p><code>targetSdkVersion = 26</code></p>
 <h4>1.8 签名</h4>
@@ -854,6 +832,11 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 -dontwarn okio.**
 -keep class okhttp3.**{ *;}
 -keep class com.google.gson.**{*;}
+-keep class com.alipay.** {*;}
+-keep class com.ta.** {*;}
+-keep class com.ut.** {*;}
+-keep class com.netease.** {*;}
+-keep class ray.toolkit.pocketx.** {*;}
 </code></pre>
 </div></section></div></div>
 	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
