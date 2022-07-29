@@ -20,7 +20,7 @@
 	);
 	$order['sign'] = getOrderSign($order, $privatekey);
 
-	$url = "https://open.game.163.com/pay/games/{$gameid}/add/trades";
+	$url = "https://game.yixin.im/pay/games/{$gameid}/add/trades";
 	$result = httpCurl($url ,$order);   // 生成订单接口
 	$_rst = getVerifySign($result, $publicKey); //验证返回签名数据
 	if($_rst) {

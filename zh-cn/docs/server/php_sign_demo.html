@@ -33,7 +33,7 @@
 	);
 	$order[<span class="hljs-string">'sign'</span>] = getOrderSign($order, $privatekey);
 
-	$url = <span class="hljs-string">"https://open.game.163.com/pay/games/{$gameid}/add/trades"</span>;
+	$url = <span class="hljs-string">"https://game.yixin.im/pay/games/{$gameid}/add/trades"</span>;
 	$result = httpCurl($url ,$order);   <span class="hljs-comment">// 生成订单接口</span>
 	$_rst = getVerifySign($result, $publicKey); <span class="hljs-comment">//验证返回签名数据</span>
 	<span class="hljs-keyword">if</span>($_rst) {

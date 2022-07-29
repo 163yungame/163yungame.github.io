@@ -363,10 +363,10 @@ https://xxxxxxx/api/v1/oauth2/user/info?appid=APPID&timestamp=TIMESTAMP&sign=SIG
 ```
 
 ### 客户端接入Webview
-* 接入链接:http://open.game.163.com/dp-sdk/webview
+* 接入链接:http://game.yixin.im/dp-sdk/webview
 * 提供方:GameCenterServer
 * 调用者:App
-* 注意事项:如App是登陆状态，任何进入游戏中心的入口，包括此入口和以后可能跳转的其他入口，都需要在链接上拼接`code`，如`http://open.game.163.com/dp-sdk/webview?code=deiudei928398`
+* 注意事项:如App是登陆状态，任何进入游戏中心的入口，包括此入口和以后可能跳转的其他入口，都需要在链接上拼接`code`，如`http://game.yixin.im/dp-sdk/webview?code=deiudei928398`
 
 ### 附录
 #### 生成和验证签名
