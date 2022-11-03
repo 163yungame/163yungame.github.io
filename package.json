@@ -28,7 +28,7 @@
     "eslint-plugin-import": "*",
     "eslint-plugin-react": "*",
     "extract-text-webpack-plugin": "^2.1.2",
-    "gulp": "3.9.1",
+    "gulp": "4.0.2",
     "gulp-util": "2.2.20",
     "json-loader": "*",
     "jsrsasign": "^8.0.12",
