@@ -31,6 +31,7 @@ GET
 | result .id         | 证件号码                                          |   
 | result.age         | 年龄                                          |   
 | result.birthday        | 出生日期                                          |   
+| result.realName        | 姓名                                          |   
 | result.pi | 中宣部pi值  |
 
 #### 返回示例
@@ -42,6 +43,7 @@ GET
      "verify_status":2,
      "id":"30230103021",
      "age":19,
+     "realName":"张三",
      "birthday":"20010102",
      "pi":"1he722ny7qg3rx1y5r7wakpwl6m9uz43z1a8ba"
   }
