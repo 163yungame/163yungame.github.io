@@ -9,6 +9,8 @@
 中宣部实名、优化用户信息字段、接入情况检测、多处UI适配|2021.05.08|5.3.2
 支持qq一键登录、游戏实名级别可控制|2021.09.15|5.4.0
 修复部分机型上的闪退|2022.07.29|5.5.0
+适配Android11|2023.11.29|5.6.0
+
 
 ### 1.项目准备及接入
 
@@ -83,45 +85,17 @@ public class XXGameSplashActivity extends YXSplashActivity {
 ```
 3. 权限配置
 ```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<uses-permission android:name="android.permission.GET_TASKS"/>
-<uses-permission android:name="android.permission.CALL_PHONE"/>
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 ```
-4. 其他配置
-```xml
-
-<activity
-    android:name="xx.xx.xx.xx.yxapi.YXEntryActivity"
-    android:configChanges="keyboardHidden|orientation|screenSize"
-    android:excludeFromRecents="true"
-    android:exported="true"
-    android:launchMode="singleTask"/>
-
-<receiver
-    android:name="xx.xx.xx.xx.yxapi.AppRegister"
-    android:permission="im.yixin.sdk.permission.YIXIN_SDK_MESSAGE">
-    <intent-filter>
-        <action android:name="im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"/>
-    </intent-filter>
-</receiver>
-
-```
-`YXEntryActivity` 和 `AppRegister` 中的`xx.xx.xx.xx`替换为游戏的包名。
-复制`yx_game_x.x.x.zip`中的`YXEntryActivity` 和 `AppRegister` 这两个文件到路径`[包名]/yxapi`
 
 #### 1.7 targetSdkVersion
-`targetSdkVersion = 26`
+`targetSdkVersion = 30`
 
 #### 1.8 签名
-只能使用v1签名，不能用v2签名。
+只能使用v2签名，不能用v1签名。
 
 ### 2.中宣部实名
 易信游戏SDK提供实名认证功能，游戏方无需进行实名认证。
@@ -500,3 +474,5 @@ public class GameBaseActivity extends Activity {
 -keep class com.ut.** {*;}
 -keep class com.netease.** {*;}
 -keep class ray.toolkit.pocketx.** {*;}
+-keep class com.beust.** {*;}
+-keep class com.meituan.** {*;}

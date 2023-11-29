@@ -3,7 +3,7 @@
 ## 资源下载
 
 #### AndroidSDK下载
-[GameSDK-5.5.0](https://nos-yx.netease.com/yxgame/yx_game_5.5.0.zip)
+[GameSDK-5.6.0](https://nos-yx.netease.com/yxgame/yx_game_5.6.0.zip)
 
 ### 签名
 #### APK签名获取工具
