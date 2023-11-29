@@ -53,6 +53,11 @@
 <td>2022.07.29</td>
 <td>5.5.0</td>
 </tr>
+<tr>
+<td>适配Android11</td>
+<td>2023.11.29</td>
+<td>5.6.0</td>
+</tr>
 </tbody>
 </table>
 <h3>1.项目准备及接入</h3>
@@ -138,44 +143,15 @@
 <ol start="3">
 <li>权限配置</li>
 </ol>
-<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.READ_PHONE_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_NETWORK_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CHANGE_NETWORK_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.READ_PHONE_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.GET_TASKS"</span>/&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CALL_PHONE"</span>/&gt;</span>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.CHANGE_NETWORK_STATE"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span>
 </code></pre>
-<ol start="4">
-<li>其他配置</li>
-</ol>
-<pre><code class="language-xml">
-<span class="hljs-tag">&lt;<span class="hljs-name">activity</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.YXEntryActivity"</span>
-    <span class="hljs-attr">android:configChanges</span>=<span class="hljs-string">"keyboardHidden|orientation|screenSize"</span>
-    <span class="hljs-attr">android:excludeFromRecents</span>=<span class="hljs-string">"true"</span>
-    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>
-    <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">"singleTask"</span>/&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">receiver</span>
-    <span class="hljs-attr">android:name</span>=<span class="hljs-string">"xx.xx.xx.xx.yxapi.AppRegister"</span>
-    <span class="hljs-attr">android:permission</span>=<span class="hljs-string">"im.yixin.sdk.permission.YIXIN_SDK_MESSAGE"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"im.yixin.sdk.api.Intent.ACTION_REFRESH_YXAPP"</span>/&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
-
-</code></pre>
-<p><code>YXEntryActivity</code> 和 <code>AppRegister</code> 中的<code>xx.xx.xx.xx</code>替换为游戏的包名。
-复制<code>yx_game_x.x.x.zip</code>中的<code>YXEntryActivity</code> 和 <code>AppRegister</code> 这两个文件到路径<code>[包名]/yxapi</code></p>
 <h4>1.7 targetSdkVersion</h4>
-<p><code>targetSdkVersion = 26</code></p>
+<p><code>targetSdkVersion = 30</code></p>
 <h4>1.8 签名</h4>
-<p>只能使用v1签名，不能用v2签名。</p>
+<p>只能使用v2签名，不能用v1签名。</p>
 <h3>2.中宣部实名</h3>
 <p>易信游戏SDK提供实名认证功能，游戏方无需进行实名认证。</p>
 <p>该功能采用中宣部提供的服务，请游戏方通过易信服务端获取中宣部返回的pi等实名信息。</p>
@@ -837,7 +813,8 @@ YXSDK.get().getPayMonitor().pay(DemoPayActivity.<span class="hljs-keyword">this<
 -keep class com.ut.** {*;}
 -keep class com.netease.** {*;}
 -keep class ray.toolkit.pocketx.** {*;}
-</code></pre>
+-keep class com.beust.** {*;}
+-keep class com.meituan.** {*;}</code></pre>
 </div></section></div></div>
 	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
 	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
