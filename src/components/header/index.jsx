@@ -37,7 +37,7 @@ const propTypes = {
 const defaultProps = {
   type: 'primary',
   language: 'zh-cn',
-  logo: 'http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png',
+  logo: 'https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png',
   onLanguageChange: noop,
 };
 
