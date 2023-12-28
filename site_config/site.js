@@ -53,6 +53,6 @@ export default {
         },
       ],
     },
-    copyright: 'Copyright © 2019 易信游戏',
+    copyright: 'Copyright © 2019 游戏SDK',
   },
 };

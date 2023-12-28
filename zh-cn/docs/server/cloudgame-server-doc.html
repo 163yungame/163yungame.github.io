@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="/build/documentation.css" />
 </head>
 <body>
-	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="http://cloudgame-res.127.net/homepage/55681a7dd72dda6286a8a17f78759fc4.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>云游戏服务端接入文档</h1>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>云游戏服务端接入文档</h1>
 <h2>0.版本变更记录</h2>
 <table>
 <thead>
@@ -129,7 +129,7 @@
 <p><img src="https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg" alt="支付中各角色交互说明"></p>
 <p><strong>参与支付流程交互的角色有：</strong></p>
 <ul>
-<li><strong>游戏APP（以下也称第三方App）</strong>：需要集成易信游戏SDK
+<li><strong>游戏APP（以下也称第三方App）</strong>：需要集成游戏SDK
 <ul>
 <li>调用游戏Server接口生成订单</li>
 <li>调用SDK接口进行支付</li>
@@ -138,21 +138,21 @@
 <li><strong>游戏Server（以下也称第三方服务器）</strong>：
 <ul>
 <li>负责生成订单，并将订单信息持久化到第三方服务器</li>
-<li>负责接收易信游戏Server支付回调，处理发货逻辑</li>
+<li>负责接收我方Server支付回调，处理发货逻辑</li>
 </ul>
 </li>
-<li><strong>易信游戏Server（以下也称PayServer）</strong>
+<li><strong>我方Server（以下也称PayServer）</strong>
 <ul>
 <li>根据游戏Server订单，生成订单信息（Trade信息），返回给游戏App</li>
 <li>接收支付工具Server（如支付宝、微信等）的回调，并回调游戏Server接口</li>
 </ul>
 </li>
 </ul>
-<p>从上面的描述中，第三方游戏接入易信游戏仅需要关心以下部分流程:</p>
+<p>从上面的描述中，第三方游戏仅需要关心以下部分流程:</p>
 <ol>
 <li>游戏App向游戏Server发起生成订单</li>
-<li>游戏App调用易信游戏SDK接口发起支付</li>
-<li>游戏Server接收易信游戏Server异步支付成功回调</li>
+<li>游戏App调用游戏SDK接口发起支付</li>
+<li>游戏Server接收我方Server异步支付成功回调</li>
 </ol>
 <h3>1.2 完整交易流程</h3>
 <p><img src="https://nosdn-yx.127.net/yxgame/9f90aedb103cdde8459dcd908662b138.jpg" alt=""></p>
@@ -180,7 +180,7 @@
 <pre><code class="language-sql"><span class="hljs-keyword">update</span> Trade <span class="hljs-keyword">set</span> PayState=Payed <span class="hljs-keyword">where</span> PayState=UnPay <span class="hljs-keyword">and</span> <span class="hljs-keyword">Id</span>=?;
 </code></pre>
 <h4>2.1.3 两个公钥，一个私钥<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>很重要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></h4>
-<p>易信游戏需要两个公钥一个私钥。请<code>谨记</code>括号里面的名字。</p>
+<p>我方需要两个公钥一个私钥。请<code>谨记</code>括号里面的名字。</p>
 <ol>
 <li>游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">或<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)
 <img src="http://nosdn-yx.127.net/yxgame/0be8e326369a4f64a44b03c193faf243.jpg" alt="游戏方接入方公私钥获取"></li>
