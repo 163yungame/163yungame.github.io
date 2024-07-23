@@ -1,3 +1,10 @@
+<!--
+ * @Author: huangyang@yixin.im
+ * @Date: 2020-03-09 14:27:12
+ * @LastEditors: huangyang@yixin.im
+ * @LastEditTime: 2024-07-23 11:02:25
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +15,11 @@
 	<meta name="description" content="server" />
 	<!-- 网页标签标题 -->
 	<title>server</title>
-  <link rel="shortcut icon" href="http://cloudgame-res.127.net/game/resource/images/cloudGame/favicon.ico"/>
+  	<link rel="shortcut icon" href="https://res.yixinyouxi.cn/yxgame/favicon.ico"/>
 	<link rel="stylesheet" href="/build/blogDetail.css" />
 </head>
 <body>
-	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h1>云游戏渠道应用接入文档</h1>
+	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="https://res.yixinyouxi.cn/yxgame/8a49e8068bc75bbc018ca906d3420012"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h1>行者之地渠道应用接入文档</h1>
 <h2>文档版本更新记录</h2>
 <table>
 <thead>
@@ -50,26 +57,26 @@
 </table>
 <h2>渠道应用授权登陆流程及接入注意事项</h2>
 <h3>下载</h3>
-<p><a href="http://nosdn-yx.127.net/yxgame/8a49e813671570e601671588cd5f0002.zip">Demo</a></p>
+<p><a href="http://res.yixinyouxi.cn/yxgame/8a49e813671570e601671588cd5f0002.zip">Demo</a></p>
 <h3>授权流程图</h3>
-<p><img src="http://nosdn-yx.127.net/yxgame/417bf23c05f64116b0ed079e2a616ddc.png" alt="授权流程图"></p>
+<p><img src="http://res.yixinyouxi.cn/yxgame/417bf23c05f64116b0ed079e2a616ddc.png" alt="授权流程图"></p>
 <h3>角色说明</h3>
 <ul>
 <li>
-<p><code>GAME</code>:接入云游戏的游戏方(例如第五人格)</p>
+<p><code>GAME</code>:接入行者之地的游戏方(例如第五人格)</p>
 </li>
 <li>
 <p><code>WebView</code>: 接入渠道方的游戏中心Webview</p>
 <p><code>GAME</code>与<code>Webview</code>都属于游戏中心的子应用</p>
 </li>
 <li>
-<p><code>App</code>:接入云游戏的渠道方的App</p>
+<p><code>App</code>:接入行者之地的渠道方的App</p>
 </li>
 <li>
-<p><code>AppServer</code>:接入云游戏的渠道方的Server</p>
+<p><code>AppServer</code>:接入行者之地的渠道方的Server</p>
 </li>
 <li>
-<p><code>GameCenterServer</code>:云游戏的服务端</p>
+<p><code>GameCenterServer</code>:行者之地的服务端</p>
 </li>
 </ul>
 <h3>oauth流程中的术语说明</h3>
@@ -86,8 +93,8 @@
 <ol>
 <li>接入并开启渠道授权后，需要第一时间联系运营在后台进行配置以下内容
 <ul>
-<li><code>oauthAppId</code>和<code>oauthAppSecret</code>:渠道方分配给云游戏进行Oauth接入分配的<code>appId</code>和<code>secret</code>, 后续所有给云游戏分配的<code>clientId</code>都需要在这个<code>appId</code>的维度下，即同一用户使用同一个<code>appId</code>下不同的<code>clientId</code>授权，获取的<code>openId</code>是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的</li>
-<li><code>webClientId</code>和<code>webClientSecret</code>:渠道方在上方<code>oauthAppId</code>下给云游戏中心webview分配的<code>clientId</code>，在渠道的App内也会用到，渠道App进入游戏中心的时候需要获取code并作为参数附到链接后，后文会提到。</li>
+<li><code>oauthAppId</code>和<code>oauthAppSecret</code>:渠道方分配给行者之地进行Oauth接入分配的<code>appId</code>和<code>secret</code>, 后续所有给行者之地分配的<code>clientId</code>都需要在这个<code>appId</code>的维度下，即同一用户使用同一个<code>appId</code>下不同的<code>clientId</code>授权，获取的<code>openId</code>是相同的。注意**<font color=red>这很关键</font>**，否则不同游戏映射出来的账号是不同的</li>
+<li><code>webClientId</code>和<code>webClientSecret</code>:渠道方在上方<code>oauthAppId</code>下给行者之地中心webview分配的<code>clientId</code>，在渠道的App内也会用到，渠道App进入游戏中心的时候需要获取code并作为参数附到链接后，后文会提到。</li>
 <li>提供的自动注册<code>ClientId</code>的接口，需要保证在前面的<code>oauthAppId</code>维度下进行。</li>
 <li>授权流程中的<code>code</code>换完一次<code>accessToken</code>后需要失效</li>
 <li>生成<code>accessToken</code>时，需要同时关联<code>clientId</code>与<code>userId</code>两个维度，即同一个用户在不同的<code>clientId</code>下获取到的<code>accessToken</code>是不同，并可以同时存在和使用，互不影响</li>
@@ -171,7 +178,7 @@ CheckSum=sha1hex(keyavb1a21512970730186)=9040814fffef8b6367c71ff1748d4af56437308
 <tbody>
 <tr>
 <td>appId</td>
-<td>分配的oauthAppId,所有云游戏ClientId及webClientid属于这个oauthAppId</td>
+<td>分配的oauthAppId,所有行者之地ClientId及webClientid属于这个oauthAppId</td>
 <td>String</td>
 <td>是</td>
 </tr>
@@ -796,10 +803,10 @@ CheckSum=sha1hex(keyavb1a21512970730186)=9040814fffef8b6367c71ff1748d4af56437308
 </code></pre>
 <h3>客户端接入Webview</h3>
 <ul>
-<li>接入链接:<a href="http://game.yixin.im/dp-sdk/webview">http://game.yixin.im/dp-sdk/webview</a></li>
+<li>接入链接:<a href="http://yixingame.cn/dp-sdk/webview">http://yixingame.cn/dp-sdk/webview</a></li>
 <li>提供方:GameCenterServer</li>
 <li>调用者:App</li>
-<li>注意事项:如App是登陆状态，任何进入游戏中心的入口，包括此入口和以后可能跳转的其他入口，都需要在链接上拼接<code>code</code>，如<code>http://game.yixin.im/dp-sdk/webview?code=deiudei928398</code></li>
+<li>注意事项:如App是登陆状态，任何进入游戏中心的入口，包括此入口和以后可能跳转的其他入口，都需要在链接上拼接<code>code</code>，如<code>http://yixingame.cn/dp-sdk/webview?code=deiudei928398</code></li>
 </ul>
 <h3>附录</h3>
 <h4>生成和验证签名</h4>

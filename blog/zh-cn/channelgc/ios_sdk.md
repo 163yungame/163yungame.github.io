@@ -1,7 +1,7 @@
 # 1. iOS SDK 使用文档
 
 ## SDK下载
-[NCGSDK-1.0.2](http://nosdn-yx.127.net/yxgame/1126f6a28f504ecc8589454412b1f4b3.zip)
+[NCGSDK-1.0.2](http://res.yixinyouxi.cn/yxgame/1126f6a28f504ecc8589454412b1f4b3.zip)
 
 - 更新版本：v1.0.2
 1. 对URLScheme调用做了判断，默认作为外部调用，忽略method==2的情况

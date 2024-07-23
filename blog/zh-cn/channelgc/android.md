@@ -1,21 +1,21 @@
 ## NCGSDK开发文档
 
-`NCGSDK`是一个为方便独立App快速接入云游戏分发平台的移动端`Web`游戏中心的`SDK`库，`SDK`提供`App`授权登录、游戏下载等等通用`API`接口，开发者可以方便快捷的根据自己需求进行开发实现。
+`NCGSDK`是一个为方便独立App快速接入行者之地分发平台的移动端`Web`游戏中心的`SDK`库，`SDK`提供`App`授权登录、游戏下载等等通用`API`接口，开发者可以方便快捷的根据自己需求进行开发实现。
 
 ### 下载
 #### SDK
-必选 [NCGSDK-1.5.5](http://nosdn-yx.127.net/yxgame/f9d9c9d66fe54816bdea776b5608d0c7.aar)   
-可选 [NCGDownloadSDK-1.5.1](http://nosdn-yx.127.net/yxgame/f4caf5117d5742a8a7762583936f250e.aar)
+必选 [NCGSDK-1.5.5](http://res.yixinyouxi.cn/yxgame/f9d9c9d66fe54816bdea776b5608d0c7.aar)   
+可选 [NCGDownloadSDK-1.5.1](http://res.yixinyouxi.cn/yxgame/f4caf5117d5742a8a7762583936f250e.aar)
 #### Demo
-[Demo](http://nosdn-yx.127.net/yxgame/bc660d3dcb6341189ee45c5e9fe8859e.zip)
+[Demo](http://res.yixinyouxi.cn/yxgame/bc660d3dcb6341189ee45c5e9fe8859e.zip)
 
 ### 快速使用
 #### 参数配置
-在`AndroidManifest`中配置云游戏平台分配给接入`App`的`appId`数据，`SDK`初始化时使用。
+在`AndroidManifest`中配置行者之地平台分配给接入`App`的`appId`数据，`SDK`初始化时使用。
 
 ```xml
  <meta-data android:name="ncg_app_id" 
- android:value="<云游戏平台分配的appid，唯一标示App>"/>
+ android:value="<行者之地平台分配的appid，唯一标示App>"/>
  <meta-data android:name="ncg_web_id" 
  android:value="<接入方自己分配的id，用于web游戏中心换取token>"/>
  <meta-data
@@ -41,11 +41,11 @@ public class DemoNCGCenterModule implements NCGModule {
 
     @Override
     public void apply(Context context, NCGCenter.NCGCenterBuilder builder) {
-        //使用云游戏提供的下载模块，所需要的配置信息，不使用可不调用
+        //使用行者之地提供的下载模块，所需要的配置信息，不使用可不调用
         builder.setConfig(new GameDownloadConfig());
         //为SDK配置图片加载器
         builder.setImageLoader(new DemoImageLoader());
-        //云游戏提供的游戏授权模块依赖接口
+        //行者之地提供的游戏授权模块依赖接口
         builder.setAuth(new DemoAuth());
     }
 }
@@ -164,7 +164,7 @@ public class DemoImageLoader implements NCGImageLoader {
 
 #### 配置下载模块（可选）
 
-若不需要云游戏提供的下载模块，则略过。否则需要用户实现该接口，示例如下：
+若不需要行者之地提供的下载模块，则略过。否则需要用户实现该接口，示例如下：
 
 ```java
 public class GameDownloadConfig implements NCGDownLoadConfig {
@@ -492,7 +492,7 @@ public enum GameStatus {
 
 #### 其他注意事项
 * 游戏中心不包含导航条，因此，Webview的页面的管理需要app自己负责，比如返回上一个界面，可以复写`onBackPressed()`等；
-* 在某些场景下需要通过Webview打开包含云游戏域名的H5页面，且界面有交互操作，都要通过`public void registerNCGJSCall(NCGJSCall call, WebView webView)`方法进行注入，不然无法进行交互通信。
+* 在某些场景下需要通过Webview打开包含行者之地域名的H5页面，且界面有交互操作，都要通过`public void registerNCGJSCall(NCGJSCall call, WebView webView)`方法进行注入，不然无法进行交互通信。
 
 ### 集成
 

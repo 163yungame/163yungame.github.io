@@ -1,3 +1,10 @@
+<!--
+ * @Author: huangyang@yixin.im
+ * @Date: 2020-03-09 14:27:12
+ * @LastEditors: huangyang@yixin.im
+ * @LastEditTime: 2024-07-23 11:02:25
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +15,11 @@
 	<meta name="description" content="cloudgame-server-doc" />
 	<!-- 网页标签标题 -->
 	<title>cloudgame-server-doc</title>
-  <link rel="shortcut icon" href="http://cloudgame-res.127.net/game/resource/images/cloudGame/favicon.ico"/>
+  	<link rel="shortcut icon" href="https://res.yixinyouxi.cn/yxgame/favicon.ico"/>
 	<link rel="stylesheet" href="/build/documentation.css" />
 </head>
 <body>
-	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>云游戏服务端接入文档</h1>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="https://res.yixinyouxi.cn/yxgame/8a49e8068bc75bbc018ca906d3420012"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">客户端</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">服务器</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/util/index.html" target="_self">工具</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>接入文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>接入文档</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/resources/resources.html" target="_self">接入指引</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>客户端<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/gamesdk.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/client/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><span>服务器<img style="transform:rotate(-90deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/cloudgame-server-doc.html" target="_self">接入指南</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/php_sign_demo.html" target="_self">php下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/python_sign_demo.html" target="_self">python下单签名示例</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/server/faq.html" target="_self">Q&amp;A</a></li></ul></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/auth/index.html" target="_self">实名认证接入文档</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>行者之地服务端接入文档</h1>
 <h2>0.版本变更记录</h2>
 <table>
 <thead>
@@ -122,11 +129,11 @@
 <p>客户端5.3.0之前版本下单流程由游戏服务端发起，客户端5.3.0版本及以上由客户端直接发起下单，服务器不再需要请求原下单接口，请各游戏渠道做到版本兼容。</p>
 </li>
 <li>
-<p>客户端5.3.2版本及以上实名认证请求新接口：<a href="http://game.yixin.im/sdk/user/center/info%EF%BC%8C">http://game.yixin.im/sdk/user/center/info，</a> 请各游戏渠道做到版本兼容。</p>
+<p>客户端5.3.2版本及以上实名认证请求新接口：<a href="http://yixingame.cn/sdk/user/center/info%EF%BC%8C">http://yixingame.cn/sdk/user/center/info，</a> 请各游戏渠道做到版本兼容。</p>
 </li>
 </ul>
 <h3>1.1 支付中各角色交互说明</h3>
-<p><img src="https://nosdn-yx.127.net/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg" alt="支付中各角色交互说明"></p>
+<p><img src="https://res.yixinyouxi.cn/yxgame/067e22fdee9d2839b24efd1b99bfbd87.jpg" alt="支付中各角色交互说明"></p>
 <p><strong>参与支付流程交互的角色有：</strong></p>
 <ul>
 <li><strong>游戏APP（以下也称第三方App）</strong>：需要集成游戏SDK
@@ -155,7 +162,7 @@
 <li>游戏Server接收我方Server异步支付成功回调</li>
 </ol>
 <h3>1.2 完整交易流程</h3>
-<p><img src="https://nosdn-yx.127.net/yxgame/9f90aedb103cdde8459dcd908662b138.jpg" alt=""></p>
+<p><img src="https://res.yixinyouxi.cn/yxgame/9f90aedb103cdde8459dcd908662b138.jpg" alt=""></p>
 <p><strong>流程说明</strong></p>
 <p>由流程图可知</p>
 <ol>
@@ -165,10 +172,10 @@
 </ol>
 <p><strong><code>流程注意点</code></strong></p>
 <ol>
-<li>调用支付接口时都<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>必须</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">传递用户的access_token，用于提取用户名、验证。</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都可能中断，要保证最终数据的一致性、正确。比如悬挂订单最终要超时。</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都要签名，防篡改、欺骗、重放。</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都有可能多次重复调用，被调用者负责去重。</li>
+<li>调用支付接口时都<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>必须</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">传递用户的access_token，用于提取用户名、验证。</li>
+<li><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都可能中断，要保证最终数据的一致性、正确。比如悬挂订单最终要超时。</li>
+<li><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都要签名，防篡改、欺骗、重放。</li>
+<li><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>任一步</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">都有可能多次重复调用，被调用者负责去重。</li>
 </ol>
 <h2>2.服务端接口</h2>
 <p>服务器端接口包括<code>第三方Server</code>、<code>PayServer</code>提供给对方和Android客户端的接口。主要包括订单生成、支付通知两类接口。考虑到安全性，除了用户输入、UI交互接口需要在Android端完成，其他跟支付有关的接口必须在服务器端进行调用。签名由服务器端进行，公钥不要暴露在Android端。</p>
@@ -179,25 +186,25 @@
 <p>支付完成后<code>Payserver</code>调用<code>第三方Server</code>接口通知发货，相同订单支付通知接口可能被调用多次，需要去重并避免重复发货等问题。如更新数据库时可以使用类似的SQL:</p>
 <pre><code class="language-sql"><span class="hljs-keyword">update</span> Trade <span class="hljs-keyword">set</span> PayState=Payed <span class="hljs-keyword">where</span> PayState=UnPay <span class="hljs-keyword">and</span> <span class="hljs-keyword">Id</span>=?;
 </code></pre>
-<h4>2.1.3 两个公钥，一个私钥<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>很重要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></h4>
+<h4>2.1.3 两个公钥，一个私钥<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>很重要</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></h4>
 <p>我方需要两个公钥一个私钥。请<code>谨记</code>括号里面的名字。</p>
 <ol>
-<li>游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">或<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)
-<img src="http://nosdn-yx.127.net/yxgame/0be8e326369a4f64a44b03c193faf243.jpg" alt="游戏方接入方公私钥获取"></li>
-<li>平台公钥(以下称<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)</li>
+<li>游戏方接入方公钥及私钥请联系贵方商务或运营从开发者后台获取。(以下称<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方公钥</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">或<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>游戏方私钥</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)
+<img src="http://res.yixinyouxi.cn/yxgame/0be8e326369a4f64a44b03c193faf243.jpg" alt="游戏方接入方公私钥获取"></li>
+<li>平台公钥(以下称<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">)</li>
 </ol>
 <pre><code>30819f300d06092a864886f70d010101050003818d0030818902818100ac1b8d63bcaf49cdd0d1e79c916aba0250421b3ee8eaf134f80843c5033e30a150b9e26e78025fde8e52538d4beb572940966b0c80460d90a26c9119a0d28c4277024dbeb20e31403360aeca70da506a19d89e95512e5347be0eae9b2c49da3150a93e3bc80817fa9a1d8170555e6117c86f84f13afc39944fb6bdfc85e3723b0203010001
 </code></pre>
 <h4><h4 id='sign'>2.1.4 签名校验及参数值编码</h4></h4>
-<p><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>非常重要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">绝大部分平台接入失败都卡在签名这一步，请仔细阅读下面各点。</p>
+<p><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>非常重要</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">绝大部分平台接入失败都卡在签名这一步，请仔细阅读下面各点。</p>
 <h5>2.1.4.1 注意点</h5>
 <ol>
 <li>拼接在请求URL上的参数，需要进行URLEncode, 如<code>String param = URLEncoder.encode(&quot;2014-01-01 12:12:12&quot;, &quot;UTF-8&quot;);</code>, 输出为<code>2014-01-01+12%3A12%3A12</code></li>
 <li><code>第三方Server</code>接收<code>PayServer</code>的支付通知回调接口的<code>sign签名</code>字段操作
 <ul>
 <li>将参与签名的参数进行<code>字符串拼接</code> (参与签名计算的参数会在每个接口中进行说明)</li>
-<li><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要、需要、需要</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行<code>URLEncode</code></li>
-<li>使用<code>Android Demo</code>工程的类<code>im.yixin.game.demo.rsa.RSA</code>中的<code>RSA.verify()</code>接口和<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">以及上述拼接字符串验证<code>sign</code>参数是否正确，正确再执行业务逻辑</li>
+<li><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要、需要、需要</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行<code>URLEncode</code></li>
+<li>使用<code>Android Demo</code>工程的类<code>im.yixin.game.demo.rsa.RSA</code>中的<code>RSA.verify()</code>接口和<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">以及上述拼接字符串验证<code>sign</code>参数是否正确，正确再执行业务逻辑</li>
 </ul>
 </li>
 </ol>
@@ -343,7 +350,7 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 <li>请求方式: <code>POST</code></li>
 </ul>
 <h4>2.3.2 请求参数</h4>
-<p><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>拼接在URL中</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></p>
+<p><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>拼接在URL中</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""></p>
 <table>
 <thead>
 <tr>
@@ -441,7 +448,7 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 <tr>
 <td>sign</td>
 <td>签名</td>
-<td>请先阅读<a href="#sign">2.1.4 签名校验及参数值编码</a>,参与签名的参数<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">严格<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">依照以下顺序，中间的<code>+</code>表示前后字符串直接拼接，不要把<code>+</code>加到字符串中，拼接后<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要URLEncode</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">, <code>v+thirdpart_orderid+thirdpart_ordertime+tradeName+result+trade_serialid+goodsprice+goodsamount+paystatus+paytime+paytooltype+notifyid+notifytime+from</code>,使用<img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://nosdn-yx.127.net/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行签名验证计算</td>
+<td>请先阅读<a href="#sign">2.1.4 签名校验及参数值编码</a>,参与签名的参数<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">严格<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">依照以下顺序，中间的<code>+</code>表示前后字符串直接拼接，不要把<code>+</code>加到字符串中，拼接后<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>需要URLEncode</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">, <code>v+thirdpart_orderid+thirdpart_ordertime+tradeName+result+trade_serialid+goodsprice+goodsamount+paystatus+paytime+paytooltype+notifyid+notifytime+from</code>,使用<img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt=""><code>平台公钥</code><img src="http://res.yixinyouxi.cn/yxgame/d90c6c4f9c6d4f668739eb8f40b34e4a.png" alt="">进行签名验证计算</td>
 <td>String</td>
 </tr>
 </tbody>
@@ -452,7 +459,7 @@ RSA.verify(publicKey, sign, signSrcSb4Ret.toString());
 <p>获取用户信息，校验access_token有效性, 本接口无签名校验</p>
 <h4>2.4.1 接口定义</h4>
 <ul>
-<li>URL: <code>https://game.yixin.im/api/user/info</code></li>
+<li>URL: <code>https://yixingame.cn/api/user/info</code></li>
 <li>提供方: <code>PayServer</code></li>
 <li>调用方: <code>第三方Server</code></li>
 <li>请求方式: <code>GET</code></li>

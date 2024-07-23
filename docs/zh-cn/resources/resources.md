@@ -7,7 +7,7 @@
 
 ### 签名
 #### APK签名获取工具
-[下载地址](https://nosdn-yx.127.net/yxgame/8a49e8136628c152016628c152460000.apk)
+[下载地址](https://res.yixinyouxi.cn/yxgame/8a49e8136628c152016628c152460000.apk)
 
 #### 支付接口调用签名验证
 [在线验证](https://163yungame.github.io/zh-cn/util/index.html)
@@ -19,7 +19,7 @@
 4. 运行GetSignature.apk，填入游戏包名，生成签名，配置到后台对应的游戏下面
 
 #### 自测文档
-[下载地址](http://nosdn-yx.127.net/yxgame/8a49e8136628c1520166291f78bb0001.xlsx)
+[下载地址](http://res.yixinyouxi.cn/yxgame/8a49e8136628c1520166291f78bb0001.xlsx)
 
 ## 注意事项
 1. 先申请GameID，GameSecret，交给对应开发

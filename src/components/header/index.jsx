@@ -37,7 +37,7 @@ const propTypes = {
 const defaultProps = {
   type: 'primary',
   language: 'zh-cn',
-  logo: 'https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png',
+  logo: 'https://res.yixinyouxi.cn/yxgame/8a49e8068bc75bbc018ca906d3420012',
   onLanguageChange: noop,
 };
 

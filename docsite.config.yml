@@ -4,7 +4,7 @@ pages:
   # 首页配置
   zh-cn:
    title: '游戏SDK'
-   keywords: '游戏SDK，网易，游戏，SDK'
+   keywords: '游戏SD，游戏，SDK'
   # home config
   en-us:
    title: 'EaseGame'
@@ -13,7 +13,7 @@ pages:
   # 社区页配置
   zh-cn:
    title: '游戏SDK'
-   keywords: '游戏SDK，网易，游戏，SDK'
+   keywords: '游戏SD，游戏，SDK'
   # community page config
   en-us:
    title: 'EaseGame'
@@ -22,7 +22,7 @@ pages:
   # 博客列表页配置
   zh-cn:
    title: '游戏SDK'
-   keywords: '游戏SDK，网易，游戏，SDK'
+   keywords: '游戏SD，游戏，SDK'
   en-us:
    # blog list page config
    title: 'EaseGame'

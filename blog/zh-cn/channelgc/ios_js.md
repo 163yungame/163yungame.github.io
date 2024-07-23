@@ -1,6 +1,6 @@
 # 命名空间
 
-注:以易信JsBridge为例，命名空间window.YxJsBrige
+注:以行者之地JsBridge为例，命名空间window.YxJsBrige
 
 bridge 实现文件由客户端注入或者 webview 提供
 
@@ -214,7 +214,7 @@ bridge 实现文件由客户端注入或者 webview 提供
 - idfa：String， 手机广告 id
 - model：String， 手机硬件型号信息
 - osVer：String， ios 版本号
-- appId：String， 云游戏中心为你方分配的识别码
+- appId：String， 行者之地中心为你方分配的识别码
 - hubbleId：String， hubble账号appid
 
 

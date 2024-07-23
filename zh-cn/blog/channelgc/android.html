@@ -1,3 +1,10 @@
+<!--
+ * @Author: huangyang@yixin.im
+ * @Date: 2020-03-09 14:27:12
+ * @LastEditors: huangyang@yixin.im
+ * @LastEditTime: 2024-07-23 11:02:25
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,23 +15,23 @@
 	<meta name="description" content="android" />
 	<!-- 网页标签标题 -->
 	<title>android</title>
-  <link rel="shortcut icon" href="http://cloudgame-res.127.net/game/resource/images/cloudGame/favicon.ico"/>
+  	<link rel="shortcut icon" href="https://res.yixinyouxi.cn/yxgame/favicon.ico"/>
 	<link rel="stylesheet" href="/build/blogDetail.css" />
 </head>
 <body>
-	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="https://nosdn-yx.127.net/yxgame/8a49e8068bc75bbc018ca906d3420011.png"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h2>NCGSDK开发文档</h2>
-<p><code>NCGSDK</code>是一个为方便独立App快速接入云游戏分发平台的移动端<code>Web</code>游戏中心的<code>SDK</code>库，<code>SDK</code>提供<code>App</code>授权登录、游戏下载等等通用<code>API</code>接口，开发者可以方便快捷的根据自己需求进行开发实现。</p>
+	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/blog"><img class="logo" src="https://res.yixinyouxi.cn/yxgame/8a49e8068bc75bbc018ca906d3420012"/></a><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/></div></div></header><section class="blog-content markdown-body"><h2>NCGSDK开发文档</h2>
+<p><code>NCGSDK</code>是一个为方便独立App快速接入行者之地分发平台的移动端<code>Web</code>游戏中心的<code>SDK</code>库，<code>SDK</code>提供<code>App</code>授权登录、游戏下载等等通用<code>API</code>接口，开发者可以方便快捷的根据自己需求进行开发实现。</p>
 <h3>下载</h3>
 <h4>SDK</h4>
-<p>必选 <a href="http://nosdn-yx.127.net/yxgame/f9d9c9d66fe54816bdea776b5608d0c7.aar">NCGSDK-1.5.5</a><br>
-可选 <a href="http://nosdn-yx.127.net/yxgame/f4caf5117d5742a8a7762583936f250e.aar">NCGDownloadSDK-1.5.1</a></p>
+<p>必选 <a href="http://res.yixinyouxi.cn/yxgame/f9d9c9d66fe54816bdea776b5608d0c7.aar">NCGSDK-1.5.5</a><br>
+可选 <a href="http://res.yixinyouxi.cn/yxgame/f4caf5117d5742a8a7762583936f250e.aar">NCGDownloadSDK-1.5.1</a></p>
 <h4>Demo</h4>
-<p><a href="http://nosdn-yx.127.net/yxgame/bc660d3dcb6341189ee45c5e9fe8859e.zip">Demo</a></p>
+<p><a href="http://res.yixinyouxi.cn/yxgame/bc660d3dcb6341189ee45c5e9fe8859e.zip">Demo</a></p>
 <h3>快速使用</h3>
 <h4>参数配置</h4>
-<p>在<code>AndroidManifest</code>中配置云游戏平台分配给接入<code>App</code>的<code>appId</code>数据，<code>SDK</code>初始化时使用。</p>
+<p>在<code>AndroidManifest</code>中配置行者之地平台分配给接入<code>App</code>的<code>appId</code>数据，<code>SDK</code>初始化时使用。</p>
 <pre><code class="language-xml"> <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"ncg_app_id"</span> 
- <span class="hljs-attr">android:value</span>=<span class="hljs-string">"&lt;云游戏平台分配的appid，唯一标示App&gt;"</span>/&gt;</span>
+ <span class="hljs-attr">android:value</span>=<span class="hljs-string">"&lt;行者之地平台分配的appid，唯一标示App&gt;"</span>/&gt;</span>
  <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"ncg_web_id"</span> 
  <span class="hljs-attr">android:value</span>=<span class="hljs-string">"&lt;接入方自己分配的id，用于web游戏中心换取token&gt;"</span>/&gt;</span>
  <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span>
@@ -47,11 +54,11 @@
 
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">apply</span><span class="hljs-params">(Context context, NCGCenter.NCGCenterBuilder builder)</span> </span>{
-        <span class="hljs-comment">//使用云游戏提供的下载模块，所需要的配置信息，不使用可不调用</span>
+        <span class="hljs-comment">//使用行者之地提供的下载模块，所需要的配置信息，不使用可不调用</span>
         builder.setConfig(<span class="hljs-keyword">new</span> GameDownloadConfig());
         <span class="hljs-comment">//为SDK配置图片加载器</span>
         builder.setImageLoader(<span class="hljs-keyword">new</span> DemoImageLoader());
-        <span class="hljs-comment">//云游戏提供的游戏授权模块依赖接口</span>
+        <span class="hljs-comment">//行者之地提供的游戏授权模块依赖接口</span>
         builder.setAuth(<span class="hljs-keyword">new</span> DemoAuth());
     }
 }
@@ -155,7 +162,7 @@
 }
 </code></pre>
 <h4>配置下载模块（可选）</h4>
-<p>若不需要云游戏提供的下载模块，则略过。否则需要用户实现该接口，示例如下：</p>
+<p>若不需要行者之地提供的下载模块，则略过。否则需要用户实现该接口，示例如下：</p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GameDownloadConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">NCGDownLoadConfig</span> </span>{
 
   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getFileProviderAuthority</span><span class="hljs-params">()</span> </span>{
@@ -461,7 +468,7 @@
 <h4>其他注意事项</h4>
 <ul>
 <li>游戏中心不包含导航条，因此，Webview的页面的管理需要app自己负责，比如返回上一个界面，可以复写<code>onBackPressed()</code>等；</li>
-<li>在某些场景下需要通过Webview打开包含云游戏域名的H5页面，且界面有交互操作，都要通过<code>public void registerNCGJSCall(NCGJSCall call, WebView webView)</code>方法进行注入，不然无法进行交互通信。</li>
+<li>在某些场景下需要通过Webview打开包含行者之地域名的H5页面，且界面有交互操作，都要通过<code>public void registerNCGJSCall(NCGJSCall call, WebView webView)</code>方法进行注入，不然无法进行交互通信。</li>
 </ul>
 <h3>集成</h3>
 <pre><code class="language-groovy">repositories {

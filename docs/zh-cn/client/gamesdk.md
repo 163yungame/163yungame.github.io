@@ -15,7 +15,7 @@
 ### 1.项目准备及接入
 
 #### 1.1 游戏配置ID申请
-* 在[游戏后台](https://game.yixin.im/)申请游戏`GameId`及`GameSecret`
+* 在[游戏后台](https://yixingame.cn/)申请游戏`GameId`及`GameSecret`
 
 #### 1.2 urs签名备案
 * 从5.3.0版本开始，需下载[urs签名获取工具](https://nos.netease.com/yxgame/bf3af30b5b34e6c14754fe8683e58602.apk)获取游戏apk签名(注意：这个工具和别的签名获取工具不一样)，将签名发给商务同学进入签名备案流程，
