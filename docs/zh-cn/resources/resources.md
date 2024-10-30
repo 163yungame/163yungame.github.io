@@ -1,9 +1,16 @@
+<!--
+ * @Author: huangyang@yixin.im
+ * @Date: 2024-07-23 15:54:18
+ * @LastEditors: huangyang@yixin.im
+ * @LastEditTime: 2024-10-30 14:28:09
+ * @Description: 
+-->
 # 接入指引
 
 ## 资源下载
 
 #### AndroidSDK下载
-[GameSDK-5.6.0](https://nos-yx.netease.com/yxgame/yx_game_5.6.0.zip)
+[GameSDK-5.6.0](https://res.yixinyouxi.cn/yxgame/yx_game_5.6.0.zip)
 
 ### 签名
 #### APK签名获取工具
